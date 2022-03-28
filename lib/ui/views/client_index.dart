@@ -74,7 +74,7 @@ class _ClientIndexState extends State<ClientIndex> {
                     color: currentIndex == 3 ? Colors.blue : textPaint),
                 label: ''),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings,
+                icon: Icon(Icons.person,
                     size: 25,
                     color: currentIndex == 4 ? Colors.blue : textPaint),
                 label: ''),

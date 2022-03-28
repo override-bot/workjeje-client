@@ -33,7 +33,9 @@ class _CategoriesState extends State<Categories> {
           title: Text(
             "Categories",
             style: TextStyle(
-                color: textPaint, fontWeight: FontWeight.w500, fontSize: 20),
+                color: textPaint,
+                fontWeight: FontWeight.w500,
+                fontSize: (24 / 720) * MediaQuery.of(context).size.height),
           ),
         ),
         body: Container(
@@ -92,9 +94,7 @@ class _CategoriesState extends State<Categories> {
                                         child: Text(
                                           categories[index],
                                           style: TextStyle(
-                                              color: index == 2
-                                                  ? Colors.black87
-                                                  : Colors.white,
+                                              color: Colors.white,
                                               fontWeight: FontWeight.w600,
                                               // backgroundColor: Colors.black87,
                                               fontSize: (17 / 720) *

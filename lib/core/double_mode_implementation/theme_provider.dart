@@ -4,7 +4,7 @@ import 'package:workjeje/core/double_mode_implementation/pref_store.dart';
 
 class ThemeProvider with ChangeNotifier {
   ThemePreference themePreference = ThemePreference();
-  bool _darkTheme = true;
+  bool _darkTheme = false;
   bool get darkTheme => _darkTheme;
   set darkTheme(bool value) {
     _darkTheme = value;
