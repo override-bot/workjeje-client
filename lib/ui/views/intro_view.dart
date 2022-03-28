@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
+import 'package:workjeje/core/services/authentication.dart';
+import 'package:workjeje/ui/views/client_index.dart';
+import 'package:workjeje/ui/views/signin_view.dart';
+import 'package:workjeje/utils/router.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
 
@@ -10,6 +14,8 @@ class IntroScreen extends StatefulWidget {
 }
 
 class IntroScreenState extends State<IntroScreen> {
+  Auth auth = Auth();
+  RouteController routeController = RouteController();
   @override
   Widget build(BuildContext context) {
     final themeStatus = Provider.of<ThemeProvider>(context);
@@ -57,7 +63,14 @@ class IntroScreenState extends State<IntroScreen> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0), color: textPaint),
               child: MaterialButton(
-                  onPressed: null,
+                  onPressed: () {
+                    bool authState = auth.authState();
+                    authState == false
+                        ? routeController.pushAndRemoveUntil(
+                            context, ClientSignInPage())
+                        : routeController.pushAndRemoveUntil(
+                            context, ClientIndex());
+                  },
                   child: Text(
                     "Get Started",
                     style: TextStyle(

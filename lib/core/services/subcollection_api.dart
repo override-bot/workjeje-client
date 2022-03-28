@@ -38,4 +38,8 @@ class SubCollectionApi {
   Future updateDocument(field, value, docId) {
     return ref.doc(docId).update({field: value});
   }
+
+  Future setData(id, data) {
+    return ref.doc(id).set(data);
+  }
 }

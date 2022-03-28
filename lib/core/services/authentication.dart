@@ -33,6 +33,18 @@ class Auth {
     });
   }
 
+  Future<User?> signInClient(email, password) async {
+    assert(password != null);
+    final UserCredential userCredential =
+        await auth.signInWithEmailAndPassword(email: email, password: password);
+    final User? user = userCredential.user;
+    return user;
+  }
+
+  Future signOut() async {
+    await auth.signOut();
+  }
+
   bool authState() {
     if (FirebaseAuth.instance.currentUser == null) {
       return false;

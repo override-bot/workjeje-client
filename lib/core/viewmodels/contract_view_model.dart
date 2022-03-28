@@ -36,13 +36,26 @@ class ContractViewModel extends ChangeNotifier {
         .streamDocumentById(docId);
   }
 
-  Future completeContract(userId, docId) {
+  Future completeContract(userId, docId, providerId) {
     return SubCollectionApi("contracts", "userContracts", userId)
-        .updateDocument("Status", "Completed", docId);
+        .updateDocument("Status", "Completed", docId)
+        .then((value) {
+      SubCollectionApi("contracts", "userContracts", providerId)
+          .updateDocument("Status", "Completed", docId);
+    });
   }
 
   Stream<QuerySnapshot> getCompletedContracts(userId) {
     return SubCollectionApi("contracts", "userContracts", userId)
         .queryWhereIsEqualTo("Completed", "Status");
+  }
+
+  Future sendContract(userId, providerId, id, Contracts data) {
+    return SubCollectionApi("contracts", "userContracts", userId)
+        .setData(id, data.toJson())
+        .then((value) {
+      SubCollectionApi("contracts", "userContracts", providerId)
+          .setData(id, data.toJson());
+    });
   }
 }

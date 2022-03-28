@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:workjeje/core/double_mode_implementation/pref_store.dart';
+import 'package:workjeje/core/viewmodels/contract_view_model.dart';
 import 'package:workjeje/core/viewmodels/jobs_view_models.dart';
+import 'package:workjeje/core/viewmodels/review_view_model.dart';
 
 import 'core/double_mode_implementation/theme_provider.dart';
 import 'ui/views/intro_view.dart';
@@ -20,6 +23,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   ThemeProvider themeProvider = ThemeProvider();
   JobViewModel jobViewModel = JobViewModel();
+  ContractViewModel contractViewModel = ContractViewModel();
+  ReviewViewModel reviewViewModel = ReviewViewModel();
   @override
   void initState() {
     super.initState();
@@ -43,6 +48,16 @@ class _MyAppState extends State<MyApp> {
           create: (_) {
             return jobViewModel;
           },
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return contractViewModel;
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return reviewViewModel;
+          },
         )
       ],
       child: MaterialApp(
@@ -50,6 +65,9 @@ class _MyAppState extends State<MyApp> {
         title: 'workjeje client',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          canvasColor: themeProvider.darkTheme == true
+              ? const Color(0xffb14181c)
+              : Colors.white,
         ),
         home: IntroScreen(),
       ),
