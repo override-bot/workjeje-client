@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:workjeje/core/double_mode_implementation/pref_store.dart';
 import 'package:workjeje/core/viewmodels/contract_view_model.dart';
 import 'package:workjeje/core/viewmodels/jobs_view_models.dart';
+import 'package:workjeje/core/viewmodels/providers_view_model.dart';
 import 'package:workjeje/core/viewmodels/review_view_model.dart';
 
 import 'core/double_mode_implementation/theme_provider.dart';
@@ -25,6 +26,7 @@ class _MyAppState extends State<MyApp> {
   JobViewModel jobViewModel = JobViewModel();
   ContractViewModel contractViewModel = ContractViewModel();
   ReviewViewModel reviewViewModel = ReviewViewModel();
+  ProviderViewModel providerViewModel = ProviderViewModel();
   @override
   void initState() {
     super.initState();
@@ -57,6 +59,11 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) {
             return reviewViewModel;
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return providerViewModel;
           },
         )
       ],

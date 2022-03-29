@@ -8,12 +8,12 @@ class ServiceProvider {
   final String imageurl;
   final String verificationStatus;
   final String onlineStatus;
-  final String lastSeen;
+  dynamic lastSeen;
   final int rating;
   final int raters;
   final String email;
-  final int userLat;
-  final int userLong;
+  final double userLat;
+  final double userLong;
   ServiceProvider({
     this.id,
     required this.username,

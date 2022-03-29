@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:workjeje/ui/views/providers_by_categories.dart';
+import 'package:workjeje/utils/router.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
 import '../../core/services/queries.dart';
@@ -20,6 +22,7 @@ class _SubcategoriesState extends State<Subcategories> {
   Random random = new Random();
   List<IconData> icons = [Icons.work, Icons.category, Icons.construction];
   FirebaseQueries firebaseQueries = FirebaseQueries();
+  RouteController routeController = RouteController();
   @override
   Widget build(BuildContext context) {
     final themeStatus = Provider.of<ThemeProvider>(context);
@@ -63,6 +66,12 @@ class _SubcategoriesState extends State<Subcategories> {
                           return Container(
                               margin: EdgeInsets.only(top: 12),
                               child: ListTile(
+                                onTap: () {
+                                  routeController.push(
+                                      context,
+                                      ProvidersByCategory(
+                                          category: subcategories[index]));
+                                },
                                 leading: Icon(icons[random.nextInt(3)],
                                     color: textPaint),
                                 title: Text(

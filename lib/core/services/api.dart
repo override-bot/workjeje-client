@@ -28,4 +28,8 @@ class Api {
   Future<DocumentReference> addData(Map data) {
     return ref.add(data);
   }
+
+  Future<QuerySnapshot> queryWhereArrayContains(param, field) {
+    return ref.where(field, arrayContains: param).get();
+  }
 }

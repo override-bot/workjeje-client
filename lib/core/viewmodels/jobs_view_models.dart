@@ -9,7 +9,7 @@ class JobViewModel extends ChangeNotifier {
   Future<List<Jobs>> getJobs() async {
     var result = await jobApi.getDocuments();
     jobs = result.docs
-        .map((doc) => Jobs.fromMap(doc.data as Map<String, dynamic>, doc.id))
+        .map((doc) => Jobs.fromMap(doc.data() as Map<String, dynamic>, doc.id))
         .toList();
     return jobs;
   }
