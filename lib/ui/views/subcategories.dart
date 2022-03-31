@@ -28,11 +28,14 @@ class _SubcategoriesState extends State<Subcategories> {
     final themeStatus = Provider.of<ThemeProvider>(context);
     bool isDark = themeStatus.darkTheme;
     Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
+    Color? background =
+        isDark == false ? Color.fromARGB(255, 231, 239, 240) : Colors.black26;
+
     Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: paint,
+          backgroundColor: background,
           centerTitle: true,
           title: Text(widget.category!,
               style: TextStyle(
@@ -51,7 +54,7 @@ class _SubcategoriesState extends State<Subcategories> {
         body: Container(
             height: double.infinity,
             width: double.infinity,
-            color: paint,
+            color: background,
             child: FutureBuilder<DocumentSnapshot>(
                 future: firebaseQueries.getCategoryDoc(),
                 builder: (BuildContext context,

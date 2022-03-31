@@ -24,11 +24,13 @@ class _CategoriesState extends State<Categories> {
   Widget build(BuildContext context) {
     final themeStatus = Provider.of<ThemeProvider>(context);
     bool isDark = themeStatus.darkTheme;
+    Color? background =
+        isDark == false ? Color.fromARGB(255, 231, 239, 240) : Colors.black26;
     Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
     Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: paint,
+          backgroundColor: background,
           elevation: 0.0,
           title: Text(
             "Categories",
@@ -39,7 +41,7 @@ class _CategoriesState extends State<Categories> {
           ),
         ),
         body: Container(
-            color: paint,
+            color: background,
             height: double.infinity,
             width: double.infinity,
             child: FutureBuilder<DocumentSnapshot>(

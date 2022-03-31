@@ -27,6 +27,10 @@ class SubCollectionApi {
     return ref.doc(id).get();
   }
 
+  Future<QuerySnapshot> getWhereIsEqualTo(param, field) {
+    return ref.where(field, isEqualTo: param).get();
+  }
+
   Stream<QuerySnapshot> queryWhereIsEqualTo(param, field) {
     return ref.where(field, isEqualTo: param).snapshots();
   }

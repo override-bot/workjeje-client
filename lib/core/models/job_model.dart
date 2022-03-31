@@ -21,7 +21,7 @@ class Jobs {
   Jobs.fromMap(Map snapshot, this.id)
       : employerId = snapshot['employerId'],
         jobDescription = snapshot['jobDescription'],
-        username = snapshot['username'],
+        username = snapshot['name'],
         location = snapshot['location'],
         jobCategory = snapshot['jobCategory'],
         phoneNumber = snapshot['phoneNumber'],
@@ -31,7 +31,7 @@ class Jobs {
     return {
       "employerId": employerId,
       "jobDescription": jobDescription,
-      "username": username,
+      "name": username,
       "location": location,
       "jobCategory": jobCategory,
       "phoneNumber": phoneNumber,

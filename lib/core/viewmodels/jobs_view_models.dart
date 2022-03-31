@@ -6,12 +6,21 @@ import 'package:workjeje/core/services/api.dart';
 class JobViewModel extends ChangeNotifier {
   Api jobApi = Api("jobs");
   List<Jobs> jobs = [];
+  List<Jobs> clientJobs = [];
   Future<List<Jobs>> getJobs() async {
     var result = await jobApi.getDocuments();
     jobs = result.docs
         .map((doc) => Jobs.fromMap(doc.data() as Map<String, dynamic>, doc.id))
         .toList();
     return jobs;
+  }
+
+  Future<List<Jobs>> getClientJobs(id) async {
+    var result = await jobApi.getWhereIsEqualTo(id, "employerId");
+    clientJobs = result.docs
+        .map((doc) => Jobs.fromMap(doc.data() as Map<String, dynamic>, doc.id))
+        .toList();
+    return clientJobs;
   }
 
   Future<Jobs> getJobsById(id) async {

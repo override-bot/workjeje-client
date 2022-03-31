@@ -14,8 +14,10 @@ class ServiceProvider {
   final String email;
   final double userLat;
   final double userLong;
+  final int jobs;
   ServiceProvider({
     this.id,
+    required this.jobs,
     required this.username,
     required this.occupation,
     required this.skill,
@@ -45,6 +47,7 @@ class ServiceProvider {
         raters = snapshot['raters'],
         email = snapshot['email'],
         userLat = snapshot['userLat'],
+        jobs = snapshot['jobs'],
         userLong = snapshot['userLong'];
   toJson() {
     return {
@@ -54,6 +57,7 @@ class ServiceProvider {
       "occupation": occupation,
       "skill": skill,
       "location": location,
+      "jobs": jobs,
       "email": email,
       "phoneNumber": phoneNumber,
       "imageurl": imageurl,
