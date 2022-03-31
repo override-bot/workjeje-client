@@ -36,4 +36,8 @@ class Api {
   Future<QuerySnapshot> queryWhereArrayContains(param, field) {
     return ref.where(field, arrayContains: param).get();
   }
+
+  deleteDocument(id) {
+    ref.doc(id).delete();
+  }
 }

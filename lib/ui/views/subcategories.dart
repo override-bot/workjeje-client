@@ -29,7 +29,7 @@ class _SubcategoriesState extends State<Subcategories> {
     bool isDark = themeStatus.darkTheme;
     Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
     Color? background =
-        isDark == false ? Color.fromARGB(255, 231, 239, 240) : Colors.black26;
+        isDark == false ? Color.fromARGB(255, 237, 241, 241) : Colors.black26;
 
     Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
     return Scaffold(

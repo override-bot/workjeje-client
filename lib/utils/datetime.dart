@@ -27,7 +27,7 @@ class DateTimeFormatter {
   }
 
   String displayFullDate(Timestamp timestamp) {
-    var format = DateFormat('y-MM-dd');
+    var format = DateFormat('dd-MM-y');
     return format.format(timestamp.toDate());
   }
 

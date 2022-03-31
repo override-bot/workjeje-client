@@ -34,7 +34,7 @@ class _ProvidersByCategoryState extends State<ProvidersByCategory> {
     final clientViewModel = Provider.of<ClientViewModel>(context);
     bool isDark = themeStatus.darkTheme;
     Color? background =
-        isDark == false ? Color.fromARGB(255, 231, 239, 240) : Colors.black26;
+        isDark == false ? Color.fromARGB(255, 237, 241, 241) : Colors.black26;
 
     Color paint = isDark == true
         ? Color(0xFFB14181c)

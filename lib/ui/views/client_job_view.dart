@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/job_model.dart';
 import 'package:workjeje/core/viewmodels/jobs_view_models.dart';
+import 'package:workjeje/ui/views/job_info_view.dart';
 import 'package:workjeje/utils/stringManip.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
@@ -29,7 +30,7 @@ class JobViewState extends State<JobView> {
     Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
     Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
     Color? background =
-        isDark == false ? Color.fromARGB(255, 231, 239, 240) : Colors.black26;
+        isDark == false ? Color.fromARGB(255, 237, 241, 241) : Colors.black26;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: background,
@@ -96,6 +97,13 @@ class JobViewState extends State<JobView> {
                         ),
                         trailing: Text(
                             '${dateTimeFormatter.timeDifference(snapshot.data![index].addedAt)} ago'),
+                        onTap: () {
+                          routeController.push(
+                              context,
+                              JobInfoView(
+                                jobId: snapshot.data![index].id,
+                              ));
+                        },
                       ));
                 },
               );
@@ -107,6 +115,14 @@ class JobViewState extends State<JobView> {
               ),
             );
           },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: textPaint,
+        onPressed: null,
+        child: Icon(
+          Icons.add_outlined,
+          color: paint,
         ),
       ),
     );

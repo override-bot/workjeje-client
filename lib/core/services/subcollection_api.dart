@@ -46,4 +46,8 @@ class SubCollectionApi {
   Future setData(id, data) {
     return ref.doc(id).set(data);
   }
+
+  deleteDocument(id) {
+    ref.doc(id).delete();
+  }
 }

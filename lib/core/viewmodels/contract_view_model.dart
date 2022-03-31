@@ -10,7 +10,7 @@ class ContractViewModel extends ChangeNotifier {
         .getDocuments();
     contracts = result.docs
         .map((doc) =>
-            Contracts.fromMap(doc.data as Map<String, dynamic>, doc.id))
+            Contracts.fromMap(doc.data() as Map<String, dynamic>, doc.id))
         .toList();
     return contracts;
   }

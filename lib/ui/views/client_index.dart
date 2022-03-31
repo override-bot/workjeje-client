@@ -41,7 +41,7 @@ class _ClientIndexState extends State<ClientIndex> {
     Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
     IconData darkIcon = Icons.person;
     Color? background =
-        isDark == false ? Color.fromARGB(255, 231, 239, 240) : Colors.black26;
+        isDark == false ? Color.fromARGB(255, 237, 241, 241) : Colors.black26;
 
     changeMode(bool value) {
       isDark = value;
@@ -60,8 +60,8 @@ class _ClientIndexState extends State<ClientIndex> {
             child: BottomNavigationBar(
               currentIndex: currentIndex,
               backgroundColor: background,
-              selectedItemColor: Color.fromARGB(255, 30, 197, 226),
-              unselectedItemColor: textPaint,
+              selectedItemColor: textPaint,
+              unselectedItemColor: Colors.grey,
               //  showSelectedLabels: true,
               unselectedLabelStyle: TextStyle(color: textPaint, fontSize: 10),
               selectedLabelStyle: TextStyle(
@@ -73,40 +73,35 @@ class _ClientIndexState extends State<ClientIndex> {
               onTap: onTabTapped,
               items: [
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.home_outlined,
-                      size: 25,
-                      color: currentIndex == 0
-                          ? Color.fromARGB(255, 30, 197, 226)
-                          : textPaint),
+                  icon: Icon(
+                    Icons.home_outlined,
+                    size: 25,
+                  ),
                   label: 'Categories',
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.work_outline,
-                        size: 25,
-                        color: currentIndex == 1
-                            ? Color.fromARGB(255, 30, 197, 226)
-                            : textPaint),
+                    icon: Icon(
+                      Icons.work_outline,
+                      size: 25,
+                    ),
                     label: 'My Jobs'),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.pending_actions,
-                        size: 25,
-                        color: currentIndex == 2
-                            ? Color.fromARGB(255, 30, 197, 226)
-                            : textPaint),
+                    icon: Icon(
+                      Icons.pending_actions,
+                      size: 25,
+                    ),
                     label: 'Contracts'),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.search,
-                        size: 25,
-                        color: currentIndex == 3
-                            ? Color.fromARGB(255, 30, 197, 226)
-                            : textPaint),
+                    icon: Icon(
+                      Icons.search,
+                      size: 25,
+                    ),
                     label: 'Search'),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.person_outline,
-                        size: 25,
-                        color: currentIndex == 4
-                            ? Color.fromARGB(255, 30, 197, 226)
-                            : textPaint),
+                    icon: Icon(
+                      Icons.person_outline,
+                      size: 25,
+                    ),
                     label: 'Profile'),
               ],
             )),
