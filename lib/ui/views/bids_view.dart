@@ -411,7 +411,7 @@ class BidViewState extends State<BidView> {
                                                                                 contractViewModel.sendContract(user!.uid, snapshot.data!.id, user!.uid + snapshot.data!.id!, Contracts(employeeId: snapshot.data!.id!, employerId: user!.uid, employerName: userData.username!, employeeName: snapshot.data!.username, employerPhoneNumber: userData.phoneNumber!, employeePhoneNumber: snapshot.data!.phoneNumber, createdAt: DateTime.now(), jobId: widget.jobId!, jobDescription: jobData.jobDescription, jobCategory: jobData.jobCategory, status: "Pending", contractTerms: termsField.text));
                                                                                 //  bidViewModel.rejectBid(bidId, widget.jobId);
                                                                                 PopUp().showSuccess("Contract sent", context);
-                                                                                routeController.pop(context);
+                                                                                Navigator.of(context).pop();
                                                                               },
                                                                               child: Text(
                                                                                 "Send Contract",
