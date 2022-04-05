@@ -23,9 +23,12 @@ class IntroScreenState extends State<IntroScreen> {
     Color paint = isDark == true ? const Color(0xffb14181c) : Colors.white;
     Color textPaint = isDark == false ? const Color(0xffb14181c) : Colors.white;
     String link = "assets/wj_final.png";
+    Color? background =
+        isDark == false ? Color.fromARGB(255, 237, 241, 241) : Colors.black26;
+
     return Scaffold(
         body: Container(
-      color: paint,
+      color: background,
       height: double.infinity,
       child: SingleChildScrollView(
           child: Container(

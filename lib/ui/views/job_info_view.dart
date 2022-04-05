@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/job_model.dart';
+import 'package:workjeje/ui/views/bids_view.dart';
 import '../../core/double_mode_implementation/theme_provider.dart';
 import '../../core/services/queries.dart';
 import '../../core/viewmodels/jobs_view_models.dart';
@@ -175,7 +176,13 @@ class JobInfoViewState extends State<JobInfoView> {
                           color: textPaint,
                           borderRadius: BorderRadius.circular(15)),
                       child: MaterialButton(
-                        onPressed: null,
+                        onPressed: () {
+                          routeController.push(
+                              context,
+                              BidView(
+                                jobId: widget.jobId,
+                              ));
+                        },
                         child: Text("View Bids",
                             style: TextStyle(
                                 fontSize: (14 / 720) *

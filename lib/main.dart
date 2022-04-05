@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/double_mode_implementation/pref_store.dart';
+import 'package:workjeje/core/viewmodels/bids_view_model.dart';
 import 'package:workjeje/core/viewmodels/client_view_model.dart';
 import 'package:workjeje/core/viewmodels/contract_view_model.dart';
 import 'package:workjeje/core/viewmodels/jobs_view_models.dart';
@@ -29,6 +30,7 @@ class _MyAppState extends State<MyApp> {
   ReviewViewModel reviewViewModel = ReviewViewModel();
   ProviderViewModel providerViewModel = ProviderViewModel();
   ClientViewModel clientViewModel = ClientViewModel();
+  BidsViewModel bidsViewModel = BidsViewModel();
   @override
   void initState() {
     super.initState();
@@ -71,6 +73,11 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) {
             return clientViewModel;
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return bidsViewModel;
           },
         )
       ],

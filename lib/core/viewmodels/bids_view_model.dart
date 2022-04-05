@@ -9,10 +9,12 @@ class BidsViewModel extends ChangeNotifier {
     bids = result.docs
         .map((doc) => Bid.fromMap(doc.data() as Map<String, dynamic>, doc.id))
         .toList();
+    //notifyListeners();
     return bids;
   }
 
   rejectBid(bidId, jobId) {
-    SubCollectionApi("bids", "jobbid", jobId).deleteDocument(bidId);
+    SubCollectionApi("bids", "jobBid", jobId).deleteDocument(bidId);
+    notifyListeners();
   }
 }
