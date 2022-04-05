@@ -5,9 +5,12 @@ import 'package:workjeje/core/double_mode_implementation/pref_store.dart';
 import 'package:workjeje/core/viewmodels/bids_view_model.dart';
 import 'package:workjeje/core/viewmodels/client_view_model.dart';
 import 'package:workjeje/core/viewmodels/contract_view_model.dart';
+import 'package:workjeje/core/viewmodels/gallery_view_model.dart';
 import 'package:workjeje/core/viewmodels/jobs_view_models.dart';
 import 'package:workjeje/core/viewmodels/providers_view_model.dart';
+import 'package:workjeje/core/viewmodels/rate_card_view_model.dart';
 import 'package:workjeje/core/viewmodels/review_view_model.dart';
+import 'package:workjeje/core/viewmodels/schedule_view_model.dart';
 
 import 'core/double_mode_implementation/theme_provider.dart';
 import 'ui/views/intro_view.dart';
@@ -31,6 +34,9 @@ class _MyAppState extends State<MyApp> {
   ProviderViewModel providerViewModel = ProviderViewModel();
   ClientViewModel clientViewModel = ClientViewModel();
   BidsViewModel bidsViewModel = BidsViewModel();
+  ScheduleViewModel scheduleViewModel = ScheduleViewModel();
+  RateCardViewModel rateCardViewModel = RateCardViewModel();
+  GalleryViewModel galleryViewModel = GalleryViewModel();
   @override
   void initState() {
     super.initState();
@@ -78,6 +84,21 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) {
             return bidsViewModel;
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return galleryViewModel;
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return scheduleViewModel;
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return rateCardViewModel;
           },
         )
       ],
