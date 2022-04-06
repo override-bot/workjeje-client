@@ -45,6 +45,10 @@ class Auth {
     await auth.signOut();
   }
 
+  Future deleteAccount() async {
+    await auth.currentUser?.delete();
+  }
+
   bool authState() {
     if (FirebaseAuth.instance.currentUser == null) {
       return false;

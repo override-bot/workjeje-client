@@ -21,4 +21,8 @@ class ClientViewModel extends ChangeNotifier {
     var doc = await api.getDocumentById(id);
     return Client.fromMap(doc.data() as Map<String, dynamic>, doc.id);
   }
+
+  deleteClientDetails(id) {
+    api.deleteDocument(id);
+  }
 }

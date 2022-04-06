@@ -29,8 +29,9 @@ class JobViewState extends State<JobView> {
     bool isDark = themeStatus.darkTheme;
     Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
     Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
-    Color? background =
-        isDark == false ? Color.fromARGB(255, 237, 241, 241) : Colors.black26;
+    Color? background = isDark == false
+        ? Color.fromARGB(255, 237, 241, 241)
+        : Color.fromARGB(160, 0, 0, 0);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: background,
