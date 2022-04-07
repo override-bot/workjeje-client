@@ -38,12 +38,17 @@ class DateTimeFormatter {
 
   String displayTime(timestamp) {
     var format = DateFormat('jm');
-    return format.format(timestamp.toDate());
+    var time = timestamp.toDate();
+    var newDate = format.format(time);
+    return newDate;
   }
 
   String displayT(timestamp) {
     var format = DateFormat('jm');
-    return format.format(timestamp);
+    var time = timestamp;
+    var newDate = format.parse(time);
+
+    return format.format(newDate);
   }
 
   String timeDiff(end, start) {

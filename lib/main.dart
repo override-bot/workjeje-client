@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/double_mode_implementation/pref_store.dart';
+import 'package:workjeje/core/services/location.dart';
 import 'package:workjeje/core/viewmodels/bids_view_model.dart';
 import 'package:workjeje/core/viewmodels/client_view_model.dart';
 import 'package:workjeje/core/viewmodels/contract_view_model.dart';
@@ -13,6 +14,7 @@ import 'package:workjeje/core/viewmodels/review_view_model.dart';
 import 'package:workjeje/core/viewmodels/schedule_view_model.dart';
 
 import 'core/double_mode_implementation/theme_provider.dart';
+import 'core/services/queries.dart';
 import 'ui/views/intro_view.dart';
 
 void main() async {
@@ -37,10 +39,12 @@ class _MyAppState extends State<MyApp> {
   ScheduleViewModel scheduleViewModel = ScheduleViewModel();
   RateCardViewModel rateCardViewModel = RateCardViewModel();
   GalleryViewModel galleryViewModel = GalleryViewModel();
+  LocationService locationService = LocationService();
   @override
   void initState() {
     super.initState();
     getCurrentAppTheme();
+    locationService.getPosition();
   }
 
   void getCurrentAppTheme() async {
@@ -74,6 +78,11 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) {
             return providerViewModel;
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (_) {
+            return locationService;
           },
         ),
         ChangeNotifierProvider(

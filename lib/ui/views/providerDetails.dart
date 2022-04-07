@@ -3,6 +3,10 @@ import 'package:latlong/latlong.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/provider_model.dart';
 import 'package:workjeje/ui/shared/option_box.dart';
+import 'package:workjeje/ui/views/gallery_view.dart';
+import 'package:workjeje/ui/views/rate_card_view.dart';
+import 'package:workjeje/ui/views/review_view.dart';
+import 'package:workjeje/ui/views/schedule_view.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
 import '../../core/services/queries.dart';
@@ -180,6 +184,10 @@ class ProviderDetailsState extends State<ProviderDetails> {
                           ])),
                   Container(height: 14.0),
                   ListTile(
+                    onTap: () {
+                      routeController.push(
+                          context, RateCardView(providerId: widget.providerId));
+                    },
                     leading:
                         Icon(Icons.monetization_on_outlined, color: textPaint),
                     title: Text(
@@ -208,6 +216,10 @@ class ProviderDetailsState extends State<ProviderDetails> {
                   ),
                   Container(height: 7.0),
                   ListTile(
+                    onTap: () {
+                      routeController.push(
+                          context, ScheduleView(providerId: widget.providerId));
+                    },
                     leading:
                         Icon(Icons.calendar_today_outlined, color: textPaint),
                     title: Text(
@@ -222,6 +234,10 @@ class ProviderDetailsState extends State<ProviderDetails> {
                   ),
                   Container(height: 7.0),
                   ListTile(
+                    onTap: () {
+                      routeController.push(
+                          context, ReviewWidget(uid: widget.providerId));
+                    },
                     leading: Icon(Icons.star_outline, color: textPaint),
                     title: Text(
                       "Reviews",
@@ -235,6 +251,10 @@ class ProviderDetailsState extends State<ProviderDetails> {
                   ),
                   Container(height: 7.0),
                   ListTile(
+                    onTap: () {
+                      routeController.push(
+                          context, ProviderGallery(uuid: widget.providerId));
+                    },
                     leading: Icon(Icons.image_outlined, color: textPaint),
                     title: Text(
                       "View Gallery",
