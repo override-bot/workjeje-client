@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, use_full_hex_values_for_flutter_colors, unused_element, prefer_const_literals_to_create_immutables
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +12,8 @@ import '../../core/double_mode_implementation/theme_provider.dart';
 import '../../core/services/authentication.dart';
 
 class ClientIndex extends StatefulWidget {
+  const ClientIndex({Key? key}) : super(key: key);
+
   @override
   _ClientIndexState createState() => _ClientIndexState();
 }
@@ -21,7 +25,7 @@ class _ClientIndexState extends State<ClientIndex> {
 
   int currentIndex = 0;
   List children = [
-    Categories(),
+    const Categories(),
     JobView(),
     Container(),
     SearchScreen(),
@@ -30,7 +34,6 @@ class _ClientIndexState extends State<ClientIndex> {
   @override
   void initState() {
     super.initState();
-    final User? user = auth.currentUser;
     // updatePosition("clients", user.uid);
   }
 
@@ -39,9 +42,7 @@ class _ClientIndexState extends State<ClientIndex> {
     final themeStatus = Provider.of<ThemeProvider>(context);
     ThemeProvider themeProvider = ThemeProvider();
     bool isDark = themeStatus.darkTheme;
-    Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
-    Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
-    IconData darkIcon = Icons.person;
+    Color textPaint = isDark == false ? Color(0xffb14181c) : Colors.white;
     Color? background = isDark == false
         ? Color.fromARGB(255, 237, 241, 241)
         : Color.fromARGB(160, 0, 0, 0);

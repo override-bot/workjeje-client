@@ -1,5 +1,7 @@
 // ignore: unused_import
 
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, use_full_hex_values_for_flutter_colors, duplicate_ignore
+
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +9,6 @@ import 'package:workjeje/core/services/authentication.dart';
 import 'package:workjeje/ui/shared/popup.dart';
 import 'package:workjeje/ui/shared/shared_button.dart';
 import 'package:workjeje/ui/views/client_index.dart';
-import 'package:workjeje/ui/views/intro_view.dart';
 import 'package:workjeje/ui/views/signup_view.dart';
 import 'package:workjeje/utils/router.dart';
 
@@ -20,8 +21,8 @@ class ClientSignInPage extends StatefulWidget {
 }
 
 class _ClientSignInPageState extends State<ClientSignInPage> {
-  TextEditingController _emailField = TextEditingController();
-  TextEditingController _passwordField = TextEditingController();
+  final TextEditingController _emailField = TextEditingController();
+  final TextEditingController _passwordField = TextEditingController();
   bool isLoading = false;
   Auth auth = Auth();
   RouteController routeController = RouteController();
@@ -42,9 +43,9 @@ class _ClientSignInPageState extends State<ClientSignInPage> {
                 height: MediaQuery.of(context).size.height / 3,
                 margin: EdgeInsets.all(25.0),
                 // child: Image.asset(),
-                decoration: new BoxDecoration(
-                    image: new DecorationImage(
-                        fit: BoxFit.contain, image: new AssetImage(link)))),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.contain, image: AssetImage(link)))),
             Text("Sign In",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, use_key_in_widget_constructors, prefer_const_constructors, use_full_hex_values_for_flutter_colors
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,7 +30,7 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
       } else {
-        return null;
+        return;
       }
     });
   }
@@ -36,11 +38,11 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
   Auth auth = Auth();
   RouteController routeController = RouteController();
   PopUp popUp = PopUp();
-  TextEditingController _emailField = TextEditingController();
-  TextEditingController _passwordField = TextEditingController();
-  TextEditingController _locationField = TextEditingController();
-  TextEditingController _fullNameField = TextEditingController();
-  TextEditingController _phoneNumberField = TextEditingController();
+  final TextEditingController _emailField = TextEditingController();
+  final TextEditingController _passwordField = TextEditingController();
+  final TextEditingController _locationField = TextEditingController();
+  final TextEditingController _fullNameField = TextEditingController();
+  final TextEditingController _phoneNumberField = TextEditingController();
 
   bool isName = true;
   bool isLoading = true;
@@ -71,9 +73,9 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                     height: MediaQuery.of(context).size.height / 3,
                     margin: EdgeInsets.all(10.0),
                     // child: Image.asset(),
-                    decoration: new BoxDecoration(
-                        image: new DecorationImage(
-                            fit: BoxFit.contain, image: new AssetImage(link)))),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.contain, image: AssetImage(link)))),
                 Text("Create account",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -170,11 +172,11 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                           : Container(
                               width: 300,
                               height: 300,
-                              decoration: new BoxDecoration(
+                              decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(150),
-                                  image: new DecorationImage(
+                                  image: DecorationImage(
                                       fit: BoxFit.cover,
-                                      image: new FileImage(_image!)))),
+                                      image: FileImage(_image!)))),
                     ),
                   ).p16(),
                   Row(
@@ -326,6 +328,7 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                             });
                           }
                         : null,
+                    isLoading: null,
                   ),
                 ],
               ))

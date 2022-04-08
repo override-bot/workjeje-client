@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, use_full_hex_values_for_flutter_colors
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 //import 'package:workman/double_mode_implementation/theme_provider.dart';
@@ -9,7 +11,7 @@ class ImageInformation extends StatefulWidget {
   // String photoId;
   final String imageUrl;
   final String imageCaption;
-  ImageInformation({required this.imageUrl, required this.imageCaption});
+  const ImageInformation({required this.imageUrl, required this.imageCaption});
   @override
   ImageInfoState createState() => ImageInfoState();
 }
@@ -23,7 +25,7 @@ class ImageInfoState extends State<ImageInformation> {
             backgroundColor: Colors.transparent,
             content: Container(
                 color: Colors.transparent,
-                margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 width: MediaQuery.of(context).size.width / 1.2,
                 //height: 100,
                 child: Text(
@@ -39,7 +41,7 @@ class ImageInfoState extends State<ImageInformation> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text("dismiss",
+                  child: const Text("dismiss",
                       style: TextStyle(
                           color: Colors.red, fontWeight: FontWeight.w600)))
             ],
@@ -51,11 +53,11 @@ class ImageInfoState extends State<ImageInformation> {
   Widget build(BuildContext context) {
     final themeStatus = Provider.of<ThemeProvider>(context);
     bool isDark = themeStatus.darkTheme;
-    Color? background =
-        isDark == false ? Color.fromARGB(255, 231, 239, 240) : Colors.black26;
+    Color? background = isDark == false
+        ? const Color.fromARGB(255, 231, 239, 240)
+        : Colors.black26;
 
-    Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
-    Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
+    Color textPaint = isDark == false ? const Color(0xFFB14181c) : Colors.white;
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -74,9 +76,9 @@ class ImageInfoState extends State<ImageInformation> {
             color: background,
             height: double.infinity,
             width: double.infinity,
-            child: new CachedNetworkImage(
+            child: CachedNetworkImage(
               imageUrl: widget.imageUrl,
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
               progressIndicatorBuilder: (context, url, downloadProgress) =>
                   CircularProgressIndicator(
                 value: downloadProgress.progress,

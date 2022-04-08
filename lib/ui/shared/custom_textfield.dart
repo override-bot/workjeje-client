@@ -13,6 +13,7 @@ class CustomTextField extends StatefulWidget {
   final String? errorText;
   final bool? obscureText;
 
+  // ignore: use_key_in_widget_constructors
   const CustomTextField({
     required this.hintText,
     required this.labelText,
@@ -27,10 +28,12 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
+  @override
   Widget build(BuildContext context) {
     final themeStatus = Provider.of<ThemeProvider>(context);
     bool isDark = themeStatus.darkTheme;
     //Color paint = isDark == true? Color(0xFFB14181c):Colors.white;
+    // ignore: use_full_hex_values_for_flutter_colors
     Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
     return Padding(
       padding: const EdgeInsets.all(20.0),

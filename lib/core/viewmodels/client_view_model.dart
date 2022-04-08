@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:workjeje/core/models/provider_model.dart';
 import 'package:workjeje/core/services/api.dart';
 
 import '../models/clientmodel.dart';

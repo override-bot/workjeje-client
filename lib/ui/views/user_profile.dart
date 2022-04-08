@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, unused_local_variable, prefer_const_constructors, use_full_hex_values_for_flutter_colors
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/clientmodel.dart';
@@ -29,12 +31,6 @@ class UserProfileState extends State<UserProfile> {
     Color? background = isDark == false
         ? Color.fromARGB(255, 237, 241, 241)
         : Color.fromARGB(160, 0, 0, 0);
-
-    changeMode(bool value) {
-      isDark = value;
-      themeStatus.darkTheme = value;
-      themeProvider.themePreference.setDarkTheme(isDark);
-    }
 
     return FutureBuilder<Client>(
       future: clientViewModel.getProviderById(user!.uid),

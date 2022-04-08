@@ -1,6 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore_for_file: import_of_legacy_library_into_null_safe, use_key_in_widget_constructors, prefer_const_constructors, use_full_hex_values_for_flutter_colors, avoid_unnecessary_containers
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:latlong/latlong.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/clientmodel.dart';
@@ -75,7 +76,9 @@ class _ProvidersByCategoryState extends State<ProvidersByCategory> {
                         .streamProvidersByCategories(widget.category),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        print(snapshot.data);
+                        if (kDebugMode) {
+                          print(snapshot.data);
+                        }
 
                         if (snapshot.data!.isEmpty) {
                           return Center(

@@ -31,7 +31,7 @@ class PopUp {
               width: MediaQuery.of(context).size.width / 1.1,
               child: Text(
                 message,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.w500),

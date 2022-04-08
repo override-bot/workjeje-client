@@ -1,4 +1,7 @@
+// ignore_for_file: unused_import, use_key_in_widget_constructors, prefer_const_constructors, use_full_hex_values_for_flutter_colors, unused_local_variable, unnecessary_new
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/services/location.dart';
@@ -19,7 +22,7 @@ class SearchScreen extends StatefulWidget {
 class SearchScreenState extends State<SearchScreen> {
   StringManip stringManip = StringManip();
   DateTimeFormatter time = DateTimeFormatter();
-  TextEditingController _searchField = TextEditingController();
+  final TextEditingController _searchField = TextEditingController();
   String searchKey = "";
   String field = "";
   Stream? streamQuery;
@@ -27,11 +30,9 @@ class SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final themeStatus = Provider.of<ThemeProvider>(context);
-    ThemeProvider themeProvider = ThemeProvider();
     bool isDark = themeStatus.darkTheme;
     Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
     Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
-    IconData darkIcon = Icons.person;
     final clientViewModel = Provider.of<ClientViewModel>(context);
     final locationService = Provider.of<LocationService>(context);
     Color? background = isDark == false
@@ -171,7 +172,7 @@ class SearchScreenState extends State<SearchScreen> {
                       stream: streamQuery,
                       builder: (context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData) {
-                          return Container(
+                          return SizedBox(
                               height: 450,
                               width: double.infinity,
                               child: ListView(
@@ -187,6 +188,9 @@ class SearchScreenState extends State<SearchScreen> {
                                             BorderRadius.circular(15)),
                                     child: ListTile(
                                       onTap: () {
+                                        if (kDebugMode) {
+                                          print(locationService.userLong);
+                                        }
                                         RouteController().push(
                                             context,
                                             ProviderDetails(

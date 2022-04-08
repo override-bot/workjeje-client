@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, use_full_hex_values_for_flutter_colors
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,8 @@ import '../../core/double_mode_implementation/theme_provider.dart';
 import '../../core/services/queries.dart';
 
 class Categories extends StatefulWidget {
+  const Categories({Key? key}) : super(key: key);
+
   @override
   _CategoriesState createState() => _CategoriesState();
 }
@@ -27,7 +31,6 @@ class _CategoriesState extends State<Categories> {
     Color? background = isDark == false
         ? Color.fromARGB(255, 237, 241, 241)
         : Color.fromARGB(160, 0, 0, 0);
-    Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
     Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
     return Scaffold(
         appBar: AppBar(
@@ -71,7 +74,7 @@ class _CategoriesState extends State<Categories> {
                                     Icon(Icons.error),
                                 progressIndicatorBuilder: (context, url,
                                         downloadProgress) =>
-                                    Container(
+                                    SizedBox(
                                         height: 50,
                                         width: 50,
                                         child: Center(

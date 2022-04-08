@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors_in_immutables, unused_local_variable, prefer_const_constructors, use_full_hex_values_for_flutter_colors
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/schedule_model.dart';

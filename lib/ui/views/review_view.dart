@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_const_constructors, use_full_hex_values_for_flutter_colors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -84,7 +86,7 @@ class ReviewWidgetState extends State<ReviewWidget> {
                                             fontWeight: FontWeight.w600,
                                             color: textPaint),
                                       ),
-                                      subtitle: Container(
+                                      subtitle: SizedBox(
                                         height: 20,
                                         child: RatingBarIndicator(
                                           rating: document.data()!['rate'] / 1,

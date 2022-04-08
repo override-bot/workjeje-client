@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class OptionBox extends StatefulWidget {
@@ -5,7 +7,8 @@ class OptionBox extends StatefulWidget {
   final String label;
   final Color color;
   final Function() onPressed;
-  OptionBox(
+  // ignore: use_key_in_widget_constructors
+  const OptionBox(
       {required this.icon,
       required this.label,
       required this.onPressed,
@@ -25,7 +28,7 @@ class OptionBoxState extends State<OptionBox> {
             borderRadius: BorderRadius.circular(10), color: widget.color),
         child: Column(
           children: [
-            Container(child: Icon(widget.icon, color: Colors.white)),
+            Icon(widget.icon, color: Colors.white),
             Text(
               widget.label,
               textAlign: TextAlign.center,

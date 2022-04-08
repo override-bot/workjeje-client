@@ -1,19 +1,15 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import "package:geocoding/geocoding.dart";
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:workjeje/core/services/queries.dart';
 
 class LocationService extends ChangeNotifier {
   double? userLat;
   double? userLong;
-  getPosition() async {
+  Future<Position> getPosition() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.bestForNavigation);
-    userLat = position.latitude;
-    notifyListeners();
-    userLong = position.longitude;
-    notifyListeners();
+    return position;
   }
 
   updatePosition(role, userId) {
@@ -21,7 +17,9 @@ class LocationService extends ChangeNotifier {
       Geolocator.getPositionStream(
         desiredAccuracy: LocationAccuracy.best,
       ).listen((Position position) async {
-        print(position);
+        if (kDebugMode) {
+          print(position);
+        }
 
         List<Placemark> addresses = await placemarkFromCoordinates(
             position.latitude, position.longitude);

@@ -1,5 +1,8 @@
 //import 'dart:html';
 
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, use_full_hex_values_for_flutter_colors
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/job_model.dart';
@@ -109,7 +112,9 @@ class JobViewState extends State<JobView> {
                 },
               );
             }
-            print(snapshot.connectionState);
+            if (kDebugMode) {
+              print(snapshot.connectionState);
+            }
             return Center(
               child: CircularProgressIndicator(
                 color: textPaint,

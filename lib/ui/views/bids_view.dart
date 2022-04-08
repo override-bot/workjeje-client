@@ -1,3 +1,5 @@
+// ignore_for_file: use_full_hex_values_for_flutter_colors, sized_box_for_whitespace, avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +22,7 @@ import '../../utils/stringManip.dart';
 
 class BidView extends StatefulWidget {
   final String? jobId;
-  BidView({Key? key, this.jobId}) : super(key: key);
+  const BidView({Key? key, this.jobId}) : super(key: key);
   @override
   BidViewState createState() => BidViewState();
 }
@@ -39,10 +41,11 @@ class BidViewState extends State<BidView> {
     final contractViewModel = Provider.of<ContractViewModel>(context);
     final clientViewModel = Provider.of<ClientViewModel>(context);
     bool isDark = themeStatus.darkTheme;
-    Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
-    Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
-    Color? background =
-        isDark == false ? Color.fromARGB(255, 237, 241, 241) : Colors.black26;
+    Color paint = isDark == true ? const Color(0xFFB14181c) : Colors.white;
+    Color textPaint = isDark == false ? const Color(0xFFB14181c) : Colors.white;
+    Color? background = isDark == false
+        ? const Color.fromARGB(255, 237, 241, 241)
+        : Colors.black26;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -94,7 +97,7 @@ class BidViewState extends State<BidView> {
                       builder: (BuildContext context, snapshot) {
                         if (snapshot.hasData) {
                           return Container(
-                            margin: EdgeInsets.only(
+                            margin: const EdgeInsets.only(
                                 left: 10, right: 10, bottom: 10),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
@@ -109,7 +112,7 @@ class BidViewState extends State<BidView> {
                                         context: context,
                                         enableDrag: true,
                                         elevation: 10.0,
-                                        shape: RoundedRectangleBorder(
+                                        shape: const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(35),
                                                 topRight: Radius.circular(35))),
@@ -119,7 +122,7 @@ class BidViewState extends State<BidView> {
 
                                         builder: (context) {
                                           return Container(
-                                            margin: EdgeInsets.only(
+                                            margin: const EdgeInsets.only(
                                                 left: 10, right: 10),
                                             color: paint,
                                             child: Column(
@@ -174,8 +177,10 @@ class BidViewState extends State<BidView> {
                                                       text: TextSpan(children: [
                                                     WidgetSpan(
                                                         child: Container(
-                                                      margin: EdgeInsets.only(
-                                                          left: 0, right: 3),
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              left: 0,
+                                                              right: 3),
                                                       child: Icon(
                                                         Icons.location_pin,
                                                         color: textPaint,
@@ -188,8 +193,8 @@ class BidViewState extends State<BidView> {
                                                             fontWeight:
                                                                 FontWeight.w400,
                                                             color: textPaint),
-                                                        text:
-                                                            '${snapshot.data!.location}')
+                                                        text: snapshot
+                                                            .data!.location)
                                                   ])),
                                                   Container(
                                                     height: 10,
@@ -266,7 +271,8 @@ class BidViewState extends State<BidView> {
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               25)),
-                                                                  child: Icon(
+                                                                  child:
+                                                                      const Icon(
                                                                     Icons
                                                                         .person,
                                                                     size: 30,
@@ -278,7 +284,8 @@ class BidViewState extends State<BidView> {
                                                               ),
                                                               Container(
                                                                 //   width: 50,
-                                                                child: Text(
+                                                                child:
+                                                                    const Text(
                                                                   "View Profile",
                                                                   style: TextStyle(
                                                                       color: Colors
@@ -307,7 +314,7 @@ class BidViewState extends State<BidView> {
                                                                     context,
                                                                 enableDrag:
                                                                     true,
-                                                                shape: RoundedRectangleBorder(
+                                                                shape: const RoundedRectangleBorder(
                                                                     borderRadius: BorderRadius.only(
                                                                         topLeft:
                                                                             Radius.circular(
@@ -322,7 +329,8 @@ class BidViewState extends State<BidView> {
                                                                 builder:
                                                                     (context) {
                                                                   return Container(
-                                                                    margin: EdgeInsets.only(
+                                                                    margin: const EdgeInsets
+                                                                            .only(
                                                                         left:
                                                                             10,
                                                                         right:
@@ -340,14 +348,14 @@ class BidViewState extends State<BidView> {
                                                                             height:
                                                                                 20,
                                                                           ),
-                                                                          Text(
+                                                                          const Text(
                                                                             "Send Contract",
                                                                             style:
                                                                                 TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                                                                           ),
                                                                           Container(
                                                                             margin:
-                                                                                EdgeInsets.only(top: 25),
+                                                                                const EdgeInsets.only(top: 25),
                                                                             width:
                                                                                 MediaQuery.of(context).size.width / 1.1,
                                                                             padding:
@@ -368,11 +376,11 @@ class BidViewState extends State<BidView> {
                                                                                       borderSide: BorderSide(
                                                                                     color: textPaint,
                                                                                   )),
-                                                                                  errorBorder: OutlineInputBorder(
+                                                                                  errorBorder: const OutlineInputBorder(
                                                                                       borderSide: BorderSide(
                                                                                     color: Colors.red,
                                                                                   )),
-                                                                                  focusedErrorBorder: OutlineInputBorder(
+                                                                                  focusedErrorBorder: const OutlineInputBorder(
                                                                                       borderSide: BorderSide(
                                                                                     color: Colors.red,
                                                                                   )),
@@ -400,7 +408,7 @@ class BidViewState extends State<BidView> {
                                                                             height:
                                                                                 60,
                                                                             margin:
-                                                                                EdgeInsets.only(bottom: 10),
+                                                                                const EdgeInsets.only(bottom: 10),
                                                                             decoration:
                                                                                 BoxDecoration(borderRadius: BorderRadius.circular(15.0), color: textPaint),
                                                                             child:
@@ -434,7 +442,8 @@ class BidViewState extends State<BidView> {
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               25)),
-                                                                  child: Icon(
+                                                                  child:
+                                                                      const Icon(
                                                                     Icons
                                                                         .check_circle,
                                                                     size: 50,
@@ -446,7 +455,8 @@ class BidViewState extends State<BidView> {
                                                               ),
                                                               Container(
                                                                 //   width: 50,
-                                                                child: Text(
+                                                                child:
+                                                                    const Text(
                                                                   "Accept Bid",
                                                                   style: TextStyle(
                                                                       color: Colors
@@ -482,7 +492,8 @@ class BidViewState extends State<BidView> {
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               25)),
-                                                                  child: Icon(
+                                                                  child:
+                                                                      const Icon(
                                                                     Icons
                                                                         .cancel_rounded,
                                                                     size: 50,
@@ -494,7 +505,8 @@ class BidViewState extends State<BidView> {
                                                               ),
                                                               Container(
                                                                 //   width: 50,
-                                                                child: Text(
+                                                                child:
+                                                                    const Text(
                                                                   "Reject Bid",
                                                                   style: TextStyle(
                                                                       color: Colors
@@ -542,13 +554,13 @@ class BidViewState extends State<BidView> {
                                   ),
                                 ),
                                 Container(
-                                    margin: EdgeInsets.only(left: 70),
+                                    margin: const EdgeInsets.only(left: 70),
                                     child: Row(children: [
                                       RichText(
                                           text: TextSpan(children: [
                                         WidgetSpan(
                                             child: Container(
-                                          margin: EdgeInsets.only(
+                                          margin: const EdgeInsets.only(
                                               left: 0, right: 3),
                                           child: Icon(
                                             Icons.work,
@@ -573,9 +585,9 @@ class BidViewState extends State<BidView> {
                                           text: TextSpan(children: [
                                         WidgetSpan(
                                             child: Container(
-                                          margin: EdgeInsets.only(
+                                          margin: const EdgeInsets.only(
                                               left: 5, right: 3),
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.star,
                                             color: Colors.amber,
                                             size: 18,

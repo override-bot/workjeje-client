@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
-import 'package:workjeje/core/double_mode_implementation/pref_store.dart';
 import 'package:workjeje/core/services/location.dart';
 import 'package:workjeje/core/viewmodels/bids_view_model.dart';
 import 'package:workjeje/core/viewmodels/client_view_model.dart';
@@ -14,7 +14,6 @@ import 'package:workjeje/core/viewmodels/review_view_model.dart';
 import 'package:workjeje/core/viewmodels/schedule_view_model.dart';
 
 import 'core/double_mode_implementation/theme_provider.dart';
-import 'core/services/queries.dart';
 import 'ui/views/intro_view.dart';
 
 void main() async {
@@ -23,6 +22,7 @@ void main() async {
   runApp(MyApp());
 }
 
+// ignore: use_key_in_widget_constructors
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -44,11 +44,17 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     getCurrentAppTheme();
-    locationService.getPosition();
+    getLocation();
   }
 
   void getCurrentAppTheme() async {
     themeProvider.darkTheme = await themeProvider.themePreference.getTheme();
+  }
+
+  void getLocation() async {
+    Position position = await locationService.getPosition();
+    locationService.userLat = position.latitude;
+    locationService.userLong = position.longitude;
   }
 
   @override

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, import_of_legacy_library_into_null_safe, unused_import, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_const_constructors, unused_local_variable, use_full_hex_values_for_flutter_colors, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +22,7 @@ class ProviderDetails extends StatefulWidget {
   final String providerId;
   ProviderDetails(
       {required this.providerId, required this.lat, required this.long});
+  @override
   ProviderDetailsState createState() => ProviderDetailsState();
 }
 

@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, unused_local_variable, prefer_const_constructors, use_full_hex_values_for_flutter_colors
+
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,7 +21,7 @@ class Subcategories extends StatefulWidget {
 
 class _SubcategoriesState extends State<Subcategories> {
   List subcategories = [];
-  Random random = new Random();
+  Random random = Random();
   List<IconData> icons = [Icons.work, Icons.category, Icons.construction];
   FirebaseQueries firebaseQueries = FirebaseQueries();
   RouteController routeController = RouteController();
@@ -91,10 +93,9 @@ class _SubcategoriesState extends State<Subcategories> {
                         });
                   } else {
                     return Center(
-                      child: Container(
-                          child: CircularProgressIndicator(
+                      child: CircularProgressIndicator(
                         color: textPaint,
-                      )),
+                      ),
                     );
                   }
                 })));
