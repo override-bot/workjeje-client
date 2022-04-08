@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/ui/views/categories.dart';
 import 'package:workjeje/ui/views/client_job_view.dart';
+import 'package:workjeje/ui/views/contract_tab_view.dart';
 import 'package:workjeje/ui/views/search_screen.dart';
 import 'package:workjeje/ui/views/user_profile.dart';
 
@@ -27,7 +28,7 @@ class _ClientIndexState extends State<ClientIndex> {
   List children = [
     const Categories(),
     JobView(),
-    Container(),
+    ContractTabView(),
     SearchScreen(),
     UserProfile()
   ];
