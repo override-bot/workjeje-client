@@ -416,10 +416,12 @@ class BidViewState extends State<BidView> {
                                                                               onPressed: () async {
                                                                                 var userData = await clientViewModel.getProviderById(user!.uid);
                                                                                 var jobData = await jobViewModel.getJobsById(widget.jobId);
-                                                                                contractViewModel.sendContract(user!.uid, snapshot.data!.id, user!.uid + snapshot.data!.id!, Contracts(employeeId: snapshot.data!.id!, employerId: user!.uid, employerName: userData.username!, employeeName: snapshot.data!.username, employerPhoneNumber: userData.phoneNumber!, employeePhoneNumber: snapshot.data!.phoneNumber, createdAt: DateTime.now(), jobId: widget.jobId!, jobDescription: jobData.jobDescription, jobCategory: jobData.jobCategory, status: "Pending", contractTerms: termsField.text));
+                                                                                contractViewModel.sendContract(user!.uid, snapshot.data!.id, user!.uid + snapshot.data!.id!, Contracts(employeeId: snapshot.data!.id!, employerId: user!.uid, employerName: userData.username!, employeeName: snapshot.data!.username, employerPhoneNumber: userData.phoneNumber!, employeePhoneNumber: snapshot.data!.phoneNumber, createdAt: DateTime.now(), jobId: widget.jobId!, jobDescription: jobData.jobDescription, jobCategory: jobData.jobCategory, status: "Pending", contractTerms: termsField.text)).then((value) {
+                                                                                  termsField.clear();
+                                                                                  PopUp().showSuccess("Contract sent", context);
+                                                                                  Navigator.of(context).pop();
+                                                                                });
                                                                                 //  bidViewModel.rejectBid(bidId, widget.jobId);
-                                                                                PopUp().showSuccess("Contract sent", context);
-                                                                                Navigator.of(context).pop();
                                                                               },
                                                                               child: Text(
                                                                                 "Send Contract",

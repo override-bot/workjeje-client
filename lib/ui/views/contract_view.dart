@@ -1,9 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/contract_model.dart';
 import 'package:workjeje/core/viewmodels/contract_view_model.dart';
+import 'package:workjeje/ui/shared/contract_pageview.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
 import '../../core/services/queries.dart';
@@ -58,10 +60,31 @@ class ContractViewState extends State<ContractView> {
                 itemBuilder: (BuildContext context, index) {
                   return Container(
                     margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                    padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(15)),
                     child: ListTile(
+                      onTap: () {
+                        showMaterialModalBottomSheet(
+                            context: context,
+                            enableDrag: true,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(35),
+                                topRight: Radius.circular(35),
+                              ),
+                            ),
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            builder: (context) {
+                              return SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height / 1.5,
+                                  child: ContractPageView(
+                                    contractId: snapshot.data![index].id!,
+                                  ));
+                            });
+                      },
                       title: Text(
                         snapshot.data![index].employeeName,
                         style: TextStyle(

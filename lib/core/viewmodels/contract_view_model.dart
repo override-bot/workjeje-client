@@ -21,6 +21,12 @@ class ContractViewModel extends ChangeNotifier {
     return Contracts.fromMap(doc.data() as Map<String, dynamic>, doc.id);
   }
 
+  cancelContract(id, userId, providerId) {
+    SubCollectionApi("contracts", "userContracts", userId).deleteDocument(id);
+    SubCollectionApi("contracts", "userContracts", providerId)
+        .deleteDocument(id);
+  }
+
   Stream<QuerySnapshot> streamAcceptedContracts(userId) {
     return SubCollectionApi("contracts", "userContracts", userId)
         .queryWhereIsEqualTo("Accepted", "Status");
