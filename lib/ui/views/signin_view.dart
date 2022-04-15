@@ -67,7 +67,7 @@ class _ClientSignInPageState extends State<ClientSignInPage> {
               // ignore: prefer_const_constructors
               Text(
                 "Don't have an account?  ",
-                style: const TextStyle(fontSize: 17, color: Colors.white),
+                style: const TextStyle(fontSize: 17, color: Colors.black),
               ),
               GestureDetector(
                 onTap: () {
@@ -89,9 +89,8 @@ class _ClientSignInPageState extends State<ClientSignInPage> {
                 label: "login",
                 isLoading: isLoading,
                 onPressed: () {
-                  setState(() {
-                    isLoading = true;
-                  });
+                  isLoading = true;
+
                   auth
                       .signInClient(_emailField.text, _passwordField.text)
                       .then((value) {
@@ -99,9 +98,8 @@ class _ClientSignInPageState extends State<ClientSignInPage> {
                   }).catchError((e) {
                     popUp.showError(e.message, context);
                   });
-                  setState(() {
-                    isLoading = false;
-                  });
+
+                  isLoading = false;
                 }),
           ])),
     );

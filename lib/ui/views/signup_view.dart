@@ -302,9 +302,8 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                             isNo == true &&
                             _image != null
                         ? () {
-                            setState(() {
-                              isLoading = true;
-                            });
+                            isLoading = true;
+
                             auth
                                 .signUpClient(
                                     _emailField.text,
@@ -315,9 +314,8 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                                     _phoneNumberField.text,
                                     context)
                                 .then((value) {
-                              setState(() {
-                                isLoading = false;
-                              });
+                              isLoading = false;
+
                               routeController
                                   .pushAndRemoveUntil(context, ClientIndex())
                                   .catchError((e) {
