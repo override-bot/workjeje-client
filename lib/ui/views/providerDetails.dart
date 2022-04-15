@@ -9,6 +9,7 @@ import 'package:workjeje/ui/views/gallery_view.dart';
 import 'package:workjeje/ui/views/rate_card_view.dart';
 import 'package:workjeje/ui/views/review_view.dart';
 import 'package:workjeje/ui/views/schedule_view.dart';
+import 'package:workjeje/ui/views/send_contract.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
 import '../../core/services/queries.dart';
@@ -205,6 +206,14 @@ class ProviderDetailsState extends State<ProviderDetails> {
                   ),
                   Container(height: 7.0),
                   ListTile(
+                    onTap: () {
+                      routeController.push(
+                          context,
+                          SendContract(
+                              userId: user!.uid,
+                              providerId: widget.providerId,
+                              occupation: snapshot.data!.occupation));
+                    },
                     leading:
                         Icon(Icons.pending_actions_outlined, color: textPaint),
                     title: Text(

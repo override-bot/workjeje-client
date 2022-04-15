@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:workjeje/ui/shared/contract_details.dart';
+import 'package:workjeje/ui/shared/contract_terms.dart';
+import 'package:workjeje/ui/shared/job_description.dart';
 
 class ContractPageView extends StatefulWidget {
   final String contractId;
-  ContractPageView({required this.contractId});
+  final String contractTerms;
+  final String jobDescription;
+  ContractPageView(
+      {required this.contractId,
+      required this.contractTerms,
+      required this.jobDescription});
   @override
   ContractPageViewState createState() => ContractPageViewState();
 }
@@ -15,18 +22,23 @@ class ContractPageViewState extends State<ContractPageView> {
   Widget build(BuildContext context) {
     return Container(
         child: PageView(
+      physics: NeverScrollableScrollPhysics(),
       controller: myPage,
       onPageChanged: (int page) {
         currentPage = page;
       },
       children: [
-        ContractDetails(contractId: widget.contractId),
-        Container(
-          height: 150,
+        ContractDetails(
+          contractId: widget.contractId,
+          page: myPage,
         ),
-        Container(
-          color: Colors.red,
-          height: 300,
+        ContractTerms(
+          contractTerms: widget.contractTerms,
+          page: myPage,
+        ),
+        JobDescription(
+          jobDescription: widget.jobDescription,
+          page: myPage,
         )
       ],
     ));

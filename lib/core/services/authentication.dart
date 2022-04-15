@@ -12,7 +12,7 @@ class Auth {
     final UserCredential userCredential = await auth
         .createUserWithEmailAndPassword(email: email, password: password);
     final User? user = userCredential.user;
-    await uploadClientDetails(
+    uploadClientDetails(
         email, location, fullname, user?.uid, image, phoneNumber);
 
     return user;

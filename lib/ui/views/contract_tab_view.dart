@@ -30,13 +30,6 @@ class ContractTabViewState extends State<ContractTabView> {
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: background,
-          bottom: TabBar(
-            tabs: [
-              Tab(icon: Icon(Icons.pending_actions, color: textPaint)),
-              Tab(icon: Icon(Icons.check, color: textPaint)),
-            ],
-            indicatorColor: textPaint,
-          ),
           title: Text(
             "Contracts",
             style: TextStyle(
@@ -45,7 +38,7 @@ class ContractTabViewState extends State<ContractTabView> {
                 fontSize: (24 / 720) * MediaQuery.of(context).size.height),
           ),
         ),
-        body: TabBarView(children: [ContractView(), Container()]),
+        body: ContractView(),
       ),
     );
   }

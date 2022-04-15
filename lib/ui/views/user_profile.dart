@@ -35,6 +35,9 @@ class UserProfileState extends State<UserProfile> {
     return FutureBuilder<Client>(
       future: clientViewModel.getProviderById(user!.uid),
       builder: (BuildContext context, snapshot) {
+        print(snapshot.connectionState);
+        print(snapshot.data);
+        print(snapshot.error);
         if (snapshot.hasData) {
           return SafeArea(
               child: Scaffold(

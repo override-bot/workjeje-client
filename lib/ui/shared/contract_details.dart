@@ -3,16 +3,19 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:workjeje/core/models/contract_model.dart';
 import 'package:workjeje/ui/shared/popup.dart';
+import 'package:workjeje/ui/views/contract_view.dart';
 import 'package:workjeje/utils/router.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
 import '../../core/services/queries.dart';
 import '../../core/viewmodels/contract_view_model.dart';
 import '../../utils/stringManip.dart';
+import '../views/contract_tab_view.dart';
 
 class ContractDetails extends StatefulWidget {
+  final PageController page;
   final String? contractId;
-  ContractDetails({required this.contractId});
+  ContractDetails({required this.contractId, required this.page});
   @override
   ContractDetailsState createState() => ContractDetailsState();
 }
@@ -120,6 +123,9 @@ class ContractDetailsState extends State<ContractDetails> {
                       ),
                     ),
                     GestureDetector(
+                      onTap: () {
+                        widget.page.jumpToPage(1);
+                      },
                       child: Column(
                         children: [
                           Container(
@@ -148,6 +154,9 @@ class ContractDetailsState extends State<ContractDetails> {
                       ),
                     ),
                     GestureDetector(
+                      onTap: () {
+                        widget.page.jumpToPage(2);
+                      },
                       child: Column(
                         children: [
                           Container(
@@ -236,9 +245,111 @@ class ContractDetailsState extends State<ContractDetails> {
                 margin: EdgeInsets.only(left: 30, right: 20),
                 child: ListTile(
                   onTap: () {
-                    contractViewModel.cancelContract(snapshot.data!.id,
-                        user!.uid, snapshot.data!.employeeId);
-                    RouteController().pop(context);
+                    if (snapshot.data!.status == "Accepted") {
+                      PopUp().showError(
+                          "Contract has been accepted already", context);
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              content: FittedBox(
+                                fit: BoxFit.contain,
+                                //  width: MediaQuery.of(context).size.width / 1.1,
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.dangerous,
+                                      color: Colors.red,
+                                      size: 35,
+                                    ),
+                                    Container(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Are you sure you want to cancel?",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 20),
+                                    ),
+                                    Container(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.1,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              child: MaterialButton(
+                                                onPressed: () {
+                                                  RouteController()
+                                                      .pop(context);
+                                                },
+                                                child: Text(
+                                                  "Back",
+                                                  style: TextStyle(
+                                                      color: Colors.blue,
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ),
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  2.5,
+                                              height: 60,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: Colors.white,
+                                                  border: Border.all(
+                                                      color: Colors.blue)),
+                                            ),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  2.5,
+                                              height: 60,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: Colors.blue,
+                                              ),
+                                              child: MaterialButton(
+                                                onPressed: () {
+                                                  contractViewModel
+                                                      .cancelContract(
+                                                          snapshot.data!.id,
+                                                          user!.uid,
+                                                          snapshot.data!
+                                                              .employeeId);
+                                                  RouteController()
+                                                      .pop(context);
+                                                },
+                                                child: Text(
+                                                  "Cancel",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ))
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                    }
                   },
                   leading: Icon(
                     Icons.delete,

@@ -6,6 +6,7 @@ import 'package:latlong/latlong.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/clientmodel.dart';
 import 'package:workjeje/core/models/provider_model.dart';
+import 'package:workjeje/core/services/location.dart';
 import 'package:workjeje/core/viewmodels/client_view_model.dart';
 import 'package:workjeje/core/viewmodels/providers_view_model.dart';
 import 'package:workjeje/ui/views/providerDetails.dart';
@@ -36,7 +37,7 @@ class _ProvidersByCategoryState extends State<ProvidersByCategory> {
     bool isDark = themeStatus.darkTheme;
     Color? background =
         isDark == false ? Color.fromARGB(255, 237, 241, 241) : Colors.black26;
-
+    final location = Provider.of<LocationService>(context);
     Color paint = isDark == true
         ? Color(0xFFB14181c)
         : Color.fromARGB(255, 255, 255, 255);
@@ -125,8 +126,8 @@ class _ProvidersByCategoryState extends State<ProvidersByCategory> {
                                             ProviderDetails(
                                               providerId:
                                                   snapshot.data![index].id!,
-                                              lat: userData.data!.userLat!,
-                                              long: userData.data!.userLong!,
+                                              lat: location.userLat!,
+                                              long: location.userLong!,
                                             ));
                                       },
                                       leading: CircleAvatar(
@@ -179,7 +180,7 @@ class _ProvidersByCategoryState extends State<ProvidersByCategory> {
                                                     fontWeight: FontWeight.w400,
                                                     color: textPaint),
                                                 text:
-                                                    "${distance.as(LengthUnit.Kilometer, LatLng(snapshot.data![index].userLat, snapshot.data![index].userLong), LatLng(userData.data!.userLat, userData.data!.userLong))}km")
+                                                    "${distance.as(LengthUnit.Kilometer, LatLng(snapshot.data![index].userLat, snapshot.data![index].userLong), LatLng(location.userLat, location.userLong))}km")
                                           ])),
                                           Container(
                                             width: 12,

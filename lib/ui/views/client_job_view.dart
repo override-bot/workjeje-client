@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/job_model.dart';
 import 'package:workjeje/core/viewmodels/jobs_view_models.dart';
+import 'package:workjeje/ui/views/job_add_view.dart';
 import 'package:workjeje/ui/views/job_info_view.dart';
 import 'package:workjeje/utils/stringManip.dart';
 
@@ -125,7 +126,9 @@ class JobViewState extends State<JobView> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: textPaint,
-        onPressed: null,
+        onPressed: () {
+          routeController.push(context, AddJob());
+        },
         child: Icon(
           Icons.add_outlined,
           color: paint,

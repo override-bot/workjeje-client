@@ -369,6 +369,7 @@ class BidViewState extends State<BidView> {
                                                                               controller: termsField,
                                                                               minLines: 15,
                                                                               maxLines: 20,
+                                                                              maxLength: 500,
                                                                               decoration: InputDecoration(
                                                                                   hintText: "Contract terms here..",
                                                                                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: textPaint)),

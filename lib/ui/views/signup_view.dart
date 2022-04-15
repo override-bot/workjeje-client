@@ -300,7 +300,6 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                     onPressed: isName == true &&
                             isLoc == true &&
                             isNo == true &&
-                            isLoading == false &&
                             _image != null
                         ? () {
                             setState(() {

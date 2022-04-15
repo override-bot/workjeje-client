@@ -82,6 +82,10 @@ class ContractViewState extends State<ContractView> {
                                       MediaQuery.of(context).size.height / 1.5,
                                   child: ContractPageView(
                                     contractId: snapshot.data![index].id!,
+                                    contractTerms:
+                                        snapshot.data![index].contractTerms,
+                                    jobDescription:
+                                        snapshot.data![index].jobDescription,
                                   ));
                             });
                       },

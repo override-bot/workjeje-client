@@ -4,8 +4,8 @@ class Client {
   final String? location;
   final String? phoneNumber;
   final String? imageurl;
-  final double? userLat;
-  final double? userLong;
+  dynamic userLat;
+  dynamic userLong;
   final String? email;
   Client(
       {this.email,
