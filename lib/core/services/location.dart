@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class LocationService extends ChangeNotifier {
   double? userLat;
   double? userLong;
+  String? location;
   Future<Position> getPosition() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.bestForNavigation);

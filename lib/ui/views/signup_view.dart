@@ -45,7 +45,7 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
   final TextEditingController _phoneNumberField = TextEditingController();
 
   bool isName = true;
-  bool isLoading = true;
+  bool isLoading = false;
   bool isNo = true;
   bool isLoc = true;
   bool isPass = true;
@@ -302,7 +302,9 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                             isNo == true &&
                             _image != null
                         ? () {
-                            isLoading = true;
+                            setState(() {
+                              isLoading = true;
+                            });
 
                             auth
                                 .signUpClient(
@@ -314,18 +316,21 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                                     _phoneNumberField.text,
                                     context)
                                 .then((value) {
-                              isLoading = false;
+                              setState(() {
+                                isLoading = false;
+                              });
 
-                              routeController
-                                  .pushAndRemoveUntil(context, ClientIndex())
-                                  .catchError((e) {
-                                popUp.showError(e.message, context);
+                              routeController.pushAndRemoveUntil(
+                                  context, ClientIndex());
+                            }).catchError((e) {
+                              popUp.showError(e.message, context);
+                              setState(() {
                                 isLoading = false;
                               });
                             });
                           }
                         : null,
-                    isLoading: null,
+                    isLoading: isLoading,
                   ),
                 ],
               ))

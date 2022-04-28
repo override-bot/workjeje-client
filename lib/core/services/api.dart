@@ -21,6 +21,10 @@ class Api {
     return ref.where(field, isEqualTo: param).get();
   }
 
+  Future updateDocument(field, value, docId) {
+    return ref.doc(docId).update({field: value});
+  }
+
   Future<DocumentSnapshot> getDocumentById(id) {
     return ref.doc(id).get();
   }

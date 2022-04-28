@@ -28,4 +28,12 @@ class ProviderViewModel extends ChangeNotifier {
         .toList();
     return categoryProviders;
   }
+
+  Future rateProvider(providerId, rate) async {
+    var result = await getProviderById(providerId);
+    var oldRate = result.rating;
+    var oldRaters = result.raters;
+    api.updateDocument("rating", oldRate + rate, providerId);
+    api.updateDocument("raters", oldRaters + 1, providerId);
+  }
 }

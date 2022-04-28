@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:workjeje/core/models/contract_model.dart';
 import 'package:workjeje/ui/shared/popup.dart';
+import 'package:workjeje/ui/shared/rateBox.dart';
 import 'package:workjeje/ui/views/contract_view.dart';
 import 'package:workjeje/utils/router.dart';
 
@@ -208,10 +209,21 @@ class ContractDetailsState extends State<ContractDetails> {
                 child: ListTile(
                   onTap: () {
                     if (snapshot.data!.status == "Accepted") {
-                      contractViewModel.completeContract(
-                          snapshot.data!.employerId,
-                          snapshot.data!.id,
-                          snapshot.data!.employeeId);
+                      contractViewModel
+                          .completeContract(snapshot.data!.employerId,
+                              snapshot.data!.id, snapshot.data!.employeeId)
+                          .then((value) {
+                        Navigator.pop(context);
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                  content: RateBox(
+                                providerId: snapshot.data!.employeeId,
+                              ));
+                            });
+                        setState(() {});
+                      });
                     } else {
                       PopUp().showError(
                           "Contract must be accepted first", context);
@@ -248,6 +260,9 @@ class ContractDetailsState extends State<ContractDetails> {
                     if (snapshot.data!.status == "Accepted") {
                       PopUp().showError(
                           "Contract has been accepted already", context);
+                    } else if (snapshot.data!.status == "Completed") {
+                      PopUp().showError(
+                          "Contract has been completed already", context);
                     } else {
                       showDialog(
                           context: context,
@@ -331,6 +346,10 @@ class ContractDetailsState extends State<ContractDetails> {
                                                               .employeeId);
                                                   RouteController()
                                                       .pop(context);
+
+                                                  RouteController()
+                                                      .pop(context);
+                                                  setState(() {});
                                                 },
                                                 child: Text(
                                                   "Cancel",
@@ -383,12 +402,25 @@ class ContractDetailsState extends State<ContractDetails> {
               ),
             ],
           );
+        } else if (snapshot.hasError) {
+          return Center(
+              child: Container(
+            //margin: EdgeInsets.only(left: 40, top: 40),
+            child: Text(
+              "This contract has been canceled",
+              style: TextStyle(
+                  fontSize: (16 / 720) * MediaQuery.of(context).size.height,
+                  color: Colors.red,
+                  fontWeight: FontWeight.w600),
+            ),
+          ));
+        } else {
+          return Center(
+            child: CircularProgressIndicator(
+              color: textPaint,
+            ),
+          );
         }
-        return Center(
-          child: CircularProgressIndicator(
-            color: textPaint,
-          ),
-        );
       },
     );
   }

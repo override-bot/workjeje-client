@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:workjeje/core/models/contract_model.dart';
+import 'package:workjeje/core/services/api.dart';
 import 'package:workjeje/core/services/subcollection_api.dart';
+import 'package:workjeje/core/viewmodels/providers_view_model.dart';
 
 class ContractViewModel extends ChangeNotifier {
   List<Contracts> contracts = [];
   Future<List<Contracts>> getContracts(userId) async {
     var result = await SubCollectionApi("contracts", "userContracts", userId)
-        .getDocuments();
+        .getWhereIsNotEqualTo("Completed", "Status");
     contracts = result.docs
         .map((doc) =>
             Contracts.fromMap(doc.data() as Map<String, dynamic>, doc.id))
@@ -42,12 +44,16 @@ class ContractViewModel extends ChangeNotifier {
         .streamDocumentById(docId);
   }
 
-  Future completeContract(userId, docId, providerId) {
+  Future completeContract(userId, docId, providerId) async {
+    var result = await ProviderViewModel().getProviderById(providerId);
+    var completedJobs = result.jobs;
+    Api("providers").updateDocument("jobs", completedJobs + 1, providerId);
     return SubCollectionApi("contracts", "userContracts", userId)
         .updateDocument("Status", "Completed", docId)
         .then((value) {
       SubCollectionApi("contracts", "userContracts", providerId)
           .updateDocument("Status", "Completed", docId);
+      notifyListeners();
     });
   }
 

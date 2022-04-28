@@ -7,6 +7,7 @@ import 'package:workjeje/core/viewmodels/jobs_view_models.dart';
 import 'package:workjeje/ui/shared/custom_textfield.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
+import '../../core/services/location.dart';
 import '../../core/services/queries.dart';
 
 class AddJob extends StatefulWidget {
@@ -31,10 +32,12 @@ class AddJobState extends State<AddJob> {
   Widget build(BuildContext context) {
     final jobViewModel = Provider.of<JobViewModel>(context);
     final clientViewModel = Provider.of<ClientViewModel>(context);
+    final locationService = Provider.of<LocationService>(context);
     final themeStatus = Provider.of<ThemeProvider>(context);
     bool isDark = themeStatus.darkTheme;
     Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
     Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
+    _location.text = locationService.location!;
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
@@ -228,7 +231,8 @@ class AddJobState extends State<AddJob> {
                                                     jobCategory: category,
                                                     jobDescription:
                                                         _jobDescription.text,
-                                                    location: _location.text,
+                                                    location: locationService
+                                                        .location!,
                                                     phoneNumber:
                                                         result.phoneNumber!,
                                                     username: result.username!))

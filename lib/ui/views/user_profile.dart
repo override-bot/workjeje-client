@@ -236,6 +236,7 @@ class UserProfileState extends State<UserProfile> {
                               onTap: () {
                                 auth.deleteAccount();
                                 clientViewModel.deleteClientDetails(user!.uid);
+                                auth.signOut();
                                 routeController.pushAndRemoveUntil(
                                     context, IntroScreen());
                               },

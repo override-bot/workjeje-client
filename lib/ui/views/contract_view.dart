@@ -43,6 +43,7 @@ class ContractViewState extends State<ContractView> {
         future: contractViewModel.getContracts(user!.uid),
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
+            print(snapshot.data);
             if (snapshot.data!.isEmpty) {
               return Center(
                 child: Text(

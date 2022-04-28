@@ -89,17 +89,23 @@ class _ClientSignInPageState extends State<ClientSignInPage> {
                 label: "login",
                 isLoading: isLoading,
                 onPressed: () {
-                  isLoading = true;
+                  setState(() {
+                    isLoading = true;
+                  });
 
                   auth
                       .signInClient(_emailField.text, _passwordField.text)
                       .then((value) {
+                    setState(() {
+                      isLoading = false;
+                    });
                     routeController.pushAndRemoveUntil(context, ClientIndex());
                   }).catchError((e) {
                     popUp.showError(e.message, context);
+                    setState(() {
+                      isLoading = false;
+                    });
                   });
-
-                  isLoading = false;
                 }),
           ])),
     );

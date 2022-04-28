@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/services/location.dart';
@@ -14,6 +16,7 @@ import 'package:workjeje/core/viewmodels/review_view_model.dart';
 import 'package:workjeje/core/viewmodels/schedule_view_model.dart';
 
 import 'core/double_mode_implementation/theme_provider.dart';
+import 'core/services/queries.dart';
 import 'ui/views/intro_view.dart';
 
 void main() async {
@@ -55,6 +58,15 @@ class _MyAppState extends State<MyApp> {
     Position position = await locationService.getPosition();
     locationService.userLat = position.latitude;
     locationService.userLong = position.longitude;
+    List<Placemark> addresses =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+    var first = addresses.first;
+    locationService.location = first.locality;
+    FirebaseFirestore.instance.collection("clients").doc(user!.uid).update({
+      "userLat": position.latitude,
+      "userLong": position.longitude,
+      "location": first.locality
+    });
   }
 
   @override

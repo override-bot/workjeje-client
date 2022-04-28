@@ -31,6 +31,10 @@ class SubCollectionApi {
     return ref.where(field, isEqualTo: param).get();
   }
 
+  Future<QuerySnapshot> getWhereIsNotEqualTo(param, field) {
+    return ref.where(field, isNotEqualTo: param).get();
+  }
+
   Stream<QuerySnapshot> queryWhereIsEqualTo(param, field) {
     return ref.where(field, isEqualTo: param).snapshots();
   }
