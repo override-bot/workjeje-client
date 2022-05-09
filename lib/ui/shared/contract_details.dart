@@ -11,7 +11,6 @@ import '../../core/double_mode_implementation/theme_provider.dart';
 import '../../core/services/queries.dart';
 import '../../core/viewmodels/contract_view_model.dart';
 import '../../utils/stringManip.dart';
-import '../views/contract_tab_view.dart';
 
 class ContractDetails extends StatefulWidget {
   final PageController page;
@@ -38,7 +37,8 @@ class ContractDetailsState extends State<ContractDetails> {
       future: contractViewModel.getContractsByID(widget.contractId, user!.uid),
       builder: (BuildContext context, snapshot) {
         if (snapshot.hasData) {
-          return Column(
+          return SingleChildScrollView(
+              child: Column(
             children: [
               Container(
                 height: 15,
@@ -401,7 +401,7 @@ class ContractDetailsState extends State<ContractDetails> {
                 ),
               ),
             ],
-          );
+          ));
         } else if (snapshot.hasError) {
           return Center(
               child: Container(

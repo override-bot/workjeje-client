@@ -7,6 +7,7 @@ import 'package:workjeje/core/viewmodels/providers_view_model.dart';
 
 class ContractViewModel extends ChangeNotifier {
   List<Contracts> contracts = [];
+  List<Contracts> accepted = [];
   Future<List<Contracts>> getContracts(userId) async {
     var result = await SubCollectionApi("contracts", "userContracts", userId)
         .getWhereIsNotEqualTo("Completed", "Status");
@@ -32,6 +33,16 @@ class ContractViewModel extends ChangeNotifier {
   Stream<QuerySnapshot> streamAcceptedContracts(userId) {
     return SubCollectionApi("contracts", "userContracts", userId)
         .queryWhereIsEqualTo("Accepted", "Status");
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getAcceptedContracts(userId) {
+    Query<Map<String, dynamic>> acceptedContracts;
+    acceptedContracts = FirebaseFirestore.instance
+        .collection("contracts")
+        .doc(userId)
+        .collection("userContracts")
+        .where('Status', isEqualTo: "Accepted");
+    return acceptedContracts.snapshots();
   }
 
   Stream<QuerySnapshot> streamContracts(userId) {

@@ -199,6 +199,15 @@ class SearchScreenState extends State<SearchScreen> {
                                                 long:
                                                     locationService.userLong!));
                                       },
+                                      trailing: Text(
+                                          'active ${time.timeDifference(document.data()!['lastSeen'])} ago',
+                                          style: TextStyle(
+                                              fontSize: (13 / 720) *
+                                                  MediaQuery.of(context)
+                                                      .size
+                                                      .height,
+                                              fontWeight: FontWeight.w500,
+                                              color: textPaint)),
                                       title: Text(document.data()!['username'],
                                           style: TextStyle(
                                               fontSize: (17 / 720) *
