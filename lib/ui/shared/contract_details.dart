@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:workjeje/core/models/contract_model.dart';
+import 'package:workjeje/core/services/notification_helper.dart';
+import 'package:workjeje/core/viewmodels/providers_view_model.dart';
 import 'package:workjeje/ui/shared/popup.dart';
 import 'package:workjeje/ui/shared/rateBox.dart';
 import 'package:workjeje/ui/views/contract_view.dart';
@@ -22,9 +24,11 @@ class ContractDetails extends StatefulWidget {
 
 class ContractDetailsState extends State<ContractDetails> {
   StringManip stringManip = StringManip();
+  NotificationHelper _helper = NotificationHelper();
   @override
   Widget build(BuildContext context) {
     final contractViewModel = Provider.of<ContractViewModel>(context);
+    final providerViewModel = Provider.of<ProviderViewModel>(context);
     final themeStatus = Provider.of<ThemeProvider>(context);
     bool isDark = themeStatus.darkTheme;
     Color paint = isDark == true ? const Color(0xFFB14181c) : Colors.white;
@@ -207,13 +211,17 @@ class ContractDetailsState extends State<ContractDetails> {
               Container(
                 margin: EdgeInsets.only(left: 30, right: 20),
                 child: ListTile(
-                  onTap: () {
+                  onTap: () async {
+                    var result = await providerViewModel
+                        .getProviderById(snapshot.data!.employeeId);
                     if (snapshot.data!.status == "Accepted") {
                       contractViewModel
                           .completeContract(snapshot.data!.employerId,
                               snapshot.data!.id, snapshot.data!.employeeId)
                           .then((value) {
                         Navigator.pop(context);
+                        _helper.sendMesssage(result.token, "Contract",
+                            "Your contract with ${snapshot.data!.employerName} has been completed");
                         showDialog(
                             context: context,
                             builder: (context) {
@@ -222,6 +230,7 @@ class ContractDetailsState extends State<ContractDetails> {
                                 providerId: snapshot.data!.employeeId,
                               ));
                             });
+
                         setState(() {});
                       });
                     } else {
@@ -257,118 +266,115 @@ class ContractDetailsState extends State<ContractDetails> {
                 margin: EdgeInsets.only(left: 30, right: 20),
                 child: ListTile(
                   onTap: () {
-                    if (snapshot.data!.status == "Accepted") {
-                      PopUp().showError(
-                          "Contract has been accepted already", context);
-                    } else if (snapshot.data!.status == "Completed") {
-                      PopUp().showError(
-                          "Contract has been completed already", context);
-                    } else {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              content: FittedBox(
-                                fit: BoxFit.contain,
-                                //  width: MediaQuery.of(context).size.width / 1.1,
-                                child: Column(
-                                  children: [
-                                    Icon(
-                                      Icons.dangerous,
-                                      color: Colors.red,
-                                      size: 35,
-                                    ),
-                                    Container(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "Are you sure you want to cancel?",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 20),
-                                    ),
-                                    Container(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.1,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                              child: MaterialButton(
-                                                onPressed: () {
-                                                  RouteController()
-                                                      .pop(context);
-                                                },
-                                                child: Text(
-                                                  "Back",
-                                                  style: TextStyle(
-                                                      color: Colors.blue,
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            content: FittedBox(
+                              fit: BoxFit.contain,
+                              //  width: MediaQuery.of(context).size.width / 1.1,
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    Icons.dangerous,
+                                    color: Colors.red,
+                                    size: 35,
+                                  ),
+                                  Container(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "Are you sure you want to cancel?",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 20),
+                                  ),
+                                  Container(
+                                    height: 10,
+                                  ),
+                                  Container(
+                                      width: MediaQuery.of(context).size.width /
+                                          1.1,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            child: MaterialButton(
+                                              onPressed: () {
+                                                RouteController().pop(context);
+                                              },
+                                              child: Text(
+                                                "Back",
+                                                style: TextStyle(
+                                                    color: Colors.blue,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.w500),
                                               ),
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2.5,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: Colors.white,
-                                                  border: Border.all(
-                                                      color: Colors.blue)),
                                             ),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2.5,
-                                              height: 60,
-                                              decoration: BoxDecoration(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.5,
+                                            height: 60,
+                                            decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(5),
-                                                color: Colors.blue,
-                                              ),
-                                              child: MaterialButton(
-                                                onPressed: () {
-                                                  contractViewModel
-                                                      .cancelContract(
-                                                          snapshot.data!.id,
-                                                          user!.uid,
-                                                          snapshot.data!
-                                                              .employeeId);
-                                                  RouteController()
-                                                      .pop(context);
+                                                color: Colors.white,
+                                                border: Border.all(
+                                                    color: Colors.blue)),
+                                          ),
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.5,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Colors.blue,
+                                            ),
+                                            child: MaterialButton(
+                                              onPressed: () async {
+                                                var result =
+                                                    await providerViewModel
+                                                        .getProviderById(
+                                                            snapshot.data!
+                                                                .employeeId);
+                                                contractViewModel
+                                                    .cancelContract(
+                                                        snapshot.data!.id,
+                                                        user!.uid,
+                                                        snapshot
+                                                            .data!.employeeId);
 
-                                                  RouteController()
-                                                      .pop(context);
-                                                  setState(() {});
-                                                },
-                                                child: Text(
-                                                  "Cancel",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
+                                                RouteController().pop(context);
+                                                _helper.sendMesssage(
+                                                    result.token,
+                                                    "Contract",
+                                                    "Your contract with ${snapshot.data!.employerName} has been canceled");
+                                                RouteController().pop(context);
+                                                setState(() {});
+                                              },
+                                              child: Text(
+                                                "Cancel",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.w500),
                                               ),
-                                            )
-                                          ],
-                                        ))
-                                  ],
-                                ),
+                                            ),
+                                          )
+                                        ],
+                                      ))
+                                ],
                               ),
-                            );
-                          });
-                    }
+                            ),
+                          );
+                        });
                   },
                   leading: Icon(
                     Icons.delete,

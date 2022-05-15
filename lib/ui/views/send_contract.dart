@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:workjeje/core/models/contract_model.dart';
+import 'package:workjeje/core/services/notification_helper.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
 import '../../core/viewmodels/client_view_model.dart';
@@ -176,6 +177,10 @@ class SendContractState extends State<SendContract> {
                                       .then((value) {
                                     Navigator.of(context).pop();
                                     isLoading = false;
+                                    NotificationHelper().sendMesssage(
+                                        result2.token,
+                                        "Contract",
+                                        '${result1.username} sent a contract. Head to your contract manager to either accept or reject');
                                   });
                                 }
                               : null,

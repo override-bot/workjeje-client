@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/services/location.dart';
+import 'package:workjeje/core/services/notification_helper.dart';
 import 'package:workjeje/core/viewmodels/bids_view_model.dart';
 import 'package:workjeje/core/viewmodels/client_view_model.dart';
 import 'package:workjeje/core/viewmodels/contract_view_model.dart';
@@ -14,15 +16,26 @@ import 'package:workjeje/core/viewmodels/providers_view_model.dart';
 import 'package:workjeje/core/viewmodels/rate_card_view_model.dart';
 import 'package:workjeje/core/viewmodels/review_view_model.dart';
 import 'package:workjeje/core/viewmodels/schedule_view_model.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'core/double_mode_implementation/theme_provider.dart';
+import 'core/services/messaging_service.dart';
 import 'core/services/queries.dart';
 import 'ui/views/intro_view.dart';
 
+MessagingService _messagingService = MessagingService();
+NotificationHelper _helper = NotificationHelper();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await _messagingService.init();
   runApp(MyApp());
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  if (kDebugMode) {
+    print(message.notification!.title);
+  }
 }
 
 // ignore: use_key_in_widget_constructors
@@ -48,6 +61,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     getCurrentAppTheme();
     getLocation();
+    _helper.updateToken(_messagingService.token);
   }
 
   void getCurrentAppTheme() async {

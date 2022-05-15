@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:workjeje/core/services/messaging_service.dart';
 import 'package:workjeje/core/services/storage.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
+MessagingService _messagingService = MessagingService();
 
 class Auth {
   Storage storage = Storage();
@@ -29,7 +31,8 @@ class Auth {
       "location": location,
       "email": email,
       "phoneNumber": phoneNumber,
-      "imageurl": displayPictureUrl
+      "imageurl": displayPictureUrl,
+      "token": _messagingService.token
     });
   }
 

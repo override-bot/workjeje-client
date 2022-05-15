@@ -10,7 +10,7 @@ class ContractViewModel extends ChangeNotifier {
   List<Contracts> accepted = [];
   Future<List<Contracts>> getContracts(userId) async {
     var result = await SubCollectionApi("contracts", "userContracts", userId)
-        .getWhereIsNotEqualTo("Completed", "Status");
+        .getWhereIsNotEqualTo(["Completed", "Accepted"], "Status");
     contracts = result.docs
         .map((doc) =>
             Contracts.fromMap(doc.data() as Map<String, dynamic>, doc.id))

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/bid_model.dart';
 import 'package:workjeje/core/models/contract_model.dart';
 import 'package:workjeje/core/models/provider_model.dart';
+import 'package:workjeje/core/services/notification_helper.dart';
 import 'package:workjeje/core/viewmodels/bids_view_model.dart';
 import 'package:workjeje/core/viewmodels/client_view_model.dart';
 import 'package:workjeje/core/viewmodels/contract_view_model.dart';
@@ -32,6 +33,7 @@ class BidViewState extends State<BidView> {
   DateTimeFormatter dateTimeFormatter = DateTimeFormatter();
   RouteController routeController = RouteController();
   StringManip stringManip = StringManip();
+  NotificationHelper _helper = NotificationHelper();
   @override
   Widget build(BuildContext context) {
     final themeStatus = Provider.of<ThemeProvider>(context);
@@ -421,6 +423,7 @@ class BidViewState extends State<BidView> {
                                                                                   termsField.clear();
                                                                                   PopUp().showSuccess("Contract sent", context);
                                                                                   Navigator.of(context).pop();
+                                                                                  _helper.sendMesssage(snapshot.data!.token, "Contract", "${userData.username} sent a contract. Head to contract page to accept or reject");
                                                                                 });
                                                                                 //  bidViewModel.rejectBid(bidId, widget.jobId);
                                                                               },
@@ -483,6 +486,7 @@ class BidViewState extends State<BidView> {
                                                                         .jobId);
                                                             routeController
                                                                 .pop(context);
+                                                            // _helper.sendMesssage(snapshot.data!.token, "Bid", "")
                                                           },
                                                           child: Column(
                                                             children: [

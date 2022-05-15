@@ -15,24 +15,25 @@ class ServiceProvider {
   final double userLat;
   final double userLong;
   final int jobs;
-  ServiceProvider({
-    this.id,
-    required this.jobs,
-    required this.username,
-    required this.occupation,
-    required this.skill,
-    required this.location,
-    required this.phoneNumber,
-    required this.imageurl,
-    required this.verificationStatus,
-    required this.onlineStatus,
-    required this.lastSeen,
-    required this.rating,
-    required this.raters,
-    required this.email,
-    required this.userLat,
-    required this.userLong,
-  });
+  final String token;
+  ServiceProvider(
+      {this.id,
+      required this.jobs,
+      required this.username,
+      required this.occupation,
+      required this.skill,
+      required this.location,
+      required this.phoneNumber,
+      required this.imageurl,
+      required this.verificationStatus,
+      required this.onlineStatus,
+      required this.lastSeen,
+      required this.rating,
+      required this.raters,
+      required this.email,
+      required this.userLat,
+      required this.userLong,
+      required this.token});
   ServiceProvider.fromMap(Map snapshot, this.id)
       : username = snapshot['username'],
         occupation = snapshot['occupation'],
@@ -47,6 +48,7 @@ class ServiceProvider {
         raters = snapshot['raters'],
         email = snapshot['email'],
         userLat = snapshot['userLat'],
+        token = snapshot['token'],
         jobs = snapshot['jobs'],
         userLong = snapshot['userLong'];
   toJson() {
@@ -65,6 +67,7 @@ class ServiceProvider {
       "raters": raters,
       "verificationStatus": verificationStatus,
       "onlineStatus": onlineStatus,
+      "token": token
     };
   }
 }

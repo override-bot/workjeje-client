@@ -61,7 +61,7 @@ class _FinalizedContractsState extends State<FinalizedContracts> {
               if (contracts.isEmpty) {
                 return Container(
                   child: Center(
-                    child: Text('Oops,\nYou have not accepted any contract yet',
+                    child: Text('Oops,\nYou have no accepted contract yet',
                         style: TextStyle(
                             color: isDark == false
                                 ? Color(0xFFB14181c)
@@ -111,7 +111,7 @@ class _FinalizedContractsState extends State<FinalizedContracts> {
                                 });
                           },
                           title: Text(
-                            '${document.data()!['EmployerName']}'
+                            '${document.data()!['EmployeeName']}'
                                 .capitalizeFirstofEach,
                             style: TextStyle(
                                 fontSize: (13 / 720) *
