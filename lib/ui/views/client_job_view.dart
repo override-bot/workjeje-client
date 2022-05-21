@@ -2,6 +2,7 @@
 
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, use_full_hex_values_for_flutter_colors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,7 @@ import 'package:workjeje/ui/views/job_info_view.dart';
 import 'package:workjeje/utils/stringManip.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
+import '../../core/services/authentication.dart';
 import '../../core/services/queries.dart';
 import '../../utils/datetime.dart';
 import '../../utils/router.dart';
@@ -22,6 +24,7 @@ class JobView extends StatefulWidget {
 }
 
 class JobViewState extends State<JobView> {
+  final User? user = auth.currentUser;
   FirebaseQueries firebaseQueries = FirebaseQueries();
   DateTimeFormatter dateTimeFormatter = DateTimeFormatter();
   RouteController routeController = RouteController();
@@ -52,7 +55,7 @@ class JobViewState extends State<JobView> {
         height: double.infinity,
         color: background,
         child: FutureBuilder<List<Jobs>>(
-          future: jobViewModel.getClientJobs(user!.uid),
+          future: jobViewModel.getClientJobs(user?.uid),
           builder: (BuildContext context, snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data!.isEmpty) {

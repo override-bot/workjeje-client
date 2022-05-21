@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, import_of_legacy_library_into_null_safe, unused_import, use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_const_constructors, unused_local_variable, use_full_hex_values_for_flutter_colors, sized_box_for_whitespace
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,7 @@ import 'package:workjeje/ui/views/schedule_view.dart';
 import 'package:workjeje/ui/views/send_contract.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
+import '../../core/services/authentication.dart';
 import '../../core/services/queries.dart';
 import '../../core/viewmodels/providers_view_model.dart';
 import '../../utils/datetime.dart';
@@ -28,6 +30,7 @@ class ProviderDetails extends StatefulWidget {
 }
 
 class ProviderDetailsState extends State<ProviderDetails> {
+  final User? user = auth.currentUser;
   FirebaseQueries firebaseQueries = FirebaseQueries();
   DateTimeFormatter dateTimeFormatter = DateTimeFormatter();
   RouteController routeController = RouteController();

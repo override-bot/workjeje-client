@@ -15,11 +15,7 @@ class JDState extends State<JobDescription> {
   Widget build(BuildContext context) {
     final themeStatus = Provider.of<ThemeProvider>(context);
     bool isDark = themeStatus.darkTheme;
-    Color paint = isDark == true ? const Color(0xFFB14181c) : Colors.white;
     Color textPaint = isDark == false ? const Color(0xFFB14181c) : Colors.white;
-    Color? background = isDark == false
-        ? const Color.fromARGB(255, 237, 241, 241)
-        : Colors.black26;
     return Container(
       child: Column(
         //   mainAxisAlignment: MainAxisAlignment.center,

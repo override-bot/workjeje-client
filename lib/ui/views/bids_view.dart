@@ -1,5 +1,6 @@
 // ignore_for_file: use_full_hex_values_for_flutter_colors, sized_box_for_whitespace, avoid_unnecessary_containers
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,7 @@ import 'package:workjeje/ui/shared/popup.dart';
 import 'package:workjeje/ui/views/providerDetails.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
+import '../../core/services/authentication.dart';
 import '../../core/services/queries.dart';
 import '../../core/viewmodels/jobs_view_models.dart';
 import '../../utils/datetime.dart';
@@ -29,6 +31,7 @@ class BidView extends StatefulWidget {
 }
 
 class BidViewState extends State<BidView> {
+  final User? user = auth.currentUser;
   FirebaseQueries firebaseQueries = FirebaseQueries();
   DateTimeFormatter dateTimeFormatter = DateTimeFormatter();
   RouteController routeController = RouteController();

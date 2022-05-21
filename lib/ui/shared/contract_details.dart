@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -6,11 +7,10 @@ import 'package:workjeje/core/services/notification_helper.dart';
 import 'package:workjeje/core/viewmodels/providers_view_model.dart';
 import 'package:workjeje/ui/shared/popup.dart';
 import 'package:workjeje/ui/shared/rateBox.dart';
-import 'package:workjeje/ui/views/contract_view.dart';
 import 'package:workjeje/utils/router.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
-import '../../core/services/queries.dart';
+import '../../core/services/authentication.dart';
 import '../../core/viewmodels/contract_view_model.dart';
 import '../../utils/stringManip.dart';
 
@@ -25,17 +25,14 @@ class ContractDetails extends StatefulWidget {
 class ContractDetailsState extends State<ContractDetails> {
   StringManip stringManip = StringManip();
   NotificationHelper _helper = NotificationHelper();
+  final User? user = auth.currentUser;
   @override
   Widget build(BuildContext context) {
     final contractViewModel = Provider.of<ContractViewModel>(context);
     final providerViewModel = Provider.of<ProviderViewModel>(context);
     final themeStatus = Provider.of<ThemeProvider>(context);
     bool isDark = themeStatus.darkTheme;
-    Color paint = isDark == true ? const Color(0xFFB14181c) : Colors.white;
     Color textPaint = isDark == false ? const Color(0xFFB14181c) : Colors.white;
-    Color? background = isDark == false
-        ? const Color.fromARGB(255, 237, 241, 241)
-        : Colors.black26;
 
     return FutureBuilder<Contracts>(
       future: contractViewModel.getContractsByID(widget.contractId, user!.uid),

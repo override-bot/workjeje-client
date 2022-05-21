@@ -1,8 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/review_model.dart';
 
-import '../../core/services/queries.dart';
+import '../../core/services/authentication.dart';
 import '../../core/viewmodels/client_view_model.dart';
 import '../../core/viewmodels/providers_view_model.dart';
 import '../../core/viewmodels/review_view_model.dart';
@@ -17,8 +18,10 @@ class ReviewBox extends StatefulWidget {
 
 class ReviewBoxState extends State<ReviewBox> {
   TextEditingController _reviewField = TextEditingController();
+  final User? user = auth.currentUser;
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final providerViewModel = Provider.of<ProviderViewModel>(context);
     final reviewViewModel = Provider.of<ReviewViewModel>(context);
     final clientViewModel = Provider.of<ClientViewModel>(context);

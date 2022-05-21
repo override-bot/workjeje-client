@@ -86,17 +86,17 @@ class ScheduleViewState extends State<ScheduleView> {
                           dateTimeFormatter.formatDateWithLineBreak(
                               snapshot.data![index].date),
                           style: TextStyle(
-                              color: Colors.grey[500],
+                              color: Colors.black,
                               fontWeight: FontWeight.w500,
-                              fontSize: (22 / 720) *
+                              fontSize: (20 / 720) *
                                   MediaQuery.of(context).size.height),
                         ),
                         subtitle: Text(
                           snapshot.data![index].activity!.capitalizeFirstofEach,
                           style: TextStyle(
-                              color: Colors.grey[600],
+                              color: Colors.black,
                               fontWeight: FontWeight.w500,
-                              fontSize: (22 / 720) *
+                              fontSize: (18 / 720) *
                                   MediaQuery.of(context).size.height),
                         ),
                         title: Text(

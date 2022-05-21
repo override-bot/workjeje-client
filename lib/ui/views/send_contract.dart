@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -5,9 +6,9 @@ import 'package:workjeje/core/models/contract_model.dart';
 import 'package:workjeje/core/services/notification_helper.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
+import '../../core/services/authentication.dart';
 import '../../core/viewmodels/client_view_model.dart';
 import '../../core/viewmodels/contract_view_model.dart';
-import '../../core/viewmodels/jobs_view_models.dart';
 import '../../core/viewmodels/providers_view_model.dart';
 import '../shared/custom_textfield.dart';
 
@@ -25,14 +26,13 @@ class SendContract extends StatefulWidget {
 class SendContractState extends State<SendContract> {
   bool isLoading = false;
   TextEditingController _contractTerms = TextEditingController();
-
+ final User? user = auth.currentUser;
   TextEditingController _jobDescription = TextEditingController();
   bool? isjbtp;
   bool? isjbdp;
   bool? iscrtm;
   @override
   Widget build(BuildContext context) {
-    final jobViewModel = Provider.of<JobViewModel>(context);
     final clientViewModel = Provider.of<ClientViewModel>(context);
     final providerViewModel = Provider.of<ProviderViewModel>(context);
     final contractViewModel = Provider.of<ContractViewModel>(context);

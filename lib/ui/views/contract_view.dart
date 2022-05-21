@@ -1,14 +1,15 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/contract_model.dart';
+import 'package:workjeje/core/services/authentication.dart';
 import 'package:workjeje/core/viewmodels/contract_view_model.dart';
 import 'package:workjeje/ui/shared/contract_pageview.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
-import '../../core/services/queries.dart';
 import '../../utils/stringManip.dart';
 
 class ContractView extends StatefulWidget {
@@ -18,6 +19,7 @@ class ContractView extends StatefulWidget {
 
 class ContractViewState extends State<ContractView> {
   StringManip stringManip = StringManip();
+  final User? user = auth.currentUser;
   Random random = new Random();
   List colors = [
     Colors.red[700],
@@ -30,7 +32,6 @@ class ContractViewState extends State<ContractView> {
   Widget build(BuildContext context) {
     final themeStatus = Provider.of<ThemeProvider>(context);
     bool isDark = themeStatus.darkTheme;
-    Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
     Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
     Color? background = isDark == false
         ? Color.fromARGB(255, 237, 241, 241)
@@ -80,7 +81,7 @@ class ContractViewState extends State<ContractView> {
                             builder: (context) {
                               return SizedBox(
                                   height:
-                                      MediaQuery.of(context).size.height / 1.5,
+                                      MediaQuery.of(context).size.height / 1.6,
                                   child: ContractPageView(
                                     contractId: snapshot.data![index].id!,
                                     contractTerms:

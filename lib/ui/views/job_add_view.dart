@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/job_model.dart';
@@ -7,6 +8,7 @@ import 'package:workjeje/core/viewmodels/jobs_view_models.dart';
 import 'package:workjeje/ui/shared/custom_textfield.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
+import '../../core/services/authentication.dart';
 import '../../core/services/location.dart';
 import '../../core/services/queries.dart';
 
@@ -17,7 +19,7 @@ class AddJob extends StatefulWidget {
 
 class AddJobState extends State<AddJob> {
   FirebaseQueries firebaseQueries = FirebaseQueries();
-
+  final User? user = auth.currentUser;
   bool? isJdp;
   bool? islct;
   List? categories;
@@ -180,22 +182,10 @@ class AddJobState extends State<AddJob> {
                                 : null,
                           ),
                           CustomTextField(
-                            onChanged: (text) {
-                              setState(() {
-                                if (text.length > 3) {
-                                  islct = true;
-                                } else {
-                                  islct = false;
-                                }
-                              });
-                            },
                             hintText: "Nsukka",
                             labelText: "Location",
                             // enabled: false,
                             controller: _location,
-                            errorText: islct == false
-                                ? "Job Description should be more than 3 characters"
-                                : null,
                           ),
                           isLoading == false
                               ? Container(
@@ -211,8 +201,8 @@ class AddJobState extends State<AddJob> {
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    onPressed: islct == true &&
-                                            isJdp == true &&
+                                    onPressed: isJdp == true &&
+                                            // ignore: unnecessary_null_comparison
                                             category != null &&
                                             _selectedValue != null &&
                                             isLoading == false
@@ -228,7 +218,8 @@ class AddJobState extends State<AddJob> {
                                                     employerId: user!.uid,
                                                     addedAt: DateTime.now(),
                                                     email: user!.email!,
-                                                    jobCategory: category,
+                                                    jobCategory:
+                                                        _selectedValue!,
                                                     jobDescription:
                                                         _jobDescription.text,
                                                     location: locationService

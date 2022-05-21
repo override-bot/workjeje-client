@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,8 @@ import 'package:workjeje/core/viewmodels/review_view_model.dart';
 import 'package:workjeje/core/viewmodels/schedule_view_model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'core/double_mode_implementation/theme_provider.dart';
+import 'core/services/authentication.dart';
 import 'core/services/messaging_service.dart';
-import 'core/services/queries.dart';
 import 'ui/views/intro_view.dart';
 
 MessagingService _messagingService = MessagingService();
@@ -69,6 +70,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void getLocation() async {
+    final User? user = auth.currentUser;
     Position position = await locationService.getPosition();
     locationService.userLat = position.latitude;
     locationService.userLong = position.longitude;
@@ -145,7 +147,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'workjeje client',
+        title: 'workjeje',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

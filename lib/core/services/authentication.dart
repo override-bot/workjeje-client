@@ -7,6 +7,7 @@ final FirebaseAuth auth = FirebaseAuth.instance;
 MessagingService _messagingService = MessagingService();
 
 class Auth {
+  User? user;
   Storage storage = Storage();
   Future<User?> signUpClient(
       email, password, location, fullname, image, phoneNumber, context) async {
@@ -16,7 +17,7 @@ class Auth {
     final User? user = userCredential.user;
     uploadClientDetails(
         email, location, fullname, user?.uid, image, phoneNumber);
-
+    user!.reload();
     return user;
   }
 
@@ -41,6 +42,7 @@ class Auth {
     final UserCredential userCredential =
         await auth.signInWithEmailAndPassword(email: email, password: password);
     final User? user = userCredential.user;
+    await user?.reload();
     return user;
   }
 

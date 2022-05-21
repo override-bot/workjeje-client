@@ -9,7 +9,7 @@ import 'package:workjeje/core/models/contract_model.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
 import '../../core/services/authentication.dart';
-import '../../core/services/queries.dart';
+
 import '../../core/viewmodels/contract_view_model.dart';
 import '../../utils/stringManip.dart';
 import '../shared/contract_pageview.dart';
@@ -33,7 +33,7 @@ class _FinalizedContractsState extends State<FinalizedContracts> {
   ];
   @override
   Widget build(BuildContext context) {
-    FirebaseQueries firebaseQueries = FirebaseQueries();
+    // FirebaseQueries firebaseQueries = FirebaseQueries();
     final themeStatus = Provider.of<ThemeProvider>(context);
     bool isDark = themeStatus.darkTheme;
     Color? background = isDark == false
@@ -50,12 +50,14 @@ class _FinalizedContractsState extends State<FinalizedContracts> {
             builder: (context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
               if (!snapshot.hasData) {
+                print(user!.uid);
                 return Center(
                     child: CircularProgressIndicator(
                   color: textPaint,
                 ));
               }
               contracts = snapshot.data!.docs
+                  // ignore: unnecessary_cast
                   .map((doc) => Contracts.fromMap(doc.data() as Map, doc.id))
                   .toList();
               if (contracts.isEmpty) {
@@ -100,7 +102,7 @@ class _FinalizedContractsState extends State<FinalizedContracts> {
                                   return SizedBox(
                                       height:
                                           MediaQuery.of(context).size.height /
-                                              1.2,
+                                              1.6,
                                       child: ContractPageView(
                                         contractId: document.id,
                                         contractTerms:

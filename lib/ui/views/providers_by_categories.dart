@@ -1,5 +1,6 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe, use_key_in_widget_constructors, prefer_const_constructors, use_full_hex_values_for_flutter_colors, avoid_unnecessary_containers
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
@@ -14,6 +15,7 @@ import 'package:workjeje/utils/datetime.dart';
 import 'package:workjeje/utils/router.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
+import '../../core/services/authentication.dart';
 import '../../core/services/queries.dart';
 
 class ProvidersByCategory extends StatefulWidget {
@@ -26,6 +28,7 @@ class ProvidersByCategory extends StatefulWidget {
 }
 
 class _ProvidersByCategoryState extends State<ProvidersByCategory> {
+  final User? user = auth.currentUser;
   FirebaseQueries firebaseQueries = FirebaseQueries();
   DateTimeFormatter dateTimeFormatter = DateTimeFormatter();
   RouteController routeController = RouteController();
