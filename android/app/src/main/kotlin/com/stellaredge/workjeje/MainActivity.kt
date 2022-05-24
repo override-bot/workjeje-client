@@ -1,4 +1,4 @@
-package com.example.workjeje
+package com.stellaredge.workjeje
 
 import io.flutter.embedding.android.FlutterActivity
 

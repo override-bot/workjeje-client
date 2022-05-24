@@ -79,6 +79,7 @@ class _ProvidersByCategoryState extends State<ProvidersByCategory> {
                     future: providerViewModel
                         .streamProvidersByCategories(widget.category),
                     builder: (context, snapshot) {
+                      print(snapshot.error);
                       if (snapshot.hasData) {
                         if (kDebugMode) {
                           print(snapshot.data);

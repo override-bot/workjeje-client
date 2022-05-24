@@ -1,84 +1,92 @@
 {
-    "project_info": {
-      "project_number": "55701912183",
-      "project_id": "workjeje-dcd73",
-      "storage_bucket": "workjeje-dcd73.appspot.com"
-    },
-    "client": [
-      {
-        "client_info": {
-          "mobilesdk_app_id": "1:55701912183:android:09f192d569caf90c8ba472",
-          "android_client_info": {
-            "package_name": "com.example.workjeje"
-          }
-        },
-        "oauth_client": [
-          {
-            "client_id": "55701912183-4f51244cccikod6hog7fbv797jtcs2t9.apps.googleusercontent.com",
-            "client_type": 3
-          }
-        ],
-        "api_key": [
-          {
-            "current_key": "AIzaSyAwqP5u-MGT2BOPujY05-sbbP8BnRdpYrQ"
-          }
-        ],
-        "services": {
-          "appinvite_service": {
-            "other_platform_oauth_client": [
-              {
-                "client_id": "55701912183-4f51244cccikod6hog7fbv797jtcs2t9.apps.googleusercontent.com",
-                "client_type": 3
-              }
-            ]
-          }
+  "project_info": {
+    "project_number": "55701912183",
+    "project_id": "workjeje-dcd73",
+    "storage_bucket": "workjeje-dcd73.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55701912183:android:cdd069757cf0aab98ba472",
+        "android_client_info": {
+          "package_name": "com.example.workman"
         }
       },
-      {
-        "client_info": {
-          "mobilesdk_app_id": "1:55701912183:android:cdd069757cf0aab98ba472",
-          "android_client_info": {
-            "package_name": "com.example.workman"
+      "oauth_client": [
+        {
+          "client_id": "55701912183-2tpcqap2f81ang9e54accui9b1q4glt2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.workman",
+            "certificate_hash": "cdeded2f5e8c98042e773897857da566f3750cff"
           }
         },
-        "oauth_client": [
-          {
-            "client_id": "55701912183-fviip1k40mab4for00v3r9ggj8u2mrv7.apps.googleusercontent.com",
-            "client_type": 1,
-            "android_info": {
-              "package_name": "com.example.workman",
-              "certificate_hash": "ddde06298e630c42488de6b7037ca619a13ee9be"
+        {
+          "client_id": "55701912183-fviip1k40mab4for00v3r9ggj8u2mrv7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.workman",
+            "certificate_hash": "ddde06298e630c42488de6b7037ca619a13ee9be"
+          }
+        },
+        {
+          "client_id": "55701912183-tp1r8253ma62ajokrmlejjfms7m9n5af.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.workman",
+            "certificate_hash": "f2e87eff7faa262bd156b6a59b10c85efe20324b"
+          }
+        },
+        {
+          "client_id": "55701912183-4f51244cccikod6hog7fbv797jtcs2t9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwqP5u-MGT2BOPujY05-sbbP8BnRdpYrQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "55701912183-4f51244cccikod6hog7fbv797jtcs2t9.apps.googleusercontent.com",
+              "client_type": 3
             }
-          },
-          {
-            "client_id": "55701912183-tp1r8253ma62ajokrmlejjfms7m9n5af.apps.googleusercontent.com",
-            "client_type": 1,
-            "android_info": {
-              "package_name": "com.example.workman",
-              "certificate_hash": "f2e87eff7faa262bd156b6a59b10c85efe20324b"
-            }
-          },
-          {
-            "client_id": "55701912183-4f51244cccikod6hog7fbv797jtcs2t9.apps.googleusercontent.com",
-            "client_type": 3
-          }
-        ],
-        "api_key": [
-          {
-            "current_key": "AIzaSyAwqP5u-MGT2BOPujY05-sbbP8BnRdpYrQ"
-          }
-        ],
-        "services": {
-          "appinvite_service": {
-            "other_platform_oauth_client": [
-              {
-                "client_id": "55701912183-4f51244cccikod6hog7fbv797jtcs2t9.apps.googleusercontent.com",
-                "client_type": 3
-              }
-            ]
-          }
+          ]
         }
       }
-    ],
-    "configuration_version": "1"
-  }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55701912183:android:b0cf928293a4553a8ba472",
+        "android_client_info": {
+          "package_name": "com.stellaredge.workjeje"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "55701912183-4f51244cccikod6hog7fbv797jtcs2t9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwqP5u-MGT2BOPujY05-sbbP8BnRdpYrQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "55701912183-4f51244cccikod6hog7fbv797jtcs2t9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

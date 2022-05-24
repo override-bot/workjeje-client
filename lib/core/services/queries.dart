@@ -49,7 +49,7 @@ class FirebaseQueries {
     Query<Map<String, dynamic>> providers;
     providers = FirebaseFirestore.instance
         .collection('providers')
-        .where("subcategories", arrayContains: category)
+        .where("skill", arrayContains: category)
         .orderBy("rating", descending: true);
 
     return providers.snapshots();

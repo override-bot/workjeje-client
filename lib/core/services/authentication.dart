@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:workjeje/core/services/location.dart';
 import 'package:workjeje/core/services/messaging_service.dart';
 import 'package:workjeje/core/services/storage.dart';
 
@@ -14,7 +15,7 @@ class Auth {
     assert(password != null);
     final UserCredential userCredential = await auth
         .createUserWithEmailAndPassword(email: email, password: password);
-    final User? user = userCredential.user;
+    final User? user = await userCredential.user;
     uploadClientDetails(
         email, location, fullname, user?.uid, image, phoneNumber);
     user!.reload();
@@ -33,7 +34,6 @@ class Auth {
       "email": email,
       "phoneNumber": phoneNumber,
       "imageurl": displayPictureUrl,
-      "token": _messagingService.token
     });
   }
 

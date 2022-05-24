@@ -25,16 +25,6 @@ class UserProfileState extends State<UserProfile> {
   RouteController routeController = RouteController();
 
   final Uri goToAbout = Uri.parse("https://www.workjeje.com");
-  reloadUser() async {
-    var auth = FirebaseAuth.instance.currentUser;
-    await auth?.refreshToken;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    reloadUser();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +46,7 @@ class UserProfileState extends State<UserProfile> {
       builder: (BuildContext context, snapshot) {
         print(snapshot.connectionState);
         print(snapshot.data);
+        print(user);
         print(snapshot.error);
         if (snapshot.hasData) {
           return SafeArea(
@@ -119,7 +110,7 @@ class UserProfileState extends State<UserProfile> {
                             margin: EdgeInsets.only(left: 25),
                             child: ListTile(
                               leading: Icon(
-                                Icons.email_outlined,
+                                Icons.email,
                                 color: textPaint,
                               ),
                               title: Text(
@@ -407,6 +398,8 @@ class UserProfileState extends State<UserProfile> {
               ),
             ),
           ));
+        } else if (snapshot.hasError) {
+          setState(() {});
         }
         return Center(
           child: CircularProgressIndicator(),
