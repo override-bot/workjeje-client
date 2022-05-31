@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -12,16 +13,17 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final String? errorText;
   final bool? obscureText;
+  final bool? isEnabled;
 
   // ignore: use_key_in_widget_constructors
-  const CustomTextField({
-    required this.hintText,
-    required this.labelText,
-    this.onChanged,
-    required this.controller,
-    this.errorText,
-    this.obscureText,
-  });
+  const CustomTextField(
+      {required this.hintText,
+      required this.labelText,
+      this.onChanged,
+      required this.controller,
+      this.errorText,
+      this.obscureText,
+      this.isEnabled});
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
@@ -39,7 +41,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       padding: const EdgeInsets.all(20.0),
       child: Container(
         padding: EdgeInsets.only(top: 5.0),
-        width: MediaQuery.of(context).size.width / 1.2,
+        width: MediaQuery.of(context).size.width / 1.1,
         child: TextFormField(
           onChanged: (text) {
             if (widget.onChanged != null) {
@@ -47,27 +49,26 @@ class _CustomTextFieldState extends State<CustomTextField> {
             }
           },
           controller: widget.controller,
-          style: TextStyle(color: textPaint),
+          style: TextStyle(color: Colors.black),
+          enabled: widget.isEnabled,
           decoration: InputDecoration(
             hintText: widget.hintText,
-            hintStyle: TextStyle(color: textPaint),
+            hintStyle: TextStyle(color: Colors.grey),
             labelText: widget.labelText,
-            labelStyle: TextStyle(
-                color: textPaint, fontSize: 20, fontWeight: FontWeight.w600),
-            focusedBorder:
-                OutlineInputBorder(borderSide: BorderSide(color: textPaint)),
-            enabledBorder: OutlineInputBorder(
+            labelStyle: GoogleFonts.lato(
+                color: Colors.grey, fontSize: 20, fontWeight: FontWeight.w500),
+            focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
-              color: textPaint,
+              width: 2.5,
+              color: Color.fromARGB(255, 14, 140, 172),
             )),
-            errorBorder: OutlineInputBorder(
+            enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
-              color: Colors.red,
+              width: 2,
+              color: Colors.grey,
             )),
-            focusedErrorBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-              color: Colors.red,
-            )),
+            errorBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 2)),
             errorText: widget.errorText,
           ),
           obscureText: widget.obscureText == null ? false : true,

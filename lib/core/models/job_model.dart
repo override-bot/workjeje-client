@@ -6,13 +6,13 @@ class Jobs {
   final String location;
   final String jobCategory;
   final String phoneNumber;
-  final String email;
+  final String? email;
   dynamic addedAt;
   Jobs(
       {this.id,
       required this.employerId,
       required this.addedAt,
-      required this.email,
+      this.email,
       required this.jobCategory,
       required this.jobDescription,
       required this.location,

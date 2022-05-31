@@ -16,6 +16,11 @@ class ClientViewModel extends ChangeNotifier {
     return clients;
   }
 
+  Future getUserbyId(id) async {
+    var doc = await api.getDocumentById(id);
+    return doc.data();
+  }
+
   Future<Client> getProviderById(id) async {
     var doc = await api.getDocumentById(id);
     return Client.fromMap(doc.data() as Map<String, dynamic>, doc.id);
@@ -23,5 +28,10 @@ class ClientViewModel extends ChangeNotifier {
 
   deleteClientDetails(id) {
     api.deleteDocument(id);
+  }
+
+  Future addClient(Client data, id) async {
+    var result = await api.setData(data.toJson(), id);
+    return result;
   }
 }

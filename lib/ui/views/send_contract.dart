@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:workjeje/core/models/contract_model.dart';
@@ -26,8 +27,9 @@ class SendContract extends StatefulWidget {
 class SendContractState extends State<SendContract> {
   bool isLoading = false;
   TextEditingController _contractTerms = TextEditingController();
- final User? user = auth.currentUser;
+  final User? user = auth.currentUser;
   TextEditingController _jobDescription = TextEditingController();
+  Color blue = Color.fromARGB(255, 14, 140, 172);
   bool? isjbtp;
   bool? isjbdp;
   bool? iscrtm;
@@ -63,29 +65,56 @@ class SendContractState extends State<SendContract> {
                     margin: EdgeInsets.only(left: 5.0),
                     child: Text(
                       "Send Contract:",
-                      style: TextStyle(
+                      style: GoogleFonts.lato(
                         fontWeight: FontWeight.w600,
                         fontSize:
                             (20 / 720) * MediaQuery.of(context).size.height,
-                        color: textPaint,
+                        color: blue,
                       ),
                     )),
-                CustomTextField(
-                  onChanged: (text) {
-                    setState(() {
-                      if (text.length > 10) {
-                        isjbdp = true;
+                Container(
+                  margin: const EdgeInsets.only(top: 25),
+                  width: MediaQuery.of(context).size.width / 1.1,
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: TextField(
+                    controller: _jobDescription,
+                    minLines: 5,
+                    maxLines: 10,
+                    maxLength: 300,
+                    decoration: InputDecoration(
+                        hintText: "job description here",
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: blue)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                          color: textPaint,
+                        )),
+                        errorBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                          color: Colors.red,
+                        )),
+                        focusedErrorBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                          color: Colors.red,
+                        )),
+                        errorText:
+                            isjbdp == false ? "more than 3 characters" : null),
+                    onChanged: (text) {
+                      if (text.length < 3) {
+                        setState(() {
+                          isjbdp = false;
+                        });
                       } else {
-                        isjbdp = false;
+                        setState(() {
+                          isjbdp = true;
+                        });
                       }
-                    });
-                  },
-                  hintText: "skills needed are...",
-                  labelText: "Job Description",
-                  controller: _jobDescription,
-                  errorText: isjbdp == false
-                      ? "Job Description should be more than 10 characters"
-                      : null,
+                    },
+                  ),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 25),
@@ -136,7 +165,7 @@ class SendContractState extends State<SendContract> {
                         margin: EdgeInsets.only(top: 20.0),
                         width: MediaQuery.of(context).size.width / 2,
                         height: 50,
-                        color: Colors.blue,
+                        color: blue,
                         child: MaterialButton(
                           child: "Send Contract"
                               .text

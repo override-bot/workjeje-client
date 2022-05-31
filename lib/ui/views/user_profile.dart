@@ -25,7 +25,7 @@ class UserProfileState extends State<UserProfile> {
   RouteController routeController = RouteController();
 
   final Uri goToAbout = Uri.parse("https://www.workjeje.com");
-
+  Color blue = Color.fromARGB(255, 14, 140, 172);
   @override
   Widget build(BuildContext context) {
     final InAppReview inAppReview = InAppReview.instance;
@@ -33,6 +33,7 @@ class UserProfileState extends State<UserProfile> {
     final themeStatus = Provider.of<ThemeProvider>(context);
     ThemeProvider themeProvider = ThemeProvider();
     final clientViewModel = Provider.of<ClientViewModel>(context);
+
     bool isDark = themeStatus.darkTheme;
     Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
     Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
@@ -54,16 +55,6 @@ class UserProfileState extends State<UserProfile> {
             appBar: AppBar(
               backgroundColor: Colors.white,
               elevation: 0.0,
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      launch("");
-                    },
-                    icon: Icon(
-                      Icons.info,
-                      color: textPaint,
-                    ))
-              ],
             ),
             body: Container(
               height: double.infinity,
@@ -141,7 +132,7 @@ class UserProfileState extends State<UserProfile> {
                                     fontSize: (18 / 720) *
                                         MediaQuery.of(context).size.height,
                                     fontWeight: FontWeight.w500,
-                                    color: textPaint),
+                                    color: blue),
                               )),
                           Container(
                             margin: EdgeInsets.only(left: 25, top: 5),
@@ -174,7 +165,7 @@ class UserProfileState extends State<UserProfile> {
                               },
                               leading: Icon(
                                 Icons.report,
-                                color: textPaint,
+                                color: Colors.red,
                               ),
                               title: Text(
                                 "Report an issue",
@@ -200,7 +191,7 @@ class UserProfileState extends State<UserProfile> {
                               },
                               leading: Icon(
                                 Icons.star,
-                                color: textPaint,
+                                color: Colors.amber,
                               ),
                               title: Text(
                                 "Rate us",
@@ -398,8 +389,6 @@ class UserProfileState extends State<UserProfile> {
               ),
             ),
           ));
-        } else if (snapshot.hasError) {
-          setState(() {});
         }
         return Center(
           child: CircularProgressIndicator(),

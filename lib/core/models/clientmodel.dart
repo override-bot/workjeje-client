@@ -17,12 +17,12 @@ class Client {
       this.userLong,
       this.username});
   Client.fromMap(Map snapshot, this.id)
-      : email = snapshot['email'],
-        imageurl = snapshot['imageurl'],
+      : imageurl = snapshot['imageurl'],
         location = snapshot['location'],
         phoneNumber = snapshot['phoneNumber'],
         userLat = snapshot['userLat'],
         userLong = snapshot['userLong'],
+        email = snapshot['email'],
         username = snapshot['username'];
   toJson() {
     return {

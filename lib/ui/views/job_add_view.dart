@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/job_model.dart';
 import 'package:workjeje/core/viewmodels/client_view_model.dart';
@@ -20,7 +21,8 @@ class AddJob extends StatefulWidget {
 class AddJobState extends State<AddJob> {
   FirebaseQueries firebaseQueries = FirebaseQueries();
   final User? user = auth.currentUser;
-  bool? isJdp;
+  Color blue = Color.fromARGB(255, 14, 140, 172);
+  bool? isjbdp;
   bool? islct;
   List? categories;
   bool? isjbt;
@@ -70,10 +72,10 @@ class AddJobState extends State<AddJob> {
                               margin: EdgeInsets.only(top: 10.0),
                               child: Text(
                                 "Upload New Job",
-                                style: TextStyle(
+                                style: GoogleFonts.lato(
                                     fontSize: 28.0,
                                     fontWeight: FontWeight.bold,
-                                    color: textPaint),
+                                    color: blue),
                               )),
                           Padding(
                             padding: const EdgeInsets.all(20.0),
@@ -163,25 +165,54 @@ class AddJobState extends State<AddJob> {
                                   ),
                                 )),
                           ),
-                          CustomTextField(
-                            // enabled: false,
-                            onChanged: (text) {
-                              setState(() {
-                                if (text.length > 10) {
-                                  isJdp = true;
+                          Container(
+                            margin: const EdgeInsets.only(top: 25),
+                            width: MediaQuery.of(context).size.width / 1.1,
+                            padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            child: TextField(
+                              controller: _jobDescription,
+                              minLines: 5,
+                              maxLines: 10,
+                              maxLength: 300,
+                              decoration: InputDecoration(
+                                  hintText: "job description here",
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: blue)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                    color: textPaint,
+                                  )),
+                                  errorBorder: const OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                    color: Colors.red,
+                                  )),
+                                  focusedErrorBorder: const OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                    color: Colors.red,
+                                  )),
+                                  errorText: isjbdp == false
+                                      ? "more than 3 characters"
+                                      : null),
+                              onChanged: (text) {
+                                if (text.length < 3) {
+                                  setState(() {
+                                    isjbdp = false;
+                                  });
                                 } else {
-                                  isJdp = false;
+                                  setState(() {
+                                    isjbdp = true;
+                                  });
                                 }
-                              });
-                            },
-                            hintText: "skills needed are...",
-                            labelText: "Job Description",
-                            controller: _jobDescription,
-                            errorText: isJdp == false
-                                ? "Job Description should be more than 10 characters"
-                                : null,
+                              },
+                            ),
                           ),
                           CustomTextField(
+                            isEnabled: false,
                             hintText: "Nsukka",
                             labelText: "Location",
                             // enabled: false,
@@ -192,7 +223,7 @@ class AddJobState extends State<AddJob> {
                                   margin: EdgeInsets.only(top: 20.0),
                                   width: MediaQuery.of(context).size.width / 2,
                                   height: 50,
-                                  color: textPaint,
+                                  color: blue,
                                   child: MaterialButton(
                                     child: Text(
                                       'Upload Job',
@@ -201,7 +232,7 @@ class AddJobState extends State<AddJob> {
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    onPressed: isJdp == true &&
+                                    onPressed: isjbdp == true &&
                                             // ignore: unnecessary_null_comparison
                                             category != null &&
                                             _selectedValue != null &&
@@ -217,7 +248,6 @@ class AddJobState extends State<AddJob> {
                                                 .addJobs(Jobs(
                                                     employerId: user!.uid,
                                                     addedAt: DateTime.now(),
-                                                    email: user!.email!,
                                                     jobCategory:
                                                         _selectedValue!,
                                                     jobDescription:

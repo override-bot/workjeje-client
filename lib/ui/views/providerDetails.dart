@@ -48,7 +48,7 @@ class ProviderDetailsState extends State<ProviderDetails> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: background,
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -61,7 +61,7 @@ class ProviderDetailsState extends State<ProviderDetails> {
       ),
       body: Container(
         height: double.infinity,
-        color: background,
+        color: Colors.white,
         child: FutureBuilder<ServiceProvider>(
           future: providerViewModel.getProviderById(widget.providerId),
           builder: (BuildContext context, snapshot) {

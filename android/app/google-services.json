@@ -67,6 +67,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "55701912183-dtf39fbt5r2cb1eg6cb3r5eqfblsb3oc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.stellaredge.workjeje",
+            "certificate_hash": "091207e8948bdec9152b39da163b05b8b376eaa1"
+          }
+        },
+        {
+          "client_id": "55701912183-nqrf2nbi4ci65ic4e5qbm7cq1tbfunki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.stellaredge.workjeje",
+            "certificate_hash": "cdeded2f5e8c98042e773897857da566f3750cff"
+          }
+        },
+        {
           "client_id": "55701912183-4f51244cccikod6hog7fbv797jtcs2t9.apps.googleusercontent.com",
           "client_type": 3
         }

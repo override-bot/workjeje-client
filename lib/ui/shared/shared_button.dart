@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, use_full_hex_values_for_flutter_colors, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
@@ -29,7 +30,8 @@ class LoadingButtonState extends State<LoadingButton> {
       width: MediaQuery.of(context).size.width / 2,
       height: 50,
       decoration: BoxDecoration(
-          color: textPaint, borderRadius: BorderRadius.circular(15)),
+          color: Color.fromARGB(255, 14, 140, 172),
+          borderRadius: BorderRadius.circular(15)),
       margin: const EdgeInsets.only(bottom: 10, left: 20, right: 20),
       child: MaterialButton(
           onPressed: widget.onPressed,
@@ -40,7 +42,7 @@ class LoadingButtonState extends State<LoadingButton> {
                 ))
               : Text(
                   widget.label ?? "",
-                  style: TextStyle(
+                  style: GoogleFonts.lato(
                       color: paint,
                       fontSize: 20.0,
                       fontWeight: FontWeight.w500),

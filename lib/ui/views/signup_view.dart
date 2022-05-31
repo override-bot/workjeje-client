@@ -2,20 +2,28 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:workjeje/core/models/clientmodel.dart';
 import 'package:workjeje/core/services/authentication.dart';
+import 'package:workjeje/core/services/location.dart';
+import 'package:workjeje/core/services/storage.dart';
 import 'package:workjeje/ui/shared/shared_button.dart';
 import 'package:workjeje/ui/views/client_index.dart';
 import 'package:workjeje/ui/views/intro_view.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
+import '../../core/viewmodels/client_view_model.dart';
 import '../../utils/router.dart';
 import '../shared/custom_textfield.dart';
 import '../shared/popup.dart';
 
 class ClientSignUpPage extends StatefulWidget {
+  final String? phoneNumber;
+  final String? uid;
+  ClientSignUpPage({this.phoneNumber, this.uid});
   @override
   _ClientSignUpPageState createState() => _ClientSignUpPageState();
 }
@@ -39,71 +47,97 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
   RouteController routeController = RouteController();
   PopUp popUp = PopUp();
   final TextEditingController _emailField = TextEditingController();
-  final TextEditingController _passwordField = TextEditingController();
+  Storage _storage = Storage();
   final TextEditingController _locationField = TextEditingController();
   final TextEditingController _fullNameField = TextEditingController();
   final TextEditingController _phoneNumberField = TextEditingController();
 
-  bool isName = true;
+  bool? isName;
   bool isLoading = false;
-  bool isNo = true;
-  bool isLoc = true;
-  bool isPass = true;
-  int currentPage = 0;
-  final PageController _myPage = PageController(initialPage: 0);
+
+  bool? isEmail;
+
   @override
   Widget build(BuildContext context) {
     final themeStatus = Provider.of<ThemeProvider>(context);
+    final location = Provider.of<LocationService>(context);
+    final clientViewModel = Provider.of<ClientViewModel>(context);
+    _locationField.text = location.location!;
+    _phoneNumberField.text = widget.phoneNumber!;
     bool isDark = themeStatus.darkTheme;
     Color paint = isDark == true ? Color(0xFFB14181c) : Colors.white;
     Color textPaint = isDark == false ? Color(0xFFB14181c) : Colors.white;
     String link = "assets/wj_final.png";
     return Scaffold(
-      body: PageView(
-        controller: _myPage,
-        onPageChanged: (int _page) {
-          currentPage = _page;
-        },
-        children: [
-          Container(
-              color: paint,
-              child: ListView(children: [
+      body: Container(
+          alignment: Alignment.center,
+          height: double.infinity,
+          color: Colors.grey[100],
+          child: SingleChildScrollView(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                 Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 3,
-                    margin: EdgeInsets.all(10.0),
-                    // child: Image.asset(),
+                    margin: EdgeInsets.only(left: 20.0, top: 10),
+                    child: Text("Hello!\nSignup to\nget started",
+                        style: GoogleFonts.lato(
+                            fontWeight: FontWeight.w700,
+                            fontSize:
+                                28 / 720 * MediaQuery.of(context).size.height,
+                            color: Color.fromARGB(255, 14, 140, 172)))),
+                Container(
+                    // padding: EdgeInsets.only(top: 5.0),
+                    height: 100,
+                    width: 100,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.contain, image: AssetImage(link)))),
-                Text("Create account",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 28,
-                            color: textPaint))
-                    .centered(),
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                        border: Border.all(
+                            width: 2, color: Color.fromARGB(255, 14, 140, 172))
+                        // shape: BoxShape.circle
+                        ),
+                    child: Stack(clipBehavior: Clip.none, children: [
+                      Positioned(
+                        child: Icon(
+                          Icons.camera_alt,
+                          color: Color.fromARGB(255, 14, 140, 172),
+                        ),
+                        bottom: -10,
+                        right: -8,
+                      ),
+                      MaterialButton(
+                        elevation: 0.0,
+                        onPressed: getImage,
+                        child: _image == null
+                            ? CircleAvatar(
+                                backgroundImage:
+                                    AssetImage("assets/IMG_4446.PNG"),
+                                radius: 80,
+                              )
+                            : CircleAvatar(
+                                backgroundImage: FileImage(_image!),
+                                radius: 70,
+                              ),
+                      ),
+                    ])).p16(),
                 CustomTextField(
-                  controller: _emailField,
-                  hintText: "jdoe@gmail.com",
-                  labelText: "Email",
-                ),
-                CustomTextField(
-                    controller: _passwordField,
-                    obscureText: true,
-                    labelText: "Password",
-                    hintText: '********',
+                    controller: _emailField,
+                    hintText: "jdoe@gmail.com",
+                    labelText: "Email",
                     onChanged: (text) {
-                      setState(() {
-                        if (text.length > 5) {
-                          isPass = true;
-                        } else {
-                          isPass = false;
-                        }
-                      });
+                      if (RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(text)) {
+                        setState(() {
+                          isEmail = true;
+                        });
+                      } else {
+                        setState(() {
+                          isEmail = false;
+                        });
+                      }
                     },
-                    errorText: isPass == false
-                        ? "Password should be more than 6 characters"
-                        : null),
+                    errorText: isEmail == false ? "enter a valid email" : null),
                 CustomTextField(
                     onChanged: (text) {
                       setState(() {
@@ -120,222 +154,47 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                     errorText: isName == false
                         ? "Name should be more than 3 characters"
                         : null),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                    margin: EdgeInsets.only(top: 20.0),
-                    width: 80,
-                    height: 80,
-                    color: Colors.transparent,
-                    child: MaterialButton(
-                      onPressed: () {
-                        setState(() {
-                          _myPage.jumpToPage(1);
-                        });
-                      },
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        color: textPaint,
-                        size: 35,
-                      ),
-                    ),
-                  ),
-                )
-              ])),
-          Container(
-            color: paint,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text("Add a Photo",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 28,
-                              color: textPaint))
-                      .centered(),
-                  Container(
-                    // padding: EdgeInsets.only(top: 5.0),
-                    height: 300,
-                    width: 300,
-
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(150),
-                        color: Colors.transparent,
-                        border: Border.all(color: textPaint)
-                        // shape: BoxShape.circle
-                        ),
-                    child: MaterialButton(
-                      elevation: 0.0,
-                      onPressed: getImage,
-                      child: _image == null
-                          ? Icon(Icons.add_a_photo, color: textPaint, size: 40)
-                          : Container(
-                              width: 300,
-                              height: 300,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(150),
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: FileImage(_image!)))),
-                    ),
-                  ).p16(),
-                  Row(
-                    children: [
-                      Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Container(
-                          margin: EdgeInsets.only(top: 20.0),
-                          width: 80,
-                          height: 80,
-                          color: Colors.transparent,
-                          child: MaterialButton(
-                            onPressed: () {
-                              setState(() {
-                                _myPage.jumpToPage(0);
-                              });
-                            },
-                            child: Icon(
-                              Icons.arrow_back_ios,
-                              color: textPaint,
-                              size: 35,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Container(
-                          margin: EdgeInsets.only(top: 20.0),
-                          width: 80,
-                          height: 80,
-                          color: Colors.transparent,
-                          child: MaterialButton(
-                            onPressed: () {
-                              setState(() {
-                                _myPage.jumpToPage(2);
-                              });
-                            },
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: textPaint,
-                              size: 35,
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-                ]),
-          ),
-          Container(
-              color: paint,
-              child: ListView(
-                children: [
-                  Container(
-                    height: 80,
-                  ),
-                  Text("Tell us about you.",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 28,
-                              color: textPaint))
-                      .centered(),
-                  "Please tell a bit about yourself"
-                      .text
-                      .gray500
-                      .size(22)
-                      .bold
-                      .center
-                      .make(),
-                  Container(
-                    height: 26,
-                  ),
-                  CustomTextField(
-                      controller: _phoneNumberField,
-                      onChanged: (text) {
-                        setState(() {
-                          if (text.length == 11) {
-                            isNo = true;
-                          } else {
-                            isNo = false;
-                          }
-                        });
-                      },
-                      hintText: "07089322045",
-                      labelText: "Phone Number",
-                      errorText: isNo == false
-                          ? "Number should be 11 characters"
-                          : null),
-                  Container(
-                    height: 16,
-                  ),
-                  Container(
-                    height: 16,
-                  ),
-                  CustomTextField(
-                    onChanged: (text) {
-                      setState(() {
-                        if (text.length > 3) {
-                          isLoc = true;
-                        } else {
-                          isLoc = false;
-                        }
-                      });
-                    },
-                    hintText: "Nsukka",
-                    labelText: "Location",
-                    controller: _locationField,
-                    errorText: isLoc == false
-                        ? "Location should be more than 3 characters"
-                        : null,
-                  ),
-                  Container(
-                    height: 96,
-                  ),
-                  LoadingButton(
-                    label: "Register",
-                    onPressed: isName == true &&
-                            isLoc == true &&
-                            isNo == true &&
-                            _image != null
-                        ? () {
-                            setState(() {
-                              isLoading = true;
-                            });
-
-                            auth
-                                .signUpClient(
-                                    _emailField.text,
-                                    _passwordField.text,
-                                    _locationField.text,
-                                    _fullNameField.text,
-                                    _image,
-                                    _phoneNumberField.text,
-                                    context)
-                                .then((value) {
-                              setState(() {
-                                isLoading = false;
-                              });
-
-                              routeController.pushAndRemoveUntil(
-                                  context, ClientIndex());
-                            }).catchError((e) {
-                              popUp.showError(e.message, context);
-                              setState(() {
-                                isLoading = false;
-                              });
-                            });
-                          }
-                        : null,
-                    isLoading: isLoading,
-                  ),
-                ],
-              ))
-        ],
-      ),
+                CustomTextField(
+                  controller: _phoneNumberField,
+                  isEnabled: false,
+                  hintText: "07089322045",
+                  labelText: "Phone Number",
+                ),
+                CustomTextField(
+                  isEnabled: false,
+                  hintText: "Nsukka",
+                  labelText: "Location",
+                  controller: _locationField,
+                ),
+                LoadingButton(
+                        label: "Register",
+                        isLoading: isLoading,
+                        onPressed: isName == true &&
+                                _image != null &&
+                                isEmail == true
+                            ? () async {
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                String displayPictureUrl = await _storage
+                                    .uploadImage(_image, widget.uid);
+                                clientViewModel
+                                    .addClient(
+                                        Client(
+                                            email: _emailField.text,
+                                            phoneNumber: _phoneNumberField.text,
+                                            location: _locationField.text,
+                                            username: _fullNameField.text,
+                                            imageurl: displayPictureUrl),
+                                        widget.uid)
+                                    .then((value) {
+                                  routeController.pushAndRemoveUntil(
+                                      context, ClientIndex());
+                                });
+                              }
+                            : null)
+                    .centered()
+              ]))),
     );
   }
 }

@@ -37,6 +37,10 @@ class Api {
     return ref.add(data);
   }
 
+  Future setData(Map data, id) {
+    return ref.doc(id).set(data);
+  }
+
   Future<QuerySnapshot> queryWhereArrayContains(param, field) {
     return ref.where(field, arrayContains: param).get();
   }

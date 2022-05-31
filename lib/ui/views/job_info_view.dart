@@ -23,6 +23,7 @@ class JobInfoViewState extends State<JobInfoView> {
   DateTimeFormatter dateTimeFormatter = DateTimeFormatter();
   RouteController routeController = RouteController();
   StringManip stringManip = StringManip();
+  Color blue = Color.fromARGB(255, 14, 140, 172);
   @override
   Widget build(BuildContext context) {
     final themeStatus = Provider.of<ThemeProvider>(context);
@@ -43,7 +44,7 @@ class JobInfoViewState extends State<JobInfoView> {
               fontWeight: FontWeight.w600),
         ),
         elevation: 0.0,
-        backgroundColor: background,
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -56,7 +57,7 @@ class JobInfoViewState extends State<JobInfoView> {
       ),
       body: Container(
         height: double.infinity,
-        color: background,
+        color: Colors.white,
         child: FutureBuilder<Jobs>(
           future: jobViewModel.getJobsById(widget.jobId),
           builder: (BuildContext context, snapshot) {
@@ -68,7 +69,7 @@ class JobInfoViewState extends State<JobInfoView> {
                       height: 10,
                     ),
                     CircleAvatar(
-                        radius: MediaQuery.of(context).size.height / 15,
+                        radius: MediaQuery.of(context).size.height / 20,
                         backgroundColor: textPaint,
                         // backgroundImage: NetworkImage(snapshot.data!.i),
                         child: Text(
@@ -87,7 +88,8 @@ class JobInfoViewState extends State<JobInfoView> {
                     Container(
                       height: 5,
                     ),
-                    Text(snapshot.data!.jobCategory.capitalizeFirstofEach,
+                    Text(
+                        '${snapshot.data!.jobCategory.capitalizeFirstofEach} Job',
                         style: TextStyle(
                             fontSize:
                                 (22 / 720) * MediaQuery.of(context).size.height,
@@ -98,7 +100,7 @@ class JobInfoViewState extends State<JobInfoView> {
                     ),
                     Container(
                         //margin: EdgeInsets.only(left: 70),
-                        width: MediaQuery.of(context).size.width / 2,
+                        width: MediaQuery.of(context).size.width / 1.7,
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [

@@ -100,7 +100,7 @@ class _ProvidersByCategoryState extends State<ProvidersByCategory> {
                                 height: 15,
                               ),
                               Text(
-                                "No provider with this skill...YET",
+                                "No provider with this skill around you...YET",
                                 style: TextStyle(
                                   color: textPaint,
                                   fontSize: 20,
@@ -114,137 +114,152 @@ class _ProvidersByCategoryState extends State<ProvidersByCategory> {
                           child: ListView.builder(
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, index) {
-                              return Container(
-                                margin: EdgeInsets.only(
-                                    left: 10, right: 10, bottom: 10),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: paint),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ListTile(
-                                      onTap: () {
-                                        routeController.push(
-                                            context,
-                                            ProviderDetails(
-                                              providerId:
-                                                  snapshot.data![index].id!,
-                                              lat: location.userLat!,
-                                              long: location.userLong!,
-                                            ));
-                                      },
-                                      leading: CircleAvatar(
-                                        backgroundColor: Colors.blue,
-                                        backgroundImage: NetworkImage(
-                                            snapshot.data![index].imageurl),
-                                      ),
-                                      title: Text(
-                                        snapshot.data![index].username,
-                                        style: TextStyle(
+                              var dist = distance.as(
+                                  LengthUnit.Kilometer,
+                                  LatLng(snapshot.data![index].userLat,
+                                      snapshot.data![index].userLong),
+                                  LatLng(location.userLat, location.userLong));
+                              if (dist < 10) {
+                                return Container(
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10, bottom: 10),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: paint),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ListTile(
+                                        onTap: () {
+                                          routeController.push(
+                                              context,
+                                              ProviderDetails(
+                                                providerId:
+                                                    snapshot.data![index].id!,
+                                                lat: location.userLat!,
+                                                long: location.userLong!,
+                                              ));
+                                        },
+                                        leading: CircleAvatar(
+                                          backgroundColor: Colors.blue,
+                                          backgroundImage: NetworkImage(
+                                              snapshot.data![index].imageurl),
+                                        ),
+                                        title: Text(
+                                          snapshot.data![index].username,
+                                          style: TextStyle(
+                                              color: textPaint,
+                                              fontSize: (17 / 720) *
+                                                  MediaQuery.of(context)
+                                                      .size
+                                                      .height,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                        subtitle: Text(
+                                          'last active ${dateTimeFormatter.timeDifference(snapshot.data![index].lastSeen)} ago',
+                                          style: TextStyle(
                                             color: textPaint,
-                                            fontSize: (17 / 720) *
+                                            fontSize: (14 / 720) *
                                                 MediaQuery.of(context)
                                                     .size
                                                     .height,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      subtitle: Text(
-                                        'last active ${dateTimeFormatter.timeDifference(snapshot.data![index].lastSeen)} ago',
-                                        style: TextStyle(
-                                          color: textPaint,
-                                          fontSize: (14 / 720) *
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .height,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Container(
-                                        margin: EdgeInsets.only(left: 70),
-                                        child: Row(children: [
-                                          RichText(
-                                              text: TextSpan(children: [
-                                            WidgetSpan(
-                                                child: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 0, right: 3),
-                                              child: Icon(
-                                                Icons.location_pin,
-                                                color: textPaint,
-                                                size: 18,
-                                              ),
-                                            )),
-                                            TextSpan(
-                                                style: TextStyle(
-                                                    fontSize: (14 / 720) *
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .height,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: textPaint),
-                                                text:
-                                                    "${distance.as(LengthUnit.Kilometer, LatLng(snapshot.data![index].userLat, snapshot.data![index].userLong), LatLng(location.userLat, location.userLong))}km")
+                                      Container(
+                                          margin: EdgeInsets.only(left: 70),
+                                          child: Row(children: [
+                                            RichText(
+                                                text: TextSpan(children: [
+                                              WidgetSpan(
+                                                  child: Container(
+                                                margin: EdgeInsets.only(
+                                                    left: 0, right: 3),
+                                                child: Icon(
+                                                  Icons.location_pin,
+                                                  color: textPaint,
+                                                  size: 18,
+                                                ),
+                                              )),
+                                              TextSpan(
+                                                  style: TextStyle(
+                                                      fontSize: (14 / 720) *
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .height,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: textPaint),
+                                                  text:
+                                                      "${distance.as(LengthUnit.Kilometer, LatLng(snapshot.data![index].userLat, snapshot.data![index].userLong), LatLng(location.userLat, location.userLong))}km")
+                                            ])),
+                                            Container(
+                                              width: 12,
+                                            ),
+                                            RichText(
+                                                text: TextSpan(children: [
+                                              WidgetSpan(
+                                                  child: Container(
+                                                margin: EdgeInsets.only(
+                                                    left: 0, right: 3),
+                                                child: Icon(
+                                                  Icons.work,
+                                                  color: textPaint,
+                                                  size: 18,
+                                                ),
+                                              )),
+                                              TextSpan(
+                                                  style: TextStyle(
+                                                      fontSize: (14 / 720) *
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .height,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: textPaint),
+                                                  text:
+                                                      '${snapshot.data![index].jobs}')
+                                            ])),
+                                            Container(
+                                              width: 12,
+                                            ),
+                                            RichText(
+                                                text: TextSpan(children: [
+                                              WidgetSpan(
+                                                  child: Container(
+                                                margin: EdgeInsets.only(
+                                                    left: 5, right: 3),
+                                                child: Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                  size: 18,
+                                                ),
+                                              )),
+                                              TextSpan(
+                                                  style: TextStyle(
+                                                      fontSize: (14 / 720) *
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .height,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: textPaint),
+                                                  text:
+                                                      "${(snapshot.data![index].rating / snapshot.data![index].raters).floorToDouble()}")
+                                            ])),
                                           ])),
-                                          Container(
-                                            width: 12,
-                                          ),
-                                          RichText(
-                                              text: TextSpan(children: [
-                                            WidgetSpan(
-                                                child: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 0, right: 3),
-                                              child: Icon(
-                                                Icons.work,
-                                                color: textPaint,
-                                                size: 18,
-                                              ),
-                                            )),
-                                            TextSpan(
-                                                style: TextStyle(
-                                                    fontSize: (14 / 720) *
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .height,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: textPaint),
-                                                text:
-                                                    '${snapshot.data![index].jobs}')
-                                          ])),
-                                          Container(
-                                            width: 12,
-                                          ),
-                                          RichText(
-                                              text: TextSpan(children: [
-                                            WidgetSpan(
-                                                child: Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 5, right: 3),
-                                              child: Icon(
-                                                Icons.star,
-                                                color: Colors.amber,
-                                                size: 18,
-                                              ),
-                                            )),
-                                            TextSpan(
-                                                style: TextStyle(
-                                                    fontSize: (14 / 720) *
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .height,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: textPaint),
-                                                text:
-                                                    "${(snapshot.data![index].rating / snapshot.data![index].raters).floorToDouble()}")
-                                          ])),
-                                        ])),
-                                    Container(
-                                      height: 5,
-                                    )
-                                  ],
-                                ),
-                              );
+                                      Container(
+                                        height: 5,
+                                      )
+                                    ],
+                                  ),
+                                );
+                              } else {
+                                return SizedBox(
+                                  height: 0,
+                                );
+                              }
                             },
                           ),
                         );
