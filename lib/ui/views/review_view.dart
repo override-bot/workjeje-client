@@ -82,7 +82,7 @@ class ReviewWidgetState extends State<ReviewWidget> {
                                       title: Text(
                                         document.data()!['name'],
                                         style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 13,
                                             fontWeight: FontWeight.w600,
                                             color: textPaint),
                                       ),
@@ -95,7 +95,7 @@ class ReviewWidgetState extends State<ReviewWidget> {
                                             color: Colors.amber,
                                           ),
                                           itemCount: 5,
-                                          itemSize: 20,
+                                          itemSize: 15,
                                           direction: Axis.horizontal,
                                         ),
                                       ),
@@ -105,7 +105,7 @@ class ReviewWidgetState extends State<ReviewWidget> {
                                       child: Text(
                                         document.data()!['review'],
                                         style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 13,
                                             fontWeight: FontWeight.w500,
                                             color: textPaint),
                                       ),

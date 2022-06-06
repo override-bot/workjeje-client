@@ -7,9 +7,9 @@ class PopUp {
         builder: (context) {
           return AlertDialog(
             content: SizedBox(
-                height: 200,
                 width: MediaQuery.of(context).size.width / 1.1,
                 child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
@@ -39,9 +39,9 @@ class PopUp {
         builder: (context) {
           return AlertDialog(
             content: SizedBox(
-                height: 120,
                 width: MediaQuery.of(context).size.width / 1.1,
                 child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(

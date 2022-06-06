@@ -42,7 +42,7 @@ class _SubcategoriesState extends State<Subcategories> {
           title: Text(widget.category!,
               style: TextStyle(
                   color: textPaint,
-                  fontSize: (19 / 720) * MediaQuery.of(context).size.height)),
+                  fontSize: (15 / 720) * MediaQuery.of(context).size.height)),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -78,11 +78,11 @@ class _SubcategoriesState extends State<Subcategories> {
                                           category: subcategories[index]));
                                 },
                                 leading: Icon(icons[random.nextInt(3)],
-                                    color: textPaint),
+                                    size: 20, color: textPaint),
                                 title: Text(
                                   subcategories[index],
                                   style: TextStyle(
-                                      fontSize: (15 / 720) *
+                                      fontSize: (13 / 720) *
                                           MediaQuery.of(context).size.height,
                                       fontWeight: FontWeight.w600,
                                       color: textPaint),

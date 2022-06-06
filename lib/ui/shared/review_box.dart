@@ -55,7 +55,7 @@ class ReviewBoxState extends State<ReviewBox> {
           ),
           Container(
             margin: EdgeInsets.only(top: 15),
-            height: 50,
+            height: 40,
             decoration: BoxDecoration(
                 color: Colors.blue, borderRadius: BorderRadius.circular(15)),
             width: MediaQuery.of(context).size.width / 1.8,
@@ -80,7 +80,7 @@ class ReviewBoxState extends State<ReviewBox> {
                 "post review",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 14,
                     fontWeight: FontWeight.w500),
               ),
             ),

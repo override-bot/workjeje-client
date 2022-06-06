@@ -54,7 +54,7 @@ class SearchScreenState extends State<SearchScreen> {
                         style: TextStyle(
                             color: textPaint,
                             fontWeight: FontWeight.w600,
-                            fontSize: (26 / 720) *
+                            fontSize: (20 / 720) *
                                 MediaQuery.of(context).size.height),
                       )),
                   Container(
@@ -85,7 +85,7 @@ class SearchScreenState extends State<SearchScreen> {
                         hintStyle: new TextStyle(
                             color: textPaint,
                             fontSize: 18,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w500),
                         labelStyle: new TextStyle(
                             color: textPaint,
                             fontSize: 20,
@@ -104,7 +104,7 @@ class SearchScreenState extends State<SearchScreen> {
                       child: Text(
                         "Filter by:",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 15,
                             color: textPaint,
                             fontWeight: FontWeight.w600),
                       )),
@@ -210,7 +210,7 @@ class SearchScreenState extends State<SearchScreen> {
                                               color: textPaint)),
                                       title: Text(document.data()!['username'],
                                           style: TextStyle(
-                                              fontSize: (17 / 720) *
+                                              fontSize: (15 / 720) *
                                                   MediaQuery.of(context)
                                                       .size
                                                       .height,
@@ -219,7 +219,7 @@ class SearchScreenState extends State<SearchScreen> {
                                       subtitle: Text(
                                           document.data()!['occupation'],
                                           style: TextStyle(
-                                              fontSize: (15 / 720) *
+                                              fontSize: (12 / 720) *
                                                   MediaQuery.of(context)
                                                       .size
                                                       .height,

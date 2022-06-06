@@ -78,7 +78,7 @@ class UserProfileState extends State<UserProfile> {
                                 child: Text(
                                   snapshot.data!.username!,
                                   style: TextStyle(
-                                      fontSize: (24 / 720) *
+                                      fontSize: (20 / 720) *
                                           MediaQuery.of(context).size.height,
                                       fontWeight: FontWeight.w500,
                                       color: textPaint),
@@ -86,7 +86,7 @@ class UserProfileState extends State<UserProfile> {
                             subtitle: Text(
                               snapshot.data!.phoneNumber!,
                               style: TextStyle(
-                                  fontSize: (18 / 720) *
+                                  fontSize: (16 / 720) *
                                       MediaQuery.of(context).size.height,
                                   fontWeight: FontWeight.w400,
                                   color: Colors.grey[600]),
@@ -107,7 +107,7 @@ class UserProfileState extends State<UserProfile> {
                               title: Text(
                                 snapshot.data!.email!,
                                 style: TextStyle(
-                                    fontSize: (18 / 720) *
+                                    fontSize: (16 / 720) *
                                         MediaQuery.of(context).size.height,
                                     fontWeight: FontWeight.w400,
                                     color: textPaint),
@@ -129,7 +129,7 @@ class UserProfileState extends State<UserProfile> {
                               child: Text(
                                 "Workjeje",
                                 style: TextStyle(
-                                    fontSize: (18 / 720) *
+                                    fontSize: (16 / 720) *
                                         MediaQuery.of(context).size.height,
                                     fontWeight: FontWeight.w500,
                                     color: blue),
@@ -147,7 +147,7 @@ class UserProfileState extends State<UserProfile> {
                               title: Text(
                                 "About us",
                                 style: TextStyle(
-                                    fontSize: (18 / 720) *
+                                    fontSize: (16 / 720) *
                                         MediaQuery.of(context).size.height,
                                     fontWeight: FontWeight.w400,
                                     color: textPaint),
@@ -170,7 +170,7 @@ class UserProfileState extends State<UserProfile> {
                               title: Text(
                                 "Report an issue",
                                 style: TextStyle(
-                                    fontSize: (18 / 720) *
+                                    fontSize: (16 / 720) *
                                         MediaQuery.of(context).size.height,
                                     fontWeight: FontWeight.w400,
                                     color: textPaint),
@@ -196,7 +196,7 @@ class UserProfileState extends State<UserProfile> {
                               title: Text(
                                 "Rate us",
                                 style: TextStyle(
-                                    fontSize: (18 / 720) *
+                                    fontSize: (16 / 720) *
                                         MediaQuery.of(context).size.height,
                                     fontWeight: FontWeight.w400,
                                     color: textPaint),
@@ -220,7 +220,7 @@ class UserProfileState extends State<UserProfile> {
                               child: Text(
                                 "Account",
                                 style: TextStyle(
-                                    fontSize: (18 / 720) *
+                                    fontSize: (16 / 720) *
                                         MediaQuery.of(context).size.height,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.red),
@@ -240,7 +240,7 @@ class UserProfileState extends State<UserProfile> {
                               title: Text(
                                 "Log out",
                                 style: TextStyle(
-                                    fontSize: (18 / 720) *
+                                    fontSize: (16 / 720) *
                                         MediaQuery.of(context).size.height,
                                     fontWeight: FontWeight.w400,
                                     color: Colors.red),
@@ -374,7 +374,7 @@ class UserProfileState extends State<UserProfile> {
                               title: Text(
                                 "Delete account",
                                 style: TextStyle(
-                                    fontSize: (18 / 720) *
+                                    fontSize: (16 / 720) *
                                         MediaQuery.of(context).size.height,
                                     fontWeight: FontWeight.w400,
                                     color: Colors.red),

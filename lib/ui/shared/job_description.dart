@@ -46,7 +46,7 @@ class JDState extends State<JobDescription> {
             child: Text(
               'Job Description',
               style: TextStyle(
-                  fontSize: (20 / 720) * MediaQuery.of(context).size.height,
+                  fontSize: (15 / 720) * MediaQuery.of(context).size.height,
                   color: Colors.black,
                   fontWeight: FontWeight.w500),
             ),
@@ -56,7 +56,7 @@ class JDState extends State<JobDescription> {
             child: Text(
               widget.jobDescription,
               style: TextStyle(
-                  fontSize: (16 / 720) * MediaQuery.of(context).size.height,
+                  fontSize: (13 / 720) * MediaQuery.of(context).size.height,
                   color: Colors.black,
                   fontWeight: FontWeight.w400),
             ),

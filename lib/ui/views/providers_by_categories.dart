@@ -50,9 +50,9 @@ class _ProvidersByCategoryState extends State<ProvidersByCategory> {
           title: Text(
             widget.category,
             style: TextStyle(
-                fontSize: (15 / 720) * MediaQuery.of(context).size.height,
+                fontSize: (13 / 720) * MediaQuery.of(context).size.height,
                 color: textPaint,
-                fontWeight: FontWeight.w600),
+                fontWeight: FontWeight.w500),
           ),
           elevation: 0.0,
           backgroundColor: background,
@@ -101,15 +101,17 @@ class _ProvidersByCategoryState extends State<ProvidersByCategory> {
                               ),
                               Text(
                                 "No provider with this skill around you...YET",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: textPaint,
-                                  fontSize: 20,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.w500,
                                 ),
                               )
                             ],
                           )));
                         }
+                        print(snapshot.error);
                         return Container(
                           child: ListView.builder(
                             itemCount: snapshot.data!.length,

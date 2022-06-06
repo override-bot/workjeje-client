@@ -68,7 +68,7 @@ class SendContractState extends State<SendContract> {
                       style: GoogleFonts.lato(
                         fontWeight: FontWeight.w600,
                         fontSize:
-                            (20 / 720) * MediaQuery.of(context).size.height,
+                            (16 / 720) * MediaQuery.of(context).size.height,
                         color: blue,
                       ),
                     )),
@@ -164,7 +164,7 @@ class SendContractState extends State<SendContract> {
                     ? Container(
                         margin: EdgeInsets.only(top: 20.0),
                         width: MediaQuery.of(context).size.width / 2,
-                        height: 50,
+                        height: 40,
                         color: blue,
                         child: MaterialButton(
                           child: "Send Contract"

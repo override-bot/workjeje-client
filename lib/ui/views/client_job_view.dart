@@ -42,13 +42,14 @@ class JobViewState extends State<JobView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: background,
+        centerTitle: false,
         elevation: 0.0,
         title: Text(
           "My Jobs",
           style: TextStyle(
               color: textPaint,
-              fontWeight: FontWeight.w500,
-              fontSize: (24 / 720) * MediaQuery.of(context).size.height),
+              fontWeight: FontWeight.w600,
+              fontSize: (20 / 720) * MediaQuery.of(context).size.height),
         ),
       ),
       body: Container(
@@ -91,16 +92,16 @@ class JobViewState extends State<JobView> {
                           style: TextStyle(
                               fontSize: (13 / 720) *
                                   MediaQuery.of(context).size.height,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w400,
                               color: textPaint),
                         ),
                         subtitle: Text(
                           '${snapshot.data![index].jobCategory} job'
                               .capitalizeFirstofEach,
                           style: TextStyle(
-                              fontSize: (18 / 720) *
+                              fontSize: (15 / 720) *
                                   MediaQuery.of(context).size.height,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w500,
                               color: textPaint),
                         ),
                         trailing: Text(

@@ -38,7 +38,7 @@ class ContractTermsState extends State<ContractTerms> {
           ),
           Icon(
             Icons.pending_actions,
-            size: 30,
+            size: 25,
             color: Colors.blue,
           ),
           Container(
@@ -46,7 +46,7 @@ class ContractTermsState extends State<ContractTerms> {
             child: Text(
               'Contract Terms',
               style: TextStyle(
-                  fontSize: (20 / 720) * MediaQuery.of(context).size.height,
+                  fontSize: (15 / 720) * MediaQuery.of(context).size.height,
                   color: Colors.black,
                   fontWeight: FontWeight.w500),
             ),
@@ -56,7 +56,7 @@ class ContractTermsState extends State<ContractTerms> {
             child: Text(
               widget.contractTerms,
               style: TextStyle(
-                  fontSize: (16 / 720) * MediaQuery.of(context).size.height,
+                  fontSize: (13 / 720) * MediaQuery.of(context).size.height,
                   color: Colors.black,
                   fontWeight: FontWeight.w400),
             ),

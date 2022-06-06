@@ -79,7 +79,7 @@ class ContractViewState extends State<ContractView> {
                             ),
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             builder: (context) {
-                              return SizedBox(
+                              return Container(
                                   height:
                                       MediaQuery.of(context).size.height / 1.6,
                                   child: ContractPageView(
@@ -96,7 +96,7 @@ class ContractViewState extends State<ContractView> {
                         style: TextStyle(
                             color: Colors.grey[600],
                             fontWeight: FontWeight.w500,
-                            fontSize: (16 / 720) *
+                            fontSize: (12 / 720) *
                                 MediaQuery.of(context).size.height),
                       ),
                       subtitle: Text(
@@ -104,7 +104,7 @@ class ContractViewState extends State<ContractView> {
                         style: TextStyle(
                             color: textPaint,
                             fontWeight: FontWeight.w500,
-                            fontSize: (22 / 720) *
+                            fontSize: (15 / 720) *
                                 MediaQuery.of(context).size.height),
                       ),
                       leading: CircleAvatar(

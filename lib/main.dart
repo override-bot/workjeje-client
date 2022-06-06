@@ -77,7 +77,7 @@ class _MyAppState extends State<MyApp> {
     List<Placemark> addresses =
         await placemarkFromCoordinates(position.latitude, position.longitude);
     var first = addresses.first;
-    locationService.location = first.locality;
+    locationService.location = first.locality ?? " ";
     FirebaseFirestore.instance.collection("clients").doc(user?.uid).update({
       "userLat": position.latitude,
       "userLong": position.longitude,

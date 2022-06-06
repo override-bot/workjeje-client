@@ -81,7 +81,7 @@ class ProviderDetailsState extends State<ProviderDetails> {
                   CircleAvatar(
                     backgroundColor: textPaint,
                     backgroundImage: NetworkImage(snapshot.data!.imageurl),
-                    radius: MediaQuery.of(context).size.height / 10,
+                    radius: MediaQuery.of(context).size.height / 10.5,
                   ),
                   Container(
                     height: 20,
@@ -92,10 +92,10 @@ class ProviderDetailsState extends State<ProviderDetails> {
                         color: textPaint,
                         fontWeight: FontWeight.w500,
                         fontSize:
-                            20 / 720 * MediaQuery.of(context).size.height),
+                            15 / 720 * MediaQuery.of(context).size.height),
                   ),
                   Container(
-                    height: 16,
+                    height: 10,
                   ),
                   Text(
                     snapshot.data!.occupation,
@@ -103,10 +103,10 @@ class ProviderDetailsState extends State<ProviderDetails> {
                         color: textPaint,
                         fontWeight: FontWeight.w400,
                         fontSize:
-                            16 / 720 * MediaQuery.of(context).size.height),
+                            14 / 720 * MediaQuery.of(context).size.height),
                   ),
                   Container(
-                    height: 16,
+                    height: 10,
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width / 1.5,
@@ -117,15 +117,15 @@ class ProviderDetailsState extends State<ProviderDetails> {
                           color: textPaint,
                           fontWeight: FontWeight.w400,
                           fontSize:
-                              16 / 720 * MediaQuery.of(context).size.height),
+                              14 / 720 * MediaQuery.of(context).size.height),
                     ),
                   ),
                   Container(
-                    height: 16,
+                    height: 10,
                   ),
                   Container(
                       //margin: EdgeInsets.only(left: 70),
-                      width: MediaQuery.of(context).size.width / 2,
+                      width: MediaQuery.of(context).size.width / 1.8,
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -137,12 +137,12 @@ class ProviderDetailsState extends State<ProviderDetails> {
                                 child: Icon(
                                   Icons.location_pin,
                                   color: textPaint,
-                                  size: 18,
+                                  size: 15,
                                 ),
                               )),
                               TextSpan(
                                   style: TextStyle(
-                                      fontSize: (14 / 720) *
+                                      fontSize: (13 / 720) *
                                           MediaQuery.of(context).size.height,
                                       fontWeight: FontWeight.w400,
                                       color: textPaint),
@@ -157,12 +157,12 @@ class ProviderDetailsState extends State<ProviderDetails> {
                                 child: Icon(
                                   Icons.work,
                                   color: textPaint,
-                                  size: 18,
+                                  size: 15,
                                 ),
                               )),
                               TextSpan(
                                   style: TextStyle(
-                                      fontSize: (14 / 720) *
+                                      fontSize: (13 / 720) *
                                           MediaQuery.of(context).size.height,
                                       fontWeight: FontWeight.w400,
                                       color: textPaint),
@@ -176,12 +176,12 @@ class ProviderDetailsState extends State<ProviderDetails> {
                                 child: Icon(
                                   Icons.star,
                                   color: Colors.amber,
-                                  size: 18,
+                                  size: 15,
                                 ),
                               )),
                               TextSpan(
                                   style: TextStyle(
-                                      fontSize: (14 / 720) *
+                                      fontSize: (13 / 720) *
                                           MediaQuery.of(context).size.height,
                                       fontWeight: FontWeight.w500,
                                       color: textPaint),
@@ -189,7 +189,7 @@ class ProviderDetailsState extends State<ProviderDetails> {
                                       "${(snapshot.data!.rating / snapshot.data!.raters).floorToDouble()}")
                             ])),
                           ])),
-                  Container(height: 14.0),
+                  Container(height: 11.0),
                   ListTile(
                     onTap: () {
                       routeController.push(
@@ -201,7 +201,7 @@ class ProviderDetailsState extends State<ProviderDetails> {
                       "Rate Card",
                       style: TextStyle(
                           fontSize:
-                              (14 / 720) * MediaQuery.of(context).size.height,
+                              (13 / 720) * MediaQuery.of(context).size.height,
                           fontWeight: FontWeight.w500,
                           color: isDark == true ? Colors.white : Colors.black),
                     ),
@@ -223,7 +223,7 @@ class ProviderDetailsState extends State<ProviderDetails> {
                       "Send Contract",
                       style: TextStyle(
                           fontSize:
-                              (14 / 720) * MediaQuery.of(context).size.height,
+                              (13 / 720) * MediaQuery.of(context).size.height,
                           fontWeight: FontWeight.w500,
                           color: isDark == true ? Colors.white : Colors.black),
                     ),
@@ -241,7 +241,7 @@ class ProviderDetailsState extends State<ProviderDetails> {
                       "View Schedule",
                       style: TextStyle(
                           fontSize:
-                              (14 / 720) * MediaQuery.of(context).size.height,
+                              (13 / 720) * MediaQuery.of(context).size.height,
                           fontWeight: FontWeight.w500,
                           color: isDark == true ? Colors.white : Colors.black),
                     ),
@@ -258,7 +258,7 @@ class ProviderDetailsState extends State<ProviderDetails> {
                       "Reviews",
                       style: TextStyle(
                           fontSize:
-                              (14 / 720) * MediaQuery.of(context).size.height,
+                              (13 / 720) * MediaQuery.of(context).size.height,
                           fontWeight: FontWeight.w500,
                           color: isDark == true ? Colors.white : Colors.black),
                     ),
@@ -275,7 +275,7 @@ class ProviderDetailsState extends State<ProviderDetails> {
                       "View Gallery",
                       style: TextStyle(
                           fontSize:
-                              (14 / 720) * MediaQuery.of(context).size.height,
+                              (13 / 720) * MediaQuery.of(context).size.height,
                           fontWeight: FontWeight.w500,
                           color: isDark == true ? Colors.white : Colors.black),
                     ),

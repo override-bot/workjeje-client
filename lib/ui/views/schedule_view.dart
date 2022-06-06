@@ -88,7 +88,7 @@ class ScheduleViewState extends State<ScheduleView> {
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,
-                              fontSize: (20 / 720) *
+                              fontSize: (15 / 720) *
                                   MediaQuery.of(context).size.height),
                         ),
                         subtitle: Text(
@@ -96,7 +96,7 @@ class ScheduleViewState extends State<ScheduleView> {
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w500,
-                              fontSize: (18 / 720) *
+                              fontSize: (13 / 720) *
                                   MediaQuery.of(context).size.height),
                         ),
                         title: Text(
@@ -110,7 +110,7 @@ class ScheduleViewState extends State<ScheduleView> {
                           style: TextStyle(
                               color: Colors.grey[500],
                               fontWeight: FontWeight.w400,
-                              fontSize: (18 / 720) *
+                              fontSize: (13 / 720) *
                                   MediaQuery.of(context).size.height),
                         ),
                       ),

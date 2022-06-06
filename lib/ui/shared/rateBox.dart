@@ -24,7 +24,7 @@ class RateBoxState extends State<RateBox> {
           Text(
             "Rate this provider",
             style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.w500, fontSize: 18),
+                color: Colors.black, fontWeight: FontWeight.w500, fontSize: 15),
           ),
           Container(
             height: 5,
@@ -35,6 +35,7 @@ class RateBoxState extends State<RateBox> {
             direction: Axis.horizontal,
             allowHalfRating: false,
             itemCount: 5,
+            itemSize: 20,
             itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
             itemBuilder: (context, _) => Icon(
               Icons.star,
@@ -48,7 +49,7 @@ class RateBoxState extends State<RateBox> {
           ),
           Container(
             margin: EdgeInsets.only(top: 15),
-            height: 50,
+            height: 40,
             width: MediaQuery.of(context).size.width / 1.8,
             child: MaterialButton(
               onPressed: () {
@@ -69,7 +70,7 @@ class RateBoxState extends State<RateBox> {
                 "Give ${rate.toInt()} stars",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 13,
                     fontWeight: FontWeight.w500),
               ),
             ),

@@ -78,7 +78,7 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                 Container(
-                    margin: EdgeInsets.only(left: 20.0, top: 10),
+                    margin: EdgeInsets.only(left: 20.0, top: 20),
                     child: Text("Hello!\nSignup to\nget started",
                         style: GoogleFonts.lato(
                             fontWeight: FontWeight.w700,
@@ -161,9 +161,9 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                   labelText: "Phone Number",
                 ),
                 CustomTextField(
-                  isEnabled: false,
                   hintText: "Nsukka",
                   labelText: "Location",
+                  isEnabled: false,
                   controller: _locationField,
                 ),
                 LoadingButton(

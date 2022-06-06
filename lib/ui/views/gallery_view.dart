@@ -30,83 +30,82 @@ class _ProviderGalleryState extends State<ProviderGallery> {
     Color textPaint = isDark == false ? const Color(0xFFB14181c) : Colors.white;
     final galleryViewModel = Provider.of<GalleryViewModel>(context);
 
-    return SafeArea(
-        child: Scaffold(
-            appBar: AppBar(
-              elevation: 0.0,
-              // centerTitle: true,
-              titleSpacing: 5,
-              title: Text(
-                "Gallery",
-                style: TextStyle(
-                    color: textPaint,
-                    fontWeight: FontWeight.w500,
-                    fontSize: (20 / 720) * MediaQuery.of(context).size.height),
+    return Scaffold(
+        appBar: AppBar(
+          elevation: 0.0,
+          // centerTitle: true,
+          titleSpacing: 5,
+          title: Text(
+            "Gallery",
+            style: TextStyle(
+                color: textPaint,
+                fontWeight: FontWeight.w500,
+                fontSize: (15 / 720) * MediaQuery.of(context).size.height),
+          ),
+          backgroundColor: paint,
+          leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: textPaint,
               ),
-              backgroundColor: paint,
-              leading: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: textPaint,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  }),
-            ),
-            body: Container(
-                color: paint,
-                height: double.infinity,
-                padding: const EdgeInsets.all(5),
-                child: FutureBuilder<List<Gallery>>(
-                    future: galleryViewModel.getImages(widget.uuid),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Container(
-                          color: isDark == true
-                              ? const Color(0xFFB14181c)
-                              : Colors.white,
-                          child: Center(
-                            child: Text('Oops,\nNothing to see here',
-                                style: TextStyle(
-                                    color: isDark == false
-                                        ? const Color(0xFFB14181c)
-                                        : Colors.white,
-                                    fontSize: (18 / 720) *
-                                        MediaQuery.of(context).size.height,
-                                    fontWeight: FontWeight.bold)),
-                          ),
-                        );
-                      }
+              onPressed: () {
+                Navigator.of(context).pop();
+              }),
+        ),
+        body: Container(
+            color: paint,
+            height: double.infinity,
+            padding: const EdgeInsets.all(5),
+            child: FutureBuilder<List<Gallery>>(
+                future: galleryViewModel.getImages(widget.uuid),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Container(
+                      color: isDark == true
+                          ? const Color(0xFFB14181c)
+                          : Colors.white,
+                      child: Center(
+                        child: Text('Oops,\nNothing to see here',
+                            style: TextStyle(
+                                color: isDark == false
+                                    ? const Color(0xFFB14181c)
+                                    : Colors.white,
+                                fontSize: (18 / 720) *
+                                    MediaQuery.of(context).size.height,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                    );
+                  }
 
-                      return StaggeredGridView.countBuilder(
-                        crossAxisCount: 4,
-                        itemBuilder: (BuildContext context, int index) {
-                          return GestureDetector(
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: CachedNetworkImageProvider(
-                                          snapshot.data![index].imageUrl!,
-                                        )))),
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ImageInformation(
-                                      imageUrl: snapshot.data![index].imageUrl!,
-                                      imageCaption:
-                                          snapshot.data![index].caption!)));
-                            },
-                          );
+                  return StaggeredGridView.countBuilder(
+                    crossAxisCount: 4,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: CachedNetworkImageProvider(
+                                      snapshot.data![index].imageUrl!,
+                                    )))),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ImageInformation(
+                                  imageUrl: snapshot.data![index].imageUrl!,
+                                  imageCaption:
+                                      snapshot.data![index].caption!)));
                         },
-                        itemCount: snapshot.data!.length,
-                        staggeredTileBuilder: (int index) {
-                          return StaggeredTile.count(2, index.isEven ? 3 : 4);
-                        },
-                        mainAxisSpacing: 12,
-                        crossAxisSpacing: 12,
                       );
-                    }))));
+                    },
+                    itemCount: snapshot.data!.length,
+                    staggeredTileBuilder: (int index) {
+                      return StaggeredTile.count(2, index.isEven ? 3 : 4);
+                    },
+                    mainAxisSpacing: 12,
+                    crossAxisSpacing: 12,
+                  );
+                })));
   }
   //@override
 

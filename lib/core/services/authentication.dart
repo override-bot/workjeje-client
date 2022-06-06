@@ -34,6 +34,19 @@ class Auth {
     }
   }
 
+  Future checkIfUseri(userId, context, phoneNumber) async {
+    var res = await _clientViewModel.getUserbyId(userId);
+    if (res == null) {
+      print(userId);
+      _route.pushAndRemoveUntil(
+          context,
+          ClientSignUpPage(
+            phoneNumber: phoneNumber,
+            uid: userId,
+          ));
+    }
+  }
+
   Future verifyNumber(phoneNumber, context) async {
     return auth.verifyPhoneNumber(
         phoneNumber: '+234$phoneNumber',
@@ -50,16 +63,16 @@ class Auth {
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  content: SizedBox(
-                      height: 180,
-                      width: MediaQuery.of(context).size.width / 1.1,
-                      child: Column(children: [
+                  content: Container(
+                      width: MediaQuery.of(context).size.width / 1,
+                      margin: EdgeInsets.all(3),
+                      child: Column(mainAxisSize: MainAxisSize.min, children: [
                         Container(
                             margin: EdgeInsets.only(top: 5),
                             child: Text("Verification code",
                                 style: GoogleFonts.lato(
                                     fontWeight: FontWeight.w700,
-                                    fontSize: 20 /
+                                    fontSize: 15 /
                                         720 *
                                         MediaQuery.of(context).size.height,
                                     color: Color.fromARGB(255, 14, 140, 172)))),
@@ -67,15 +80,17 @@ class Auth {
                             margin: EdgeInsets.only(top: 5),
                             child: Text(
                                 "Enter the verification code sent to you",
+                                textAlign: TextAlign.center,
                                 style: GoogleFonts.lato(
                                     fontWeight: FontWeight.w700,
-                                    fontSize: 15 /
+                                    fontSize: 13 /
                                         720 *
                                         MediaQuery.of(context).size.height,
                                     color: Colors.grey))),
                         Container(
                           margin: EdgeInsets.only(top: 5),
                           child: OtpTextField(
+                            fieldWidth: 35,
                             numberOfFields: 6,
                             showFieldAsBox: true,
                             focusedBorderColor: blue,
@@ -103,7 +118,7 @@ class Auth {
                             child: Text("This helps us verify every user",
                                 style: GoogleFonts.lato(
                                     fontWeight: FontWeight.w700,
-                                    fontSize: 15 /
+                                    fontSize: 13 /
                                         720 *
                                         MediaQuery.of(context).size.height,
                                     color: Colors.grey[500]))),
@@ -116,7 +131,7 @@ class Auth {
                               child: Text("Didn't get the code?",
                                   style: GoogleFonts.lato(
                                       fontWeight: FontWeight.w700,
-                                      fontSize: 15 /
+                                      fontSize: 13 /
                                           720 *
                                           MediaQuery.of(context).size.height,
                                       color:

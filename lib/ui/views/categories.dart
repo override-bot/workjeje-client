@@ -38,12 +38,13 @@ class _CategoriesState extends State<Categories> {
         appBar: AppBar(
           backgroundColor: background,
           elevation: 0.0,
+          centerTitle: false,
           title: Text(
             "Categories",
             style: GoogleFonts.lato(
                 color: textPaint,
-                fontWeight: FontWeight.w500,
-                fontSize: (24 / 720) * MediaQuery.of(context).size.height),
+                fontWeight: FontWeight.w600,
+                fontSize: (20 / 720) * MediaQuery.of(context).size.height),
           ),
         ),
         body: Container(
@@ -92,7 +93,7 @@ class _CategoriesState extends State<Categories> {
                                               fit: BoxFit.cover,
                                               colorFilter: ColorFilter.mode(
                                                   Colors.black12,
-                                                  BlendMode.colorBurn),
+                                                  BlendMode.darken),
                                             )),
                                       )),
                               Container(
@@ -106,7 +107,8 @@ class _CategoriesState extends State<Categories> {
                                     colors: [
                                       const Color(0x00000000),
                                       const Color(0x00000000),
-                                      Color.fromARGB(179, 0, 0, 0),
+                                      const Color(0x00000000),
+                                      Color.fromARGB(209, 0, 0, 0),
                                       Color.fromARGB(209, 0, 0, 0),
                                     ],
                                   ),
@@ -123,7 +125,7 @@ class _CategoriesState extends State<Categories> {
                                           color: Colors.white,
                                           fontWeight: FontWeight.w600,
                                           // backgroundColor: Colors.black87,
-                                          fontSize: (17 / 720) *
+                                          fontSize: (13 / 720) *
                                               MediaQuery.of(context)
                                                   .size
                                                   .height),

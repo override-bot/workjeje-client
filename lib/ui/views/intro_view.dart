@@ -45,7 +45,7 @@ class IntroScreenState extends State<IntroScreen> {
                 Expanded(child: Container()),
                 Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 3,
+                    height: MediaQuery.of(context).size.height / 3.4,
                     margin: const EdgeInsets.only(top: 0),
                     // child: Image.asset(),
                     decoration: BoxDecoration(
@@ -59,7 +59,7 @@ class IntroScreenState extends State<IntroScreen> {
                         style: GoogleFonts.lato(
                             fontWeight: FontWeight.w700,
                             fontSize:
-                                30 / 720 * MediaQuery.of(context).size.height,
+                                25 / 720 * MediaQuery.of(context).size.height,
                             color: Color.fromARGB(255, 14, 140, 172)))),
                 Container(
                     margin: EdgeInsets.only(top: 7),
@@ -69,13 +69,13 @@ class IntroScreenState extends State<IntroScreen> {
                         style: GoogleFonts.lato(
                             fontWeight: FontWeight.w700,
                             fontSize:
-                                25 / 720 * MediaQuery.of(context).size.height,
+                                20 / 720 * MediaQuery.of(context).size.height,
                             color: Colors.grey))),
                 Expanded(child: Container()),
                 Container(
-                  margin: EdgeInsets.all(10),
+                  margin: EdgeInsets.all(25),
                   width: MediaQuery.of(context).size.width / 2,
-                  height: 60,
+                  height: 50,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15.0), color: blue),
                   child: MaterialButton(
@@ -91,7 +91,7 @@ class IntroScreenState extends State<IntroScreen> {
                         auth.authState() == false ? "Get Started" : "Continue",
                         style: TextStyle(
                             fontSize:
-                                (15 / 720) * MediaQuery.of(context).size.height,
+                                (13 / 720) * MediaQuery.of(context).size.height,
                             fontWeight: FontWeight.w600,
                             color: paint),
                       )),

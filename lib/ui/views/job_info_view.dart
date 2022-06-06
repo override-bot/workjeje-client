@@ -45,6 +45,7 @@ class JobInfoViewState extends State<JobInfoView> {
         ),
         elevation: 0.0,
         backgroundColor: Colors.white,
+        centerTitle: false,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -70,7 +71,7 @@ class JobInfoViewState extends State<JobInfoView> {
                     ),
                     CircleAvatar(
                         radius: MediaQuery.of(context).size.height / 20,
-                        backgroundColor: textPaint,
+                        backgroundColor: blue,
                         // backgroundImage: NetworkImage(snapshot.data!.i),
                         child: Text(
                           stringManip.getFirstLetter(snapshot.data!.username),
@@ -82,7 +83,7 @@ class JobInfoViewState extends State<JobInfoView> {
                     Text(snapshot.data!.username,
                         style: TextStyle(
                             fontSize:
-                                (16 / 720) * MediaQuery.of(context).size.height,
+                                (13 / 720) * MediaQuery.of(context).size.height,
                             fontWeight: FontWeight.w500,
                             color: Colors.grey[500])),
                     Container(
@@ -92,7 +93,7 @@ class JobInfoViewState extends State<JobInfoView> {
                         '${snapshot.data!.jobCategory.capitalizeFirstofEach} Job',
                         style: TextStyle(
                             fontSize:
-                                (22 / 720) * MediaQuery.of(context).size.height,
+                                (15 / 720) * MediaQuery.of(context).size.height,
                             fontWeight: FontWeight.w700,
                             color: textPaint)),
                     Container(
@@ -100,7 +101,7 @@ class JobInfoViewState extends State<JobInfoView> {
                     ),
                     Container(
                         //margin: EdgeInsets.only(left: 70),
-                        width: MediaQuery.of(context).size.width / 1.7,
+                        width: MediaQuery.of(context).size.width / 1.5,
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -112,12 +113,12 @@ class JobInfoViewState extends State<JobInfoView> {
                                   child: Icon(
                                     Icons.calendar_today,
                                     color: textPaint,
-                                    size: 18,
+                                    size: 14,
                                   ),
                                 )),
                                 TextSpan(
                                     style: TextStyle(
-                                        fontSize: (14 / 720) *
+                                        fontSize: (13 / 720) *
                                             MediaQuery.of(context).size.height,
                                         fontWeight: FontWeight.w400,
                                         color: textPaint),
@@ -132,12 +133,12 @@ class JobInfoViewState extends State<JobInfoView> {
                                   child: Icon(
                                     Icons.location_pin,
                                     color: textPaint,
-                                    size: 18,
+                                    size: 14,
                                   ),
                                 )),
                                 TextSpan(
                                     style: TextStyle(
-                                        fontSize: (14 / 720) *
+                                        fontSize: (13 / 720) *
                                             MediaQuery.of(context).size.height,
                                         fontWeight: FontWeight.w400,
                                         color: textPaint),
@@ -152,7 +153,7 @@ class JobInfoViewState extends State<JobInfoView> {
                       width: MediaQuery.of(context).size.width,
                       child: Text("Job Description",
                           style: TextStyle(
-                              fontSize: (18 / 720) *
+                              fontSize: (15 / 720) *
                                   MediaQuery.of(context).size.height,
                               fontWeight: FontWeight.w600,
                               color: textPaint)),
@@ -165,7 +166,7 @@ class JobInfoViewState extends State<JobInfoView> {
                       width: MediaQuery.of(context).size.width,
                       child: Text(snapshot.data!.jobDescription,
                           style: TextStyle(
-                              fontSize: (14 / 720) *
+                              fontSize: (13 / 720) *
                                   MediaQuery.of(context).size.height,
                               fontWeight: FontWeight.w400,
                               color: textPaint)),
@@ -176,10 +177,9 @@ class JobInfoViewState extends State<JobInfoView> {
                     Container(
                       width: MediaQuery.of(context).size.width / 2,
                       // color: textPaint,
-                      height: 50,
+                      height: 40,
                       decoration: BoxDecoration(
-                          color: textPaint,
-                          borderRadius: BorderRadius.circular(15)),
+                          color: blue, borderRadius: BorderRadius.circular(15)),
                       child: MaterialButton(
                         onPressed: () {
                           routeController.push(

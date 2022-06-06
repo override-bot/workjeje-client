@@ -66,7 +66,7 @@ class RateCardViewState extends State<RateCardView> {
                     style: TextStyle(
                         color: textPaint,
                         fontSize:
-                            (22 / 720) * MediaQuery.of(context).size.height),
+                            (15 / 720) * MediaQuery.of(context).size.height),
                   ),
                 );
               } else {
@@ -78,14 +78,15 @@ class RateCardViewState extends State<RateCardView> {
                         snapshot.data![index].service!.capitalizeFirstofEach,
                         style: TextStyle(
                             color: textPaint,
-                            fontSize: (20 / 720) *
+                            fontWeight: FontWeight.w600,
+                            fontSize: (13 / 720) *
                                 MediaQuery.of(context).size.height),
                       ),
                       subtitle: Text(
                         'N${snapshot.data![index].rate!}',
                         style: TextStyle(
                             color: textPaint,
-                            fontSize: (18 / 720) *
+                            fontSize: (13 / 720) *
                                 MediaQuery.of(context).size.height),
                       ),
                     );

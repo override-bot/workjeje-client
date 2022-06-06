@@ -71,9 +71,9 @@ class AddJobState extends State<AddJob> {
                           Container(
                               margin: EdgeInsets.only(top: 10.0),
                               child: Text(
-                                "Upload New Job",
+                                "Add New Job",
                                 style: GoogleFonts.lato(
-                                    fontSize: 28.0,
+                                    fontSize: 20.0,
                                     fontWeight: FontWeight.bold,
                                     color: blue),
                               )),
@@ -98,7 +98,7 @@ class AddJobState extends State<AddJob> {
                                       'Occupation',
                                       style: TextStyle(
                                           color: textPaint,
-                                          fontSize: 20,
+                                          fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     isExpanded: true,
@@ -115,7 +115,7 @@ class AddJobState extends State<AddJob> {
                                         child: Text(
                                           val,
                                           style: TextStyle(
-                                              fontSize: 20, color: textPaint),
+                                              fontSize: 15, color: textPaint),
                                         ),
                                       );
                                     }).toList(),
@@ -143,7 +143,7 @@ class AddJobState extends State<AddJob> {
                                       'Subcategory',
                                       style: TextStyle(
                                           color: textPaint,
-                                          fontSize: 20,
+                                          fontSize: 15,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     isExpanded: true,
@@ -158,7 +158,7 @@ class AddJobState extends State<AddJob> {
                                         child: Text(
                                           val,
                                           style: TextStyle(
-                                              fontSize: 20, color: textPaint),
+                                              fontSize: 15, color: textPaint),
                                         ),
                                       );
                                     }).toList(),
@@ -212,9 +212,9 @@ class AddJobState extends State<AddJob> {
                             ),
                           ),
                           CustomTextField(
-                            isEnabled: false,
                             hintText: "Nsukka",
                             labelText: "Location",
+                            isEnabled: false,
                             // enabled: false,
                             controller: _location,
                           ),

@@ -125,7 +125,7 @@ class _FinalizedContractsState extends State<FinalizedContracts> {
                             backgroundColor: colors[random.nextInt(5)],
                             child: Text(
                               stringManip.getFirstLetter(
-                                  document.data()!['EmployerName']),
+                                  document.data()!['EmployeeName']),
                               style: TextStyle(
                                   fontSize: (22 / 720) *
                                       MediaQuery.of(context).size.height,
@@ -142,7 +142,7 @@ class _FinalizedContractsState extends State<FinalizedContracts> {
                             '${document.data()!['JobCategory']} job'
                                 .capitalizeFirstofEach,
                             style: TextStyle(
-                                fontSize: (21 / 720) *
+                                fontSize: (15 / 720) *
                                     MediaQuery.of(context).size.height,
                                 fontWeight: FontWeight.w600,
                                 color: textPaint),

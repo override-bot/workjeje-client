@@ -42,7 +42,7 @@ class GetStartedState extends State<GetStarted> {
                       style: GoogleFonts.lato(
                           fontWeight: FontWeight.w700,
                           fontSize:
-                              30 / 720 * MediaQuery.of(context).size.height,
+                              25 / 720 * MediaQuery.of(context).size.height,
                           color: Color.fromARGB(255, 14, 140, 172)))),
               Container(
                   margin: EdgeInsets.only(left: 20.0, top: 7),
@@ -50,7 +50,7 @@ class GetStartedState extends State<GetStarted> {
                       style: GoogleFonts.lato(
                           fontWeight: FontWeight.w700,
                           fontSize:
-                              25 / 720 * MediaQuery.of(context).size.height,
+                              20 / 720 * MediaQuery.of(context).size.height,
                           color: Colors.grey))),
               Container(
                 height: 30,
@@ -67,7 +67,7 @@ class GetStartedState extends State<GetStarted> {
               ),
               Container(
                   margin: EdgeInsets.only(top: 30, left: 20),
-                  height: 70,
+                  height: 60,
                   width: 200,
                   color: blue,
                   child: isLoading == false

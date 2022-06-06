@@ -45,12 +45,12 @@ class ContractDetailsState extends State<ContractDetails> {
                 height: 15,
               ),
               CircleAvatar(
-                radius: 40,
+                radius: 30,
                 backgroundColor: Colors.amber,
                 child: Text(
                   stringManip.getFirstLetter(snapshot.data!.employeeName),
                   style: TextStyle(
-                      fontSize: (22 / 720) * MediaQuery.of(context).size.height,
+                      fontSize: (20 / 720) * MediaQuery.of(context).size.height,
                       color: Colors.white,
                       fontWeight: FontWeight.w600),
                 ),
@@ -61,7 +61,7 @@ class ContractDetailsState extends State<ContractDetails> {
               Text(
                 snapshot.data!.employeeName,
                 style: TextStyle(
-                    fontSize: (20 / 720) * MediaQuery.of(context).size.height,
+                    fontSize: (15 / 720) * MediaQuery.of(context).size.height,
                     color: textPaint,
                     fontWeight: FontWeight.w600),
               ),
@@ -71,12 +71,12 @@ class ContractDetailsState extends State<ContractDetails> {
               Text(
                 snapshot.data!.jobCategory,
                 style: TextStyle(
-                    fontSize: (16 / 720) * MediaQuery.of(context).size.height,
+                    fontSize: (13 / 720) * MediaQuery.of(context).size.height,
                     color: Colors.grey[500],
                     fontWeight: FontWeight.w400),
               ),
               Container(
-                height: 15,
+                height: 10,
               ),
               Container(
                 margin: EdgeInsets.only(top: 10),
@@ -104,7 +104,7 @@ class ContractDetailsState extends State<ContractDetails> {
                               height: 50,
                               child: const Icon(
                                 Icons.call,
-                                size: 35,
+                                size: 25,
                                 color: Colors.blue,
                               )),
                           Container(
@@ -117,7 +117,7 @@ class ContractDetailsState extends State<ContractDetails> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 16,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.w600),
                             ),
                           )
@@ -135,7 +135,7 @@ class ContractDetailsState extends State<ContractDetails> {
                               height: 50,
                               child: const Icon(
                                 Icons.pending_actions,
-                                size: 35,
+                                size: 25,
                                 color: Colors.blue,
                               )),
                           Container(
@@ -148,7 +148,7 @@ class ContractDetailsState extends State<ContractDetails> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 16,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.w600),
                             ),
                           )
@@ -166,7 +166,7 @@ class ContractDetailsState extends State<ContractDetails> {
                               height: 50,
                               child: const Icon(
                                 Icons.work,
-                                size: 35,
+                                size: 25,
                                 color: Colors.blue,
                               )),
                           Container(
@@ -179,7 +179,7 @@ class ContractDetailsState extends State<ContractDetails> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: textPaint,
-                                  fontSize: 16,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.w600),
                             ),
                           )
@@ -195,7 +195,7 @@ class ContractDetailsState extends State<ContractDetails> {
                 child: Text(
                   "You sent a job contract",
                   style: TextStyle(
-                      fontSize: (16 / 720) * MediaQuery.of(context).size.height,
+                      fontSize: (13 / 720) * MediaQuery.of(context).size.height,
                       color: textPaint,
                       fontWeight: FontWeight.w600),
                 ),
@@ -242,13 +242,13 @@ class ContractDetailsState extends State<ContractDetails> {
                   trailing: Icon(
                     Icons.arrow_forward_ios,
                     color: textPaint,
-                    size: 20,
+                    size: 15,
                   ),
                   title: Text(
                     "Complete contract",
                     style: TextStyle(
                         fontSize:
-                            (16 / 720) * MediaQuery.of(context).size.height,
+                            (13 / 720) * MediaQuery.of(context).size.height,
                         color: textPaint,
                         fontWeight: FontWeight.w600),
                   ),
@@ -380,25 +380,26 @@ class ContractDetailsState extends State<ContractDetails> {
                   trailing: Icon(
                     Icons.arrow_forward_ios,
                     color: textPaint,
-                    size: 20,
+                    size: 15,
                   ),
                   title: Text(
                     "Cancel contract",
                     style: TextStyle(
                         fontSize:
-                            (16 / 720) * MediaQuery.of(context).size.height,
+                            (13 / 720) * MediaQuery.of(context).size.height,
                         color: textPaint,
                         fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 40, top: 40),
+                margin: EdgeInsets.only(top: 10),
                 width: MediaQuery.of(context).size.width,
                 child: Text(
                   "Make sure job has been completed satisfactorily before confirming completion",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: (16 / 720) * MediaQuery.of(context).size.height,
+                      fontSize: (13 / 720) * MediaQuery.of(context).size.height,
                       color: Colors.red,
                       fontWeight: FontWeight.w600),
                 ),

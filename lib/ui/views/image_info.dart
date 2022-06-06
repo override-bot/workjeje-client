@@ -61,10 +61,10 @@ class ImageInfoState extends State<ImageInformation> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
-          backgroundColor: background,
+          backgroundColor: Colors.white,
           leading: IconButton(
               icon: Icon(
-                Icons.arrow_back,
+                Icons.arrow_back_ios,
                 color: textPaint,
               ),
               onPressed: () {
@@ -73,7 +73,7 @@ class ImageInfoState extends State<ImageInformation> {
         ),
         body: GestureDetector(
           child: Container(
-            color: background,
+            color: Colors.white,
             height: double.infinity,
             width: double.infinity,
             child: CachedNetworkImage(

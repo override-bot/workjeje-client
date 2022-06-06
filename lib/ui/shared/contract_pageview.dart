@@ -20,8 +20,8 @@ class ContractPageViewState extends State<ContractPageView> {
   int currentPage = 0;
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: PageView(
+    return PageView(
+      
       physics: NeverScrollableScrollPhysics(),
       controller: myPage,
       onPageChanged: (int page) {
@@ -41,6 +41,6 @@ class ContractPageViewState extends State<ContractPageView> {
           page: myPage,
         )
       ],
-    ));
+    );
   }
 }

@@ -25,6 +25,7 @@ class _ContractTabViewState extends State<ContractTabView> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          centerTitle: false,
           elevation: 0.0,
           backgroundColor: paint,
           bottom: TabBar(
@@ -37,14 +38,14 @@ class _ContractTabViewState extends State<ContractTabView> {
           title: isDark == true
               ? "Contract Manager"
                   .text
-                  .bold
-                  .size((22 / 720) * MediaQuery.of(context).size.height)
+                  .semiBold
+                  .size((20 / 720) * MediaQuery.of(context).size.height)
                   .white
                   .make()
               : "Contract Manager"
                   .text
-                  .bold
-                  .size((22 / 720) * MediaQuery.of(context).size.height)
+                  .semiBold
+                  .size((20 / 720) * MediaQuery.of(context).size.height)
                   .black
                   .make(),
         ),

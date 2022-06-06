@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:workjeje/core/models/bid_model.dart';
 import 'package:workjeje/core/models/contract_model.dart';
 import 'package:workjeje/core/models/provider_model.dart';
+import 'package:workjeje/core/services/location.dart';
 import 'package:workjeje/core/services/notification_helper.dart';
 import 'package:workjeje/core/viewmodels/bids_view_model.dart';
 import 'package:workjeje/core/viewmodels/client_view_model.dart';
@@ -45,6 +46,7 @@ class BidViewState extends State<BidView> {
     final providerViewModel = Provider.of<ProviderViewModel>(context);
     final contractViewModel = Provider.of<ContractViewModel>(context);
     final clientViewModel = Provider.of<ClientViewModel>(context);
+    final _location = Provider.of<LocationService>(context);
     bool isDark = themeStatus.darkTheme;
     Color paint = isDark == true ? const Color(0xFFB14181c) : Colors.white;
     Color textPaint = isDark == false ? const Color(0xFFB14181c) : Colors.white;
@@ -85,7 +87,7 @@ class BidViewState extends State<BidView> {
                     "No bids for this job yet",
                     style: TextStyle(
                         color: textPaint,
-                        fontSize: 22,
+                        fontSize: 15,
                         fontWeight: FontWeight.w500),
                   ),
                 );
@@ -141,7 +143,7 @@ class BidViewState extends State<BidView> {
                                                     backgroundImage:
                                                         NetworkImage(snapshot
                                                             .data!.imageurl),
-                                                    radius: 50,
+                                                    radius: 40,
                                                   ),
                                                   Container(
                                                     height: 15,
@@ -152,7 +154,7 @@ class BidViewState extends State<BidView> {
                                                         color: textPaint,
                                                         fontWeight:
                                                             FontWeight.w500,
-                                                        fontSize: 18 /
+                                                        fontSize: 15 /
                                                             720 *
                                                             MediaQuery.of(
                                                                     context)
@@ -168,7 +170,7 @@ class BidViewState extends State<BidView> {
                                                         color: textPaint,
                                                         fontWeight:
                                                             FontWeight.w400,
-                                                        fontSize: 14 /
+                                                        fontSize: 12 /
                                                             720 *
                                                             MediaQuery.of(
                                                                     context)
@@ -189,12 +191,12 @@ class BidViewState extends State<BidView> {
                                                       child: Icon(
                                                         Icons.location_pin,
                                                         color: textPaint,
-                                                        size: 14,
+                                                        size: 12,
                                                       ),
                                                     )),
                                                     TextSpan(
                                                         style: TextStyle(
-                                                            fontSize: 14,
+                                                            fontSize: 12,
                                                             fontWeight:
                                                                 FontWeight.w400,
                                                             color: textPaint),
@@ -214,8 +216,8 @@ class BidViewState extends State<BidView> {
                                                       style: TextStyle(
                                                           color: textPaint,
                                                           fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 14 /
+                                                              FontWeight.w400,
+                                                          fontSize: 13 /
                                                               720 *
                                                               MediaQuery.of(
                                                                       context)
@@ -262,14 +264,16 @@ class BidViewState extends State<BidView> {
                                                                         snapshot
                                                                             .data!
                                                                             .id!,
-                                                                    lat: 3.1,
-                                                                    long: 3.2));
+                                                                    lat: _location
+                                                                        .userLat!,
+                                                                    long: _location
+                                                                        .userLong!));
                                                           },
                                                           child: Column(
                                                             children: [
                                                               Container(
-                                                                  width: 50,
-                                                                  height: 50,
+                                                                  width: 30,
+                                                                  height: 30,
                                                                   decoration: BoxDecoration(
                                                                       color: Colors
                                                                           .black,
@@ -280,7 +284,7 @@ class BidViewState extends State<BidView> {
                                                                       const Icon(
                                                                     Icons
                                                                         .person,
-                                                                    size: 30,
+                                                                    size: 20,
                                                                     color: Colors
                                                                         .white,
                                                                   )),
@@ -296,7 +300,7 @@ class BidViewState extends State<BidView> {
                                                                       color: Colors
                                                                           .black,
                                                                       fontSize:
-                                                                          14,
+                                                                          12,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500),
@@ -356,7 +360,7 @@ class BidViewState extends State<BidView> {
                                                                           const Text(
                                                                             "Send Contract",
                                                                             style:
-                                                                                TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                                                                                TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                                                                           ),
                                                                           Container(
                                                                             margin:
@@ -412,7 +416,7 @@ class BidViewState extends State<BidView> {
                                                                             width:
                                                                                 MediaQuery.of(context).size.width / 1.3,
                                                                             height:
-                                                                                60,
+                                                                                50,
                                                                             margin:
                                                                                 const EdgeInsets.only(bottom: 10),
                                                                             decoration:
@@ -432,7 +436,7 @@ class BidViewState extends State<BidView> {
                                                                               },
                                                                               child: Text(
                                                                                 "Send Contract",
-                                                                                style: TextStyle(color: paint, fontSize: 20),
+                                                                                style: TextStyle(color: paint, fontSize: 15),
                                                                               ),
                                                                             ),
                                                                           ),
@@ -443,8 +447,8 @@ class BidViewState extends State<BidView> {
                                                           child: Column(
                                                             children: [
                                                               Container(
-                                                                  width: 50,
-                                                                  height: 50,
+                                                                  width: 30,
+                                                                  height: 30,
                                                                   decoration: BoxDecoration(
                                                                       color: Colors
                                                                           .green,
@@ -455,7 +459,7 @@ class BidViewState extends State<BidView> {
                                                                       const Icon(
                                                                     Icons
                                                                         .check_circle,
-                                                                    size: 50,
+                                                                    size: 30,
                                                                     color: Colors
                                                                         .white,
                                                                   )),
@@ -471,7 +475,7 @@ class BidViewState extends State<BidView> {
                                                                       color: Colors
                                                                           .black,
                                                                       fontSize:
-                                                                          14,
+                                                                          12,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500),
@@ -494,8 +498,8 @@ class BidViewState extends State<BidView> {
                                                           child: Column(
                                                             children: [
                                                               Container(
-                                                                  width: 50,
-                                                                  height: 50,
+                                                                  width: 30,
+                                                                  height: 30,
                                                                   decoration: BoxDecoration(
                                                                       color: Colors
                                                                           .red,
@@ -506,7 +510,7 @@ class BidViewState extends State<BidView> {
                                                                       const Icon(
                                                                     Icons
                                                                         .cancel_rounded,
-                                                                    size: 50,
+                                                                    size: 30,
                                                                     color: Colors
                                                                         .white,
                                                                   )),
@@ -522,7 +526,7 @@ class BidViewState extends State<BidView> {
                                                                       color: Colors
                                                                           .red,
                                                                       fontSize:
-                                                                          14,
+                                                                          12,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500),
@@ -550,7 +554,7 @@ class BidViewState extends State<BidView> {
                                     snapshot.data!.username,
                                     style: TextStyle(
                                         color: textPaint,
-                                        fontSize: (17 / 720) *
+                                        fontSize: (15 / 720) *
                                             MediaQuery.of(context).size.height,
                                         fontWeight: FontWeight.w500),
                                   ),
@@ -558,7 +562,7 @@ class BidViewState extends State<BidView> {
                                     'last active ${dateTimeFormatter.timeDifference(snapshot.data!.lastSeen)} ago',
                                     style: TextStyle(
                                       color: textPaint,
-                                      fontSize: (14 / 720) *
+                                      fontSize: (11 / 720) *
                                           MediaQuery.of(context).size.height,
                                     ),
                                   ),
@@ -575,12 +579,12 @@ class BidViewState extends State<BidView> {
                                           child: Icon(
                                             Icons.work,
                                             color: textPaint,
-                                            size: 18,
+                                            size: 14,
                                           ),
                                         )),
                                         TextSpan(
                                             style: TextStyle(
-                                                fontSize: (14 / 720) *
+                                                fontSize: (12 / 720) *
                                                     MediaQuery.of(context)
                                                         .size
                                                         .height,
@@ -600,12 +604,12 @@ class BidViewState extends State<BidView> {
                                           child: const Icon(
                                             Icons.star,
                                             color: Colors.amber,
-                                            size: 18,
+                                            size: 14,
                                           ),
                                         )),
                                         TextSpan(
                                             style: TextStyle(
-                                                fontSize: (14 / 720) *
+                                                fontSize: (12 / 720) *
                                                     MediaQuery.of(context)
                                                         .size
                                                         .height,

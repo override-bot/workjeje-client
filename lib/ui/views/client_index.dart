@@ -24,7 +24,7 @@ class _ClientIndexState extends State<ClientIndex> {
   var authHandler = Auth();
 
   final User? user = auth.currentUser;
-
+  Auth _auth = Auth();
   int currentIndex = 0;
   List children = [
     const Categories(),
@@ -36,7 +36,7 @@ class _ClientIndexState extends State<ClientIndex> {
   @override
   void initState() {
     super.initState();
-    // updatePosition("clients", user.uid);
+    _auth.checkIfUseri(user!.uid, context, user!.phoneNumber);
   }
 
   @override
