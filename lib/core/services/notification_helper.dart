@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'authentication.dart';
 
 class NotificationHelper {
+  String? token;
   Future sendMesssage(token, title, message) async {
     var func = FirebaseFunctions.instance.httpsCallable("notifySubscribers");
     // ignore: unused_local_variable
@@ -18,10 +19,18 @@ class NotificationHelper {
   updateToken(token) {
     final User? user = auth.currentUser;
     if (user?.uid != null) {
-      FirebaseFirestore.instance
-          .collection("clients")
-          .doc(user?.uid)
-          .update({"token": token});
+      if (token != null) {
+        FirebaseFirestore.instance
+            .collection("clients")
+            .doc(user?.uid)
+            .update({"token": token});
+        print("$token updated");
+      } else {
+        FirebaseFirestore.instance
+            .collection("clients")
+            .doc(user?.uid)
+            .update({"token": "no token"});
+      }
     } else {
       return;
     }

@@ -6,6 +6,16 @@ class PopUp {
         context: context,
         builder: (context) {
           return AlertDialog(
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    "Back",
+                    style: TextStyle(color: Colors.red),
+                  ))
+            ],
             content: SizedBox(
                 width: MediaQuery.of(context).size.width / 1.1,
                 child: Column(
@@ -15,7 +25,7 @@ class PopUp {
                       Icon(
                         Icons.dangerous,
                         color: Colors.red,
-                        size: 35,
+                        size: 25,
                       ),
                       Container(
                         height: 10,
@@ -25,7 +35,7 @@ class PopUp {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.red[400],
-                            fontSize: 20,
+                            fontSize: 15,
                             fontWeight: FontWeight.w500),
                       ),
                     ])),
@@ -38,6 +48,16 @@ class PopUp {
         context: context,
         builder: (context) {
           return AlertDialog(
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    "Ok",
+                    style: TextStyle(color: Colors.blue),
+                  ))
+            ],
             content: SizedBox(
                 width: MediaQuery.of(context).size.width / 1.1,
                 child: Column(
@@ -47,7 +67,7 @@ class PopUp {
                       Icon(
                         Icons.check,
                         color: Colors.blue,
-                        size: 35,
+                        size: 25,
                       ),
                       Container(
                         height: 10,
@@ -56,7 +76,7 @@ class PopUp {
                         message,
                         style: TextStyle(
                             color: Colors.blue,
-                            fontSize: 20,
+                            fontSize: 15,
                             fontWeight: FontWeight.w500),
                       ),
                     ])),

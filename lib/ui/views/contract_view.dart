@@ -53,7 +53,7 @@ class ContractViewState extends State<ContractView> {
                       color: textPaint,
                       fontWeight: FontWeight.w500,
                       fontSize:
-                          (24 / 720) * MediaQuery.of(context).size.height),
+                          (16 / 720) * MediaQuery.of(context).size.height),
                 ),
               );
             } else {

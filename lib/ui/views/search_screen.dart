@@ -24,7 +24,7 @@ class SearchScreenState extends State<SearchScreen> {
   DateTimeFormatter time = DateTimeFormatter();
   final TextEditingController _searchField = TextEditingController();
   String searchKey = "";
-  String field = "";
+  String field = "occupation";
   Stream? streamQuery;
   //  FirebaseFirestore.instance.collection('providers').limit(1).snapshots();
   @override
@@ -172,8 +172,8 @@ class SearchScreenState extends State<SearchScreen> {
                       stream: streamQuery,
                       builder: (context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData) {
-                          return SizedBox(
-                              height: 450,
+                          return Container(
+                              height: 650,
                               width: double.infinity,
                               child: ListView(
                                 children: snapshot.data.docs.map<Widget>(

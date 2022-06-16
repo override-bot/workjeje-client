@@ -219,6 +219,7 @@ class ContractDetailsState extends State<ContractDetails> {
                         Navigator.pop(context);
                         _helper.sendMesssage(result.token, "Contract",
                             "Your contract with ${snapshot.data!.employerName} has been completed");
+                        providerViewModel.debit(snapshot.data!.employeeId);
                         showDialog(
                             context: context,
                             builder: (context) {

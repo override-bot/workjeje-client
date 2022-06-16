@@ -69,7 +69,7 @@ class _FinalizedContractsState extends State<FinalizedContracts> {
                                 ? Color(0xFFB14181c)
                                 : Colors.white,
                             fontSize:
-                                (18 / 720) * MediaQuery.of(context).size.height,
+                                (15 / 720) * MediaQuery.of(context).size.height,
                             fontWeight: FontWeight.bold)),
                   ),
                 );

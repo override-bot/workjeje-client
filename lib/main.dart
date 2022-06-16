@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
@@ -25,18 +26,41 @@ import 'ui/views/intro_view.dart';
 
 MessagingService _messagingService = MessagingService();
 NotificationHelper _helper = NotificationHelper();
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', 'High Importance Notifications',
+    importance: Importance.max,
+    showBadge: true,
+    enableLights: true,
+    playSound: true,
+    ledColor: Colors.blue);
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print(message.notification!.title);
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await _messagingService.init(channel);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  await _messagingService.init();
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true, badge: true, sound: true);
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin>()
+      ?.requestPermissions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
   runApp(MyApp());
-}
-
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  if (kDebugMode) {
-    print(message.notification!.title);
-  }
 }
 
 // ignore: use_key_in_widget_constructors
@@ -57,32 +81,57 @@ class _MyAppState extends State<MyApp> {
   RateCardViewModel rateCardViewModel = RateCardViewModel();
   GalleryViewModel galleryViewModel = GalleryViewModel();
   LocationService locationService = LocationService();
+  NotificationHelper _helper = NotificationHelper();
   @override
   void initState() {
     super.initState();
     getCurrentAppTheme();
     getLocation();
-    _helper.updateToken(_messagingService.token);
+    getToken(_messagingService.token);
   }
 
   void getCurrentAppTheme() async {
     themeProvider.darkTheme = await themeProvider.themePreference.getTheme();
   }
 
+  void getToken(token) {
+    _helper.token = token;
+    _helper.updateToken(token);
+  }
+
   void getLocation() async {
     final User? user = auth.currentUser;
-    Position position = await locationService.getPosition();
-    locationService.userLat = position.latitude;
-    locationService.userLong = position.longitude;
-    List<Placemark> addresses =
-        await placemarkFromCoordinates(position.latitude, position.longitude);
-    var first = addresses.first;
-    locationService.location = first.locality ?? " ";
-    FirebaseFirestore.instance.collection("clients").doc(user?.uid).update({
-      "userLat": position.latitude,
-      "userLong": position.longitude,
-      "location": first.locality
-    });
+    LocationPermission perm = await locationService.getPerm();
+    if (perm == LocationPermission.always ||
+        perm == LocationPermission.whileInUse) {
+      var position = await locationService.getPosition();
+
+      locationService.userLat = position.latitude;
+      locationService.userLong = position.longitude;
+      List<Placemark> addresses =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+      var first = addresses.first;
+      locationService.location = first.locality ?? " ";
+      if (user?.uid != null) {
+        FirebaseFirestore.instance.collection("clients").doc(user?.uid).update({
+          "userLat": position.latitude,
+          "userLong": position.longitude,
+          "location": first.locality
+        });
+      }
+    } else {
+      locationService.userLat = 0.0;
+      locationService.userLong = 0.0;
+      locationService.location = "please enable location permission";
+      if (user?.uid != null) {
+        FirebaseFirestore.instance.collection("clients").doc(user?.uid).update({
+          "userLat": 0.0,
+          "userLong": 0.0,
+          "location": "Please enable location permission"
+        });
+      }
+      print('denied');
+    }
   }
 
   @override
@@ -97,6 +146,11 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) {
             return jobViewModel;
+          },
+        ),
+        Provider(
+          create: (_) {
+            return _helper;
           },
         ),
         ChangeNotifierProvider(

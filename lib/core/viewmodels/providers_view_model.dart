@@ -36,4 +36,10 @@ class ProviderViewModel extends ChangeNotifier {
     api.updateDocument("rating", oldRate + rate, providerId);
     api.updateDocument("raters", oldRaters + 1, providerId);
   }
+
+  Future debit(providerId) async {
+    var result = await getProviderById(providerId);
+    var balance = result.balance;
+    api.updateDocument("walletBalance", balance! - 200, providerId);
+  }
 }

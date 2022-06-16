@@ -71,7 +71,7 @@ class AddJobState extends State<AddJob> {
                           Container(
                               margin: EdgeInsets.only(top: 10.0),
                               child: Text(
-                                "Add New Job",
+                                "What do you need?",
                                 style: GoogleFonts.lato(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold,

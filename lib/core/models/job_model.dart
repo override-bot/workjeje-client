@@ -6,13 +6,11 @@ class Jobs {
   final String location;
   final String jobCategory;
   final String phoneNumber;
-  final String? email;
   dynamic addedAt;
   Jobs(
       {this.id,
       required this.employerId,
       required this.addedAt,
-      this.email,
       required this.jobCategory,
       required this.jobDescription,
       required this.location,
@@ -25,7 +23,6 @@ class Jobs {
         location = snapshot['location'],
         jobCategory = snapshot['jobCategory'],
         phoneNumber = snapshot['phoneNumber'],
-        email = snapshot['email'],
         addedAt = snapshot['addedAt'];
   toJson() {
     return {
@@ -35,7 +32,6 @@ class Jobs {
       "location": location,
       "jobCategory": jobCategory,
       "phoneNumber": phoneNumber,
-      "email": email,
       "addedAt": addedAt
     };
   }

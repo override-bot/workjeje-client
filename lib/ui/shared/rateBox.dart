@@ -17,12 +17,24 @@ class RateBoxState extends State<RateBox> {
   Widget build(BuildContext context) {
     final providerViewModel = Provider.of<ProviderViewModel>(context);
     return Container(
-      height: 150,
       width: MediaQuery.of(context).size.width / 1.5,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
+          Container(
+            height: 5,
+          ),
           Text(
             "Rate this provider",
+            style: TextStyle(
+                color: Color.fromARGB(255, 14, 140, 172),
+                fontWeight: FontWeight.w500,
+                fontSize: 18),
+          ),
+          Text(
+            "This helps to improve your experience",
+            textAlign: TextAlign.center,
             style: TextStyle(
                 color: Colors.black, fontWeight: FontWeight.w500, fontSize: 15),
           ),
@@ -35,7 +47,7 @@ class RateBoxState extends State<RateBox> {
             direction: Axis.horizontal,
             allowHalfRating: false,
             itemCount: 5,
-            itemSize: 20,
+            itemSize: 22,
             itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
             itemBuilder: (context, _) => Icon(
               Icons.star,
@@ -48,7 +60,7 @@ class RateBoxState extends State<RateBox> {
             },
           ),
           Container(
-            margin: EdgeInsets.only(top: 15),
+            margin: EdgeInsets.only(top: 15, bottom: 10),
             height: 40,
             width: MediaQuery.of(context).size.width / 1.8,
             child: MaterialButton(
@@ -75,7 +87,8 @@ class RateBoxState extends State<RateBox> {
               ),
             ),
             decoration: BoxDecoration(
-                color: Colors.blue, borderRadius: BorderRadius.circular(15)),
+                color: Color.fromARGB(255, 14, 140, 172),
+                borderRadius: BorderRadius.circular(15)),
           )
         ],
       ),

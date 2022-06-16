@@ -53,13 +53,12 @@ class SendContractState extends State<SendContract> {
               }),
         ),
         body: Container(
-          height: double.infinity,
-          width: double.infinity,
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
           color: paint,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                     margin: EdgeInsets.only(left: 5.0),
@@ -75,8 +74,6 @@ class SendContractState extends State<SendContract> {
                 Container(
                   margin: const EdgeInsets.only(top: 25),
                   width: MediaQuery.of(context).size.width / 1.1,
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -119,15 +116,13 @@ class SendContractState extends State<SendContract> {
                 Container(
                   margin: const EdgeInsets.only(top: 25),
                   width: MediaQuery.of(context).size.width / 1.1,
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: TextField(
                     controller: _contractTerms,
-                    minLines: 15,
-                    maxLines: 20,
+                    minLines: 5,
+                    maxLines: 10,
                     maxLength: 500,
                     decoration: InputDecoration(
                         hintText: "Contract terms here..",

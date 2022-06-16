@@ -16,11 +16,13 @@ class ServiceProvider {
   final double userLong;
   final int jobs;
   final String token;
+  final int? balance;
   ServiceProvider(
       {this.id,
       required this.jobs,
       required this.username,
       required this.occupation,
+      this.balance,
       required this.skill,
       required this.location,
       required this.phoneNumber,
@@ -50,6 +52,7 @@ class ServiceProvider {
         userLat = snapshot['userLat'],
         token = snapshot['token'],
         jobs = snapshot['jobs'],
+        balance = snapshot['walletBalance'],
         userLong = snapshot['userLong'];
   toJson() {
     return {
@@ -67,7 +70,8 @@ class ServiceProvider {
       "raters": raters,
       "verificationStatus": verificationStatus,
       "onlineStatus": onlineStatus,
-      "token": token
+      "token": token,
+      "walletBalance": balance
     };
   }
 }

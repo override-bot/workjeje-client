@@ -315,7 +315,9 @@ class BidViewState extends State<BidView> {
                                                                 termsField =
                                                                 TextEditingController();
                                                             bool? isTerms;
-                                                            showMaterialModalBottomSheet(
+                                                            showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
                                                                 backgroundColor:
                                                                     paint,
                                                                 elevation: 20,
@@ -338,6 +340,10 @@ class BidViewState extends State<BidView> {
                                                                 builder:
                                                                     (context) {
                                                                   return Container(
+                                                                    padding: EdgeInsets.only(
+                                                                        bottom: MediaQuery.of(context)
+                                                                            .viewInsets
+                                                                            .bottom),
                                                                     margin: const EdgeInsets
                                                                             .only(
                                                                         left:
@@ -367,8 +373,6 @@ class BidViewState extends State<BidView> {
                                                                                 const EdgeInsets.only(top: 25),
                                                                             width:
                                                                                 MediaQuery.of(context).size.width / 1.1,
-                                                                            padding:
-                                                                                EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                                                                             decoration:
                                                                                 BoxDecoration(
                                                                               borderRadius: BorderRadius.circular(20.0),
@@ -485,7 +489,12 @@ class BidViewState extends State<BidView> {
                                                           ),
                                                         ),
                                                         GestureDetector(
-                                                          onTap: () {
+                                                          onTap: () async {
+                                                            var userData =
+                                                                await clientViewModel
+                                                                    .getProviderById(
+                                                                        user!
+                                                                            .uid);
                                                             bidViewModel
                                                                 .rejectBid(
                                                                     bidId,
@@ -493,7 +502,11 @@ class BidViewState extends State<BidView> {
                                                                         .jobId);
                                                             routeController
                                                                 .pop(context);
-                                                            // _helper.sendMesssage(snapshot.data!.token, "Bid", "")
+                                                            _helper.sendMesssage(
+                                                                snapshot.data!
+                                                                    .token,
+                                                                "Bid",
+                                                                "${userData.username} rejected your bid");
                                                           },
                                                           child: Column(
                                                             children: [

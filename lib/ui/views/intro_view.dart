@@ -23,6 +23,11 @@ class IntroScreenState extends State<IntroScreen> {
   RouteController routeController = RouteController();
   Color blue = Color.fromARGB(255, 14, 140, 172);
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final themeStatus = Provider.of<ThemeProvider>(context);
     bool isDark = themeStatus.darkTheme;

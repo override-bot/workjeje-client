@@ -28,9 +28,9 @@ class _ClientIndexState extends State<ClientIndex> {
   int currentIndex = 0;
   List children = [
     const Categories(),
-    JobView(),
-    ContractTabView(),
     SearchScreen(),
+    ContractTabView(),
+    JobView(),
     UserProfile()
   ];
   @override
@@ -81,32 +81,32 @@ class _ClientIndexState extends State<ClientIndex> {
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.home_outlined,
-                    size: 25,
+                    size: 20,
                   ),
                   label: 'Categories',
                 ),
                 BottomNavigationBarItem(
                     icon: Icon(
-                      Icons.work_outline,
-                      size: 25,
-                    ),
-                    label: 'My Jobs'),
-                BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.pending_actions,
-                      size: 25,
-                    ),
-                    label: 'Contracts'),
-                BottomNavigationBarItem(
-                    icon: Icon(
                       Icons.search,
-                      size: 25,
+                      size: 20,
                     ),
                     label: 'Search'),
                 BottomNavigationBarItem(
                     icon: Icon(
+                      Icons.pending_actions,
+                      size: 20,
+                    ),
+                    label: 'Contracts'),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.work_outline,
+                      size: 20,
+                    ),
+                    label: 'Job Marketplace'),
+                BottomNavigationBarItem(
+                    icon: Icon(
                       Icons.person_outline,
-                      size: 25,
+                      size: 20,
                     ),
                     label: 'Profile'),
               ],

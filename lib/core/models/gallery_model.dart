@@ -1,6 +1,6 @@
 class Gallery {
   final String? id;
-  final String? imageUrl;
+  final List? imageUrl;
   final String? caption;
   Gallery({this.id, this.caption, this.imageUrl});
   Gallery.fromMap(Map snapshot, this.id)

@@ -7,32 +7,30 @@ class LocationService extends ChangeNotifier {
   double? userLat;
   double? userLong;
   String? location;
-  Future<Position> getPosition() async {
+  Future getPosition() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.bestForNavigation);
     return position;
   }
 
-  updatePosition(role, userId) {
-    if (userId != null) {
-      Geolocator.getPositionStream(
-        desiredAccuracy: LocationAccuracy.best,
-      ).listen((Position position) async {
-        if (kDebugMode) {
-          print(position);
-        }
+  Future<LocationPermission> getPerm() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    return permission;
+  }
 
-        List<Placemark> addresses = await placemarkFromCoordinates(
-            position.latitude, position.longitude);
-        var first = addresses.first;
-        FirebaseFirestore.instance.collection(role).doc(userId).update({
-          "userLat": position.latitude,
-          "userLong": position.longitude,
-          "location": first.locality
-        });
+  updatePosition(role, userId) async {
+    LocationPermission perm = await getPerm();
+    if (perm == LocationPermission.always ||
+        perm == LocationPermission.whileInUse) {
+      Position position = await getPosition();
+      List<Placemark> addresses =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+      var first = addresses.first;
+      FirebaseFirestore.instance.collection(role).doc(userId).update({
+        "userLat": position.latitude,
+        "userLong": position.longitude,
+        "location": first.locality
       });
-    } else {
-      return;
     }
   }
 }

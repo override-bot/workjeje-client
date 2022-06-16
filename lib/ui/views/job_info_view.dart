@@ -71,7 +71,7 @@ class JobInfoViewState extends State<JobInfoView> {
                     ),
                     CircleAvatar(
                         radius: MediaQuery.of(context).size.height / 20,
-                        backgroundColor: blue,
+                        backgroundColor: Colors.black,
                         // backgroundImage: NetworkImage(snapshot.data!.i),
                         child: Text(
                           stringManip.getFirstLetter(snapshot.data!.username),
@@ -179,7 +179,8 @@ class JobInfoViewState extends State<JobInfoView> {
                       // color: textPaint,
                       height: 40,
                       decoration: BoxDecoration(
-                          color: blue, borderRadius: BorderRadius.circular(15)),
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(15)),
                       child: MaterialButton(
                         onPressed: () {
                           routeController.push(

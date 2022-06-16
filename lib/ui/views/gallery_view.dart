@@ -59,7 +59,7 @@ class _ProviderGalleryState extends State<ProviderGallery> {
             child: FutureBuilder<List<Gallery>>(
                 future: galleryViewModel.getImages(widget.uuid),
                 builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
+                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return Container(
                       color: isDark == true
                           ? const Color(0xFFB14181c)
@@ -81,14 +81,26 @@ class _ProviderGalleryState extends State<ProviderGallery> {
                     crossAxisCount: 4,
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
-                        child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: CachedNetworkImageProvider(
-                                      snapshot.data![index].imageUrl!,
-                                    )))),
+                        child: Stack(children: [
+                          Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: CachedNetworkImageProvider(
+                                        snapshot.data![index].imageUrl![0],
+                                      )))),
+                          snapshot.data![index].imageUrl!.length > 1
+                              ? Positioned(
+                                  top: 5,
+                                  right: 5,
+                                  child: Icon(
+                                    Icons.collections,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : Container()
+                        ]),
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => ImageInformation(

@@ -30,8 +30,18 @@ class _ContractTabViewState extends State<ContractTabView> {
           backgroundColor: paint,
           bottom: TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.pending_actions, color: textPaint)),
-              Tab(icon: Icon(Icons.check, color: textPaint)),
+              Tab(
+                child: Text(
+                  "Pending",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  "Accepted",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
             ],
             indicatorColor: textPaint,
           ),

@@ -6,6 +6,7 @@ class Client {
   final String? imageurl;
   dynamic userLat;
   dynamic userLong;
+  final String? token;
   final String? email;
   Client(
       {this.email,
@@ -14,6 +15,7 @@ class Client {
       this.location,
       this.phoneNumber,
       this.userLat,
+      this.token,
       this.userLong,
       this.username});
   Client.fromMap(Map snapshot, this.id)
@@ -23,6 +25,7 @@ class Client {
         userLat = snapshot['userLat'],
         userLong = snapshot['userLong'],
         email = snapshot['email'],
+        token = snapshot['token'],
         username = snapshot['username'];
   toJson() {
     return {
@@ -32,7 +35,8 @@ class Client {
       "location": location,
       "email": email,
       "phoneNumber": phoneNumber,
-      "imageurl": imageurl
+      "imageurl": imageurl,
+      "token": token
     };
   }
 }

@@ -45,7 +45,7 @@ class JobViewState extends State<JobView> {
         centerTitle: false,
         elevation: 0.0,
         title: Text(
-          "My Jobs",
+          "Job Marketplace",
           style: TextStyle(
               color: textPaint,
               fontWeight: FontWeight.w600,
@@ -62,11 +62,12 @@ class JobViewState extends State<JobView> {
               if (snapshot.data!.isEmpty) {
                 return Center(
                   child: Text(
-                    "You have not posted any job",
+                    "You have not posted any job\nadd the service you need from our providers by tapping the + button",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         color: textPaint,
                         fontWeight: FontWeight.w500,
-                        fontSize: 20),
+                        fontSize: 16),
                   ),
                 );
               }

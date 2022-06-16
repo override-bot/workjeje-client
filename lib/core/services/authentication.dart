@@ -5,6 +5,7 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workjeje/core/services/location.dart';
 import 'package:workjeje/core/services/messaging_service.dart';
+import 'package:workjeje/core/services/notification_helper.dart';
 import 'package:workjeje/core/services/storage.dart';
 import 'package:workjeje/core/viewmodels/client_view_model.dart';
 import 'package:workjeje/ui/shared/popup.dart';
@@ -13,13 +14,14 @@ import 'package:workjeje/ui/views/signup_view.dart';
 import 'package:workjeje/utils/router.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
-MessagingService _messagingService = MessagingService();
+NotificationHelper _helper = NotificationHelper();
 ClientViewModel _clientViewModel = ClientViewModel();
+LocationService _locationService = LocationService();
 RouteController _route = RouteController();
 PopUp _popUp = PopUp();
 
 class Auth {
-  Future checkIfUser(userId, context, phoneNumber) async {
+  Future checkIfUser(userId, context, phoneNumber, token) async {
     var res = await _clientViewModel.getUserbyId(userId);
     if (res == null) {
       print(userId);
@@ -31,12 +33,14 @@ class Auth {
           ));
     } else {
       _route.pushAndRemoveUntil(context, ClientIndex());
+      _helper.updateToken(token);
+      _locationService.updatePosition("clients", userId);
     }
   }
 
   Future checkIfUseri(userId, context, phoneNumber) async {
     var res = await _clientViewModel.getUserbyId(userId);
-    if (res == null) {
+    if (userId != null && res == null) {
       print(userId);
       _route.pushAndRemoveUntil(
           context,
@@ -47,12 +51,12 @@ class Auth {
     }
   }
 
-  Future verifyNumber(phoneNumber, context) async {
+  Future verifyNumber(phoneNumber, context, token) async {
     return auth.verifyPhoneNumber(
         phoneNumber: '+234$phoneNumber',
         verificationCompleted: (PhoneAuthCredential credential) async {
           var user = await auth.signInWithCredential(credential);
-          checkIfUser(user.user?.uid, context, phoneNumber);
+          checkIfUser(user.user?.uid, context, phoneNumber, token);
         },
         verificationFailed: (authException) {
           _popUp.showError(authException.message, context);
@@ -104,8 +108,8 @@ class Auth {
                                         smsCode: smsCode);
                                 var user =
                                     await auth.signInWithCredential(credential);
-                                checkIfUser(
-                                    user.user?.uid, context, phoneNumber);
+                                checkIfUser(user.user?.uid, context,
+                                    phoneNumber, token);
                               } on FirebaseAuthException catch (e) {
                                 _route.pop(context);
                                 _popUp.showError(e.code, context);
@@ -124,7 +128,7 @@ class Auth {
                                     color: Colors.grey[500]))),
                         GestureDetector(
                           onTap: () {
-                            verifyNumber(phoneNumber, context);
+                            verifyNumber(phoneNumber, context, token);
                           },
                           child: Container(
                               margin: EdgeInsets.only(top: 5),

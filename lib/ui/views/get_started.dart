@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:workjeje/core/services/authentication.dart';
+import 'package:workjeje/core/services/location.dart';
 import 'package:workjeje/ui/shared/custom_textfield.dart';
 import 'package:workjeje/ui/shared/popup.dart';
 import 'package:workjeje/ui/shared/shared_button.dart';
+
+import '../../core/services/notification_helper.dart';
 
 class GetStarted extends StatefulWidget {
   @override
@@ -19,6 +23,8 @@ class GetStartedState extends State<GetStarted> {
   Auth _auth = Auth();
   @override
   Widget build(BuildContext context) {
+    final notificationHelper = Provider.of<NotificationHelper>(context);
+    final locationService = Provider.of<LocationService>(context);
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -59,7 +65,7 @@ class GetStartedState extends State<GetStarted> {
                 margin: EdgeInsets.only(top: 30),
                 child: CustomTextField(
                     hintText: "07012345678",
-                    labelText: "Your phone number",
+                    labelText: "Your phone number(Nigeria only)",
                     controller: _phoneField),
               ),
               Container(
@@ -78,7 +84,11 @@ class GetStartedState extends State<GetStarted> {
                             });
 
                             await _auth
-                                .verifyNumber(_phoneField.text.trim(), context)
+                                .verifyNumber(
+                              _phoneField.text.trim(),
+                              context,
+                              notificationHelper.token,
+                            )
                                 .whenComplete(() {
                               setState(() {
                                 isLoading = false;

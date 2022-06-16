@@ -4,12 +4,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 //import 'package:workman/double_mode_implementation/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import '../../core/double_mode_implementation/theme_provider.dart';
 
 class ImageInformation extends StatefulWidget {
   // String photoId;
-  final String imageUrl;
+  final List imageUrl;
   final String imageCaption;
   const ImageInformation({required this.imageUrl, required this.imageCaption});
   @override
@@ -71,27 +72,35 @@ class ImageInfoState extends State<ImageInformation> {
                 Navigator.of(context).pop();
               }),
         ),
-        body: GestureDetector(
-          child: Container(
-            color: Colors.white,
-            height: double.infinity,
-            width: double.infinity,
-            child: CachedNetworkImage(
-              imageUrl: widget.imageUrl,
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  CircularProgressIndicator(
-                value: downloadProgress.progress,
-              ),
-              fit: BoxFit.fitWidth,
-              //height: double.infinity,
-              //width: double.infinity,
-              alignment: Alignment.center,
-            ),
-          ),
-          onTap: () {
-            popLoad(widget.imageCaption, context);
-          },
-        ));
+        body: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+                children:
+                    List<Widget>.generate(widget.imageUrl.length, (index) {
+              return GestureDetector(
+                child: Container(
+                  color: Colors.white,
+                  margin: EdgeInsets.all(10),
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width / 1.05,
+                  child: new CachedNetworkImage(
+                    imageUrl: widget.imageUrl[index],
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                    ).shimmer(),
+                    //fit: BoxFit.cover,
+                    //height: double.infinity,
+                    //width: double.infinity,
+                    alignment: Alignment.center,
+                  ),
+                ).centered(),
+                onTap: () {
+                  popLoad(widget.imageCaption, context);
+                },
+              );
+            }))));
   }
 }

@@ -39,7 +39,7 @@ class ReviewWidgetState extends State<ReviewWidget> {
                 color: textPaint,
                 fontWeight: FontWeight.w600),
           ),
-          backgroundColor: background,
+          backgroundColor: Colors.white,
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -53,66 +53,82 @@ class ReviewWidgetState extends State<ReviewWidget> {
         body: Container(
             // color: Colors.black87,
             height: double.infinity,
-            color: background,
+            color: Colors.white,
             child: SingleChildScrollView(
                 child: StreamBuilder<QuerySnapshot>(
                     stream: reviewViewModel.streamReviews(widget.uid),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
-                        return Column(
-                            children: snapshot.data!.docs.map<Widget>(
-                                (DocumentSnapshot<Map<String, dynamic>>
-                                    document) {
-                          return Container(
-                              color: Colors.transparent,
-                              margin: EdgeInsets.only(top: 0),
-                              width: MediaQuery.of(context).size.width / 1,
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // Divider(),
-                                    Divider(
-                                      color: textPaint,
-                                    ),
-                                    ListTile(
-                                      leading: CircleAvatar(
-                                        backgroundImage: NetworkImage(
-                                            document.data()!['image']),
+                        if (snapshot.data!.docs.isEmpty) {
+                          return Center(
+                            child: Text(
+                              "No reviews...yet",
+                              style: TextStyle(
+                                  color: textPaint,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: (16 / 720) *
+                                      MediaQuery.of(context).size.height),
+                            ),
+                          );
+                        } else {
+                          return Column(
+                              children: snapshot.data!.docs.map<Widget>(
+                                  (DocumentSnapshot<Map<String, dynamic>>
+                                      document) {
+                            return Container(
+                                color: Colors.transparent,
+                                margin: EdgeInsets.only(top: 0),
+                                width: MediaQuery.of(context).size.width / 1,
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // Divider(),
+                                      Divider(
+                                        color: textPaint,
                                       ),
-                                      title: Text(
-                                        document.data()!['name'],
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w600,
-                                            color: textPaint),
-                                      ),
-                                      subtitle: SizedBox(
-                                        height: 20,
-                                        child: RatingBarIndicator(
-                                          rating: document.data()!['rate'] / 1,
-                                          itemBuilder: (context, index) => Icon(
-                                            Icons.star,
-                                            color: Colors.amber,
+                                      ListTile(
+                                        leading: CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              document.data()!['image']),
+                                        ),
+                                        title: Text(
+                                          document.data()!['name'],
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600,
+                                              color: textPaint),
+                                        ),
+                                        subtitle: SizedBox(
+                                          height: 20,
+                                          child: RatingBarIndicator(
+                                            rating:
+                                                document.data()!['rate'] / 1,
+                                            itemBuilder: (context, index) =>
+                                                Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            itemCount: 5,
+                                            itemSize: 15,
+                                            direction: Axis.horizontal,
                                           ),
-                                          itemCount: 5,
-                                          itemSize: 15,
-                                          direction: Axis.horizontal,
                                         ),
                                       ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(left: 30),
-                                      child: Text(
-                                        document.data()!['review'],
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w500,
-                                            color: textPaint),
+                                      Container(
+                                        margin: EdgeInsets.only(left: 30),
+                                        child: Text(
+                                          document.data()!['review'],
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w500,
+                                              color: textPaint),
+                                        ),
                                       ),
-                                    ),
-                                    Container(height: 4),
-                                  ]));
-                        }).toList());
+                                      Container(height: 4),
+                                    ]));
+                          }).toList());
+                        }
                       } else {
                         return Container();
                       }

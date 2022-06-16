@@ -56,7 +56,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             hintStyle: TextStyle(color: Colors.grey),
             labelText: widget.labelText,
             labelStyle: GoogleFonts.lato(
-                color: Colors.grey, fontSize: 20, fontWeight: FontWeight.w500),
+                color: Colors.grey, fontSize: 16, fontWeight: FontWeight.w500),
             focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
               width: 2.5,

@@ -9,6 +9,7 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:workjeje/core/models/clientmodel.dart';
 import 'package:workjeje/core/services/authentication.dart';
 import 'package:workjeje/core/services/location.dart';
+import 'package:workjeje/core/services/notification_helper.dart';
 import 'package:workjeje/core/services/storage.dart';
 import 'package:workjeje/ui/shared/shared_button.dart';
 import 'package:workjeje/ui/views/client_index.dart';
@@ -62,6 +63,7 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
     final themeStatus = Provider.of<ThemeProvider>(context);
     final location = Provider.of<LocationService>(context);
     final clientViewModel = Provider.of<ClientViewModel>(context);
+    final notificationHelper = Provider.of<NotificationHelper>(context);
     _locationField.text = location.location!;
     _phoneNumberField.text = widget.phoneNumber!;
     bool isDark = themeStatus.darkTheme;
@@ -83,7 +85,7 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                         style: GoogleFonts.lato(
                             fontWeight: FontWeight.w700,
                             fontSize:
-                                28 / 720 * MediaQuery.of(context).size.height,
+                                22 / 720 * MediaQuery.of(context).size.height,
                             color: Color.fromARGB(255, 14, 140, 172)))),
                 Container(
                     // padding: EdgeInsets.only(top: 5.0),
@@ -120,6 +122,14 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                               ),
                       ),
                     ])).p16(),
+                _image == null
+                    ? Container(
+                        margin: EdgeInsets.only(left: 20),
+                        child: Text(
+                          "*profile picture is required",
+                          style: TextStyle(color: Colors.red),
+                        ))
+                    : Container(),
                 CustomTextField(
                     controller: _emailField,
                     hintText: "jdoe@gmail.com",
@@ -184,6 +194,7 @@ class _ClientSignUpPageState extends State<ClientSignUpPage> {
                                             email: _emailField.text,
                                             phoneNumber: _phoneNumberField.text,
                                             location: _locationField.text,
+                                            token: notificationHelper.token,
                                             username: _fullNameField.text,
                                             imageurl: displayPictureUrl),
                                         widget.uid)
